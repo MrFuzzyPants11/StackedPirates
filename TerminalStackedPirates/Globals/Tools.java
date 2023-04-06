@@ -1,3 +1,7 @@
+//File: Tools.java
+//Author: MrFuzzyPants
+//Created: 05-04-2023
+//Modified: 05-04-2023
 package Globals;
 
 import java.io.*;
@@ -5,69 +9,10 @@ import java.util.*;
 
 public class Tools {
   static Scanner scanner;
-  static String[] rainbowColours = {"\u001B[31;3m", "\u001B[33;3m", "\u001B[32;3m", "\u001B[36;3m", "\u001B[34;3m", "\u001B[35;3m"};
 
-  public static void prln(String str){
-    System.out.print(str + "\n");
-  }
-
-  public static void prln(String str, String col){
-    if(col.equals("RAINBOWBABY")){
-      prln(rainbowIfier(str));
-    } else {
-      prln("\u001B[" + col + "m" + str + "\u001B[0m");
-    }
-  }
-  
-  public static void pr(String str){
-    System.out.print(str);
-  }
-
-  public static void pr(String str, String col){
-    if(col.equals("RAINBOWBABY")){
-      pr(rainbowIfier(str));
-    } else {
-      pr("\u001B[" + col + "m" + str + "\u001B[0m");
-    }
-  }
-  
-  public static void prnl(String str){
-    System.out.print("\n" + str);
-  }
-
-  public static void prnl(String str, String col){
-    if(col.equals("RAINBOWBABY")){
-      prnl(rainbowIfier(str));
-    } else {
-      prnl("\u001B[" + col + "m" + str + "\u001B[0m");
-    }
-  }
-
-  private static String rainbowIfier(String str){
-    String temp = "";
-    for (int i = 0; i < str.length(); i++) {
-      temp = temp + rainbowColours[i % rainbowColours.length] + str.charAt(i);
-    }
-    return (temp + "\u001B[0m");
-  }
-
-  public static void invalOp(){
-    prln("That is not a valid option.");
-  }
-
-  public static void initializeScanner(){
-    scanner = new Scanner(System.in);
-  }
-
-  public static void closeScanner(){
-    scanner.close();
-  }
-
-  public static int askIn(){
-    pr("Enter Response: ");
-    int input = scanner.nextInt();
-    return input;
-  }
+  // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
+  // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
+  // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
 
   public static String toStr(int num){
     return Integer.toString(num);
@@ -77,24 +22,213 @@ public class Tools {
     return Integer.parseInt(str);
   }
 
-  public static void lineBreaker(){
-    prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
+  // PRINT METHODS | PRINT METHODS | PRINT METHODS
+  // PRINT METHODS | PRINT METHODS | PRINT METHODS
+  // PRINT METHODS | PRINT METHODS | PRINT METHODS
+
+  /*
+   * Prints a string with a newline at the end
+   * @param str The string to print
+   */
+  public static void prln(String str){
+    System.out.print(str + "\n");
   }
 
+  /*
+   * Prints a string without a newline
+   * @param str The string to print
+   */
+  public static void pr(String str){
+    System.out.print(str);
+  }
+
+  /*
+   * Prints a string with a newline at the beginning
+   * @param str The string to print
+   */
+  public static void prnl(String str){
+    System.out.print("\n" + str);
+  }
+
+  /*
+   * Prints a coloured string with a newline at the end
+   * @param str The string to print
+   * @param col The ANSI colour code to print the text in
+   */
+  public static void prln(String str, String col){
+    if(col.equals("RAINBOWBABY")){
+      prln(rainbowIfier(str));
+    } else if(col.equals("BROWNBOWBABY")) {
+      prln(brownbowIfier(str));
+    } else {
+      prln("\u001B[" + col + "m" + str + "\u001B[0m");
+    }
+  }
+
+  /*
+   * Prints a coloured string without a newline
+   * @param str The string to print
+   * @param col The ANSI colour code to print the text in
+   */
+  public static void pr(String str, String col){
+    if(col.equals("RAINBOWBABY")){
+      pr(rainbowIfier(str));
+    } else if(col.equals("BROWNBOWBABY")) {
+      pr(brownbowIfier(str));
+    } else {
+      pr("\u001B[" + col + "m" + str + "\u001B[0m");
+    }
+  }
+
+  /*
+   * Prints a coloured string with a newline at the beginning
+   * @param str The string to print
+   * @param col The ANSI colour code to print the text in
+   */
+  public static void prnl(String str, String col){
+    if(col.equals("RAINBOWBABY")){
+      prnl(rainbowIfier(str));
+    } else if(col.equals("BROWNBOWBABY")) {
+      prnl(brownbowIfier(str));
+    } else {
+      prnl("\u001B[" + col + "m" + str + "\u001B[0m");
+    }
+  }
+
+  /*
+   * Used internally to print rainbow text
+   * @param str The string to print in rainbow text
+   */
+  private static String rainbowIfier(String str){
+    final String[] rainbowColours = {"\u001B[31;3m", "\u001B[33;3m", "\u001B[32;3m", "\u001B[36;3m", "\u001B[34;3m", "\u001B[35;3m"};
+    String temp = "";
+    for (int i = 0; i < str.length(); i++) {
+      temp = temp + rainbowColours[i % rainbowColours.length] + str.charAt(i);
+    }
+    return (temp + "\u001B[0m");
+  }
+
+  /*
+   * Used internally to print "brownbow" (black and white) text
+   * @param str The string to print in brownbow text
+   */
+  private static String brownbowIfier(String str){
+    final String[] brownbowColours = {"\u001B[30;1m","\u001B[30;1m","\u001B[37;1m","\u001B[37;1m"};
+    String temp = "";
+    for (int i = 0; i < str.length(); i++) {
+      temp = temp + brownbowColours[i % brownbowColours.length] + str.charAt(i);
+    }
+    return (temp + "\u001B[0m");
+  }
+  
+  /*
+   * Sends an invalid option message to the user
+   */
+  public static void invalOp(){
+    prln("That is not a valid option.");
+  }
+
+  /*
+   * Prints a line of text to separate sections of the terminal
+   */
+  public static void lineBreaker(){
+    prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>", "BROWNBOWBABY");
+  }
+
+
+  // SCANNER METHODS | SCANNER METHODS | SCANNER METHODS
+  // SCANNER METHODS | SCANNER METHODS | SCANNER METHODS
+  // SCANNER METHODS | SCANNER METHODS | SCANNER METHODS
+  
+  /*
+   * Initializes the scanner
+   */
+  public static void initializeScanner(){
+    scanner = new Scanner(System.in);
+  }
+
+  /*
+   * Closes the scanner
+   */
+  public static void closeScanner(){
+    scanner.close();
+  }
+
+  /*
+   * Asks the user for input from the terminal and adds a breakline after input is received
+   * @return The string the user entered as an int
+   * @return the int 99999 if the user entered "i"
+   */
+  public static int askIn(){
+    pr("Enter Response: ");
+    String userInput = scanner.nextLine();
+    int input;
+    if(userInput.equals("i")){
+      input = 99999;
+    } else {
+      input = toInt(userInput);
+    }
+    lineBreaker();
+    return input;
+  }
+
+  // CSV METHODS | CSV METHODS | CSV METHODS
+  // CSV METHODS | CSV METHODS | CSV METHODS
+  // CSV METHODS | CSV METHODS | CSV METHODS
+
+  /*
+   * Refreshes all CSVs to delete their contents
+   */
+  public static void cleanCSVFiles(){
+    refreshCSV("allcards","Type,Rarity,Name");
+    refreshCSV("allpacks","Type,Rarity,Cost,Card1,Card2,Card3,Card4,Card5");
+    refreshCSV("human","");
+    refreshCSV("inventory","");
+    refreshCSV("player","Fname,Lname,Level,Health,Gold,Cards");
+    refreshCSV("playership","");
+    refreshCSV("ports","");
+  }
+
+  /*
+   * Refreshes a CSV file to delete its contents
+   * @param filename The name of the file to refresh
+   * @param headerRow The header row to write to the file
+   */
+  private static void refreshCSV(String filename, String headerRow) {
+    try{
+      BufferedWriter writer = new BufferedWriter(new FileWriter("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      writer.write("Index," + headerRow + "\n");
+
+      writer.close();
+    } catch (Exception e){
+      prln("refreshCSV: Failed to write to CSV file.", "31");
+    }
+  }
+
+  /*
+   * Writes a row of data to a CSV file
+   * @param filename The name of the file to write to
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @param append Whether to append to the file or overwrite it
+   * @param headerRow The header row to write to the file
+   * @param format The format of the data to write to the file
+   * @param data The data to write to the file
+   */
   public static void writeToCSV(String filename, String comingFrom, boolean append, String headerRow, String format, Object... data) {
     try{
-      BufferedWriter writer = new BufferedWriter(new FileWriter("TerminalStackedPirates/Globals/" + filename + ".csv", append));
+      BufferedWriter writer = new BufferedWriter(new FileWriter("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv", append));
 
+      // If the file is being overwritten, write the header row with index value
       if (!append) {
         writer.write("Index," + headerRow + "\n");
       }
 
-      // Get the number of rows already in the file
-      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/" + filename + ".csv"));
+      // Get the number of rows in the file (if overwritten will be 1)
+      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
       int numRows = reader.lines().skip(1).toArray().length; // Skip header row
       reader.close();
 
-      // Write the data rows with index
+      // Use that number to add an index to all the rows
       for (int i = 0; i < data.length; i += format.split(",").length) {
         writer.write(numRows + i/format.split(",").length + ",");
         writer.write(String.format(format, Arrays.copyOfRange(data, i, i + format.split(",").length)) + "\n");
@@ -106,10 +240,21 @@ public class Tools {
     }
   }
 
-  public static String getFromCSV(String filename, String comingFrom, String searchColumn, String searchValue, String resultColumn){
+  /*
+   * Gets a specific value from a CSV file
+   * @param filename The name of the file to read from
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @param searchColumn The column to search for the search value
+   * @param searchValue The value to search for in the search column
+   * @param resultColumn The column to return the result from
+   * @return The value in the result column of the row with the search value in the search column
+   * @return null if the search value or either columns are not found
+   */
+  public static String getFromCSVValue(String filename, String comingFrom, String searchColumn, String searchValue, String resultColumn){
     try {
-      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/" + filename + ".csv"));
+      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
 
+      // Get the index of the search column and result column
       String headerRow = reader.readLine();
       String[] columns = headerRow.split(",");
       int searchColumnIndex = -1;
@@ -122,45 +267,98 @@ public class Tools {
             resultColumnIndex = i;
         }
       }
-
       if (searchColumnIndex == -1) {
-        prln("getFromCSV: " +  comingFrom + ": " + searchColumn + "searchColumn not found in CSV file", "31");
+        prln("getFromCSVValue: " +  comingFrom + ": " + searchColumn + "searchColumn not found in CSV file", "31");
         reader.close();
         return null;
       }
-
       if (resultColumnIndex == -1) {
-        prln("getFromCSV: " + comingFrom + ": " + resultColumn + "resultColumn not found in CSV file", "31");
+        prln("getFromCSVValue: " + comingFrom + ": " + resultColumn + "resultColumn not found in CSV file", "31");
         reader.close();
         return null;
       }
   
+      // Search for the search value in the search column then save that row in a string array
       String row;
       while ((row = reader.readLine()) != null) {
         String[] values = row.split(",");
         if (values[searchColumnIndex].equals(searchValue)) {
             reader.close();
-            return values[resultColumnIndex];
+            return values[resultColumnIndex]; //Return the value in the result column from that array
         }
       }
   
       reader.close();
       return null;
     } catch (Exception e){
-      prln("getFromCSV: " + comingFrom + ": Failed to read from CSV file.", "31");
+      prln("getFromCSVValue: " + comingFrom + ": Failed to read from CSV file.", "31");
       return null;
     }
   }
 
-  public static void writeToCSVValue(String filename, String comingFrom, String searchColumn, String searchValue, String changeColumn, String newValue) {
+  /*
+   * Gets a specific row from a CSV file
+   * @param filename The name of the file to read from
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @param columnName The name of the column to search for the value
+   * @param value The value to search for in the column
+   * @return The row with the value in the column as a String array
+   * @return null if the value or column are not found
+   */
+  public static String[] getFromCSVRow(String filename, String comingFrom, String columnName, String value) {
     try{
-      // Read the CSV file into a 2D array
-      List<String[]> lines = new ArrayList<>();
-      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/" + filename + ".csv"));
+      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      
+      // Get the index of the column
+      String header = reader.readLine();
+      String[] columnNames = header.split(",");
+      int columnIndex = -1;
+      for (int i = 0; i < columnNames.length; i++) {
+          if (columnNames[i].equals(columnName)) {
+              columnIndex = i;
+              break;
+          }
+      }
+      if (columnIndex == -1) {
+          reader.close();
+          throw new IllegalArgumentException("Column name not found in CSV file");
+      }
+
+      // Search for the value in the column then save that row in a string array
       String line;
       while ((line = reader.readLine()) != null) {
-          String[] values = line.split(",");
-          lines.add(values);
+          String[] row = line.split(",");
+          if (row[columnIndex].equals(value)) {
+              reader.close();
+              return row; //Return that array
+          }
+      }
+      reader.close();
+      return null;
+    } catch (Exception e){
+      prln("getFromCSVRow: " + comingFrom + ": Failed to read from CSV file.", "31");
+      return null;
+    }
+  }
+
+  /*
+   * Writes a specific value to a CSV row
+   * @param filename The name of the file to read from
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @param searchColumn The column to search for the search value
+   * @param searchValue The value to search for in the search column
+   * @param changeColumn The column to change the value in
+   * @param newValue The new value to change the value in the change column to
+   */
+  public static void writeToCSVValue(String filename, String comingFrom, String searchColumn, String searchValue, String changeColumn, String newValue) {
+    try{
+      // Read the CSV file into a 2D array (data[][])
+      List<String[]> lines = new ArrayList<>();
+      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      String line;
+      while ((line = reader.readLine()) != null) {
+        String[] values = line.split(",");
+        lines.add(values);
       }
       reader.close();
       String[][] data = lines.toArray(new String[0][]);
@@ -168,56 +366,80 @@ public class Tools {
       // Find the column index of the header column
       int searchColumnIndex = -1;
       for (int i = 0; i < data[0].length; i++) {
-          if (data[0][i].equals(searchColumn)) {
-              searchColumnIndex = i;
-              break;
-          }
+        if (data[0][i].equals(searchColumn)) {
+          searchColumnIndex = i;
+          break;
+        }
       }
       if (searchColumnIndex == -1) {
         prln("writeToCSVValue: " + comingFrom + ": " + searchColumn + "searchColumn not found in CSV file", "31");
       }
 
-      // Find the row index of the value
+      // Find the row index of the value in that header column
       int rowIndex = -1;
       for (int i = 1; i < data.length; i++) {
-          if (data[i][searchColumnIndex].equals(searchValue)) {
-              rowIndex = i;
-              break;
-          }
+        if (data[i][searchColumnIndex].equals(searchValue)) {
+          rowIndex = i;
+          break;
+        }
       }
       if (rowIndex == -1) {
         prln("writeToCSVValue: " + comingFrom + ": " + searchValue + "searchValue not found in CSV file", "31");
       }
 
-      // Find the column index of the second column
+      // Find the column index of the column to change
       int changeColumnIndex = -1;
       for (int i = 0; i < data[0].length; i++) {
-          if (data[0][i].equals(changeColumn)) {
-              changeColumnIndex = i;
-              break;
-          }
+        if (data[0][i].equals(changeColumn)) {
+          changeColumnIndex = i;
+          break;
+        }
       }
       if (changeColumnIndex == -1) {
         prln("writeToCSVValue: " + comingFrom + ": " + changeColumn + "changeColumn not found in CSV file", "31");
       }
 
-      // Update the value in the array
+      // Update the value in our array of the data
       data[rowIndex][changeColumnIndex] = newValue;
 
       // Write the updated array back to the CSV file
-      BufferedWriter writer = new BufferedWriter(new FileWriter("TerminalStackedPirates/Globals/" + filename + ".csv"));
+      BufferedWriter writer = new BufferedWriter(new FileWriter("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
       for (int i = 0; i < data.length; i++) {
-          for (int j = 0; j < data[i].length; j++) {
-              writer.write(data[i][j]);
-              if (j < data[i].length - 1) {
-                  writer.write(",");
-              }
+        for (int j = 0; j < data[i].length; j++) {
+          writer.write(data[i][j]);
+          if (j < data[i].length - 1) {
+            writer.write(",");
           }
-          writer.write("\n");
+        }
+        writer.write("\n");
       }
       writer.close();
     } catch (Exception e){
       prln("writeToCSVValue: " + comingFrom + ": Failed to read from CSV file.", "31");
+    }
+  }
+
+  /*
+   * Gets the last index of a CSV file
+   * @param filename The name of the file to read from
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @return The last index of the CSV file
+   * @return Integer.MAX_VALUE if the file does not exist
+   */
+  public static int getFromCSVLastIndex(String filename, String comingFrom) {
+    try{
+      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      List<String> lines = new ArrayList<String>();
+      String line = reader.readLine();
+      while (line != null) {
+          lines.add(line);
+          line = reader.readLine();
+      }
+      reader.close();
+      return lines.size() - 1;
+    } catch (Exception e){
+      prln("getFromCSVIndex: " + comingFrom + ": Failed to read from CSV file.", "31");
+      return Integer.MAX_VALUE;
     }
   }
 }

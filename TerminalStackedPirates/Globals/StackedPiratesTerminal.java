@@ -16,6 +16,7 @@ import Encounters.subEncounters.*;
 public class StackedPiratesTerminal{
   public static void main(String args[]){
     initializeScanner();
+    cleanCSVFiles();
     prln("Welcome to Stacked Pirates!");
     Player player = new Player("Fuzzy", "Pants");
     prln("You are " + player.getFname() + " " + player.getLname() + ".");

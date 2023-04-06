@@ -1,45 +1,21 @@
+//File: FoodPack.java
+//Author: MrFuzzyPants
+//Created: 05-04-2023
+//Modified: 05-04-2023
 package Cards.Packs;
-import java.util.*;
 
-import Cards.Cards.*;
+import static Globals.Tools.*;
 
 public class FoodPack extends Pack{
   public FoodPack(int rarity){
     this.rarity = rarity;
-    cards = new ArrayList<Card>();
     generatePack(rarity);
+    writeToCSV("allpacks", "FoodCard.java", true, "Type,Rarity,Cost,CRarity0,CRarity1,CRarity2,CRarity3,CRarity4", "%s,%d,%d,%d,%d,%d,%d,%d", "Food",this.rarity,this.cost,
+    cRarities.get(0), cRarities.get(1), cRarities.get(2), cRarities.get(3), cRarities.get(4));
+    this.index = getFromCSVLastIndex("allpacks", "FoodPack.java");
   }
 
   public String getName(){
     return "Food Pack";
-  }
-  
-  protected void generatePack(int rarity){
-    Random rand = new Random();
-    if(rarity == 0){
-      for(int i = 0; i < 5; i++){
-        cards.add(new FoodCard(0));
-      }
-    } else if(rarity == 1){
-      cards.add(new FoodCard(1));
-      if(rand.nextBoolean()){
-        cards.add(new FoodCard(1));
-      } else {
-        cards.add(new FoodCard(0));
-      }
-      for(int i = 1; i <= 3; i++){
-        cards.add(new FoodCard(0));
-      }
-    } else {
-      cards.add(new FoodCard(rarity));
-      if(rand.nextBoolean()){
-        cards.add(new FoodCard(rarity));
-      } else {
-        cards.add(new FoodCard(rarity - 1));
-      }
-      for(int i = 1; i <= 3; i++){
-        cards.add(new FoodCard(rand.nextInt(rarity)));
-      }
-    }
   }
 }

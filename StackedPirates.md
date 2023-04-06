@@ -78,8 +78,21 @@ This requires "https://marketplace.visualstudio.com/items?itemName=josephcz.vsco
 
 ## Card Packs
 - Crew Packs
+  - Two Handed Tools
+  - One Handed Tools
+  - Hat
+  - Tunic
+  - Pants
 - Food Packs
+  - Rum
+  - Hardtack
+  - Orange
+  - Bread
+  - Mold
+  - really can be anything
 - Ship Packs
+  - Plating
+  - Cannons
 
 ## Battle
 - Battle is a series of choices

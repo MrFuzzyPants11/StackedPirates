@@ -1,3 +1,7 @@
+//File: Port.java
+//Author: MrFuzzyPants
+//Created: 05-04-2023
+//Modified: 05-04-2023
 package Encounters;
 
 import static Globals.Tools.*;
@@ -50,13 +54,13 @@ public class Port extends Encounter{
         pr(", ");
       }
       if(store != null && tavern != null && dock == null){
-        pr("and a ");
+        pr(", and a ");
       }
       if(tavern != null){
         pr("Tavern");
       }
       if((store != null || tavern != null) && dock != null){
-        pr("and a ");
+        pr(", and a ");
       }
       if(dock != null){
         pr("Dockyard");
@@ -112,31 +116,33 @@ public class Port extends Encounter{
   }
 
   public void enterSubEncounter(int sub){ 
-    switch(sub){
-      case 1:
-        if(store != null){
-          store.enter();
-        } else {
-          prln("There is no Supply Store here.");
-          this.enterSubEncounter(askIn());
-        }
-      case 2:
-        if(tavern != null){
-          tavern.enter();
-        } else {
-          prln("There is no Tavern here.");
-          this.enterSubEncounter(askIn());
-        }
-      case 3:
-        if(dock != null){
-          dock.enter();
-        } else {
-          prln("There is no Dockyard here.");
-          this.enterSubEncounter(askIn());
-        }
-      default:
-        invalOp();
+    if(sub == 1){
+      if(store != null){
+        prln("You enter the Supply Store.");
+        store.enter();
+      } else {
+        prln("There is no Supply Store here.");
         this.enterSubEncounter(askIn());
+      }
+    } else if(sub == 2){
+      if(tavern != null){
+        prln("You enter the Tavern.");
+        tavern.enter();
+      } else {
+        prln("There is no Tavern here.");
+        this.enterSubEncounter(askIn());
+      }
+    } else if(sub == 3){
+      if(dock != null){
+        prln("You enter the Dockyard.");
+        dock.enter();
+      } else {
+        prln("There is no Dockyard here.");
+        this.enterSubEncounter(askIn());
+      }
+    } else {
+      invalOp();
+      this.enterSubEncounter(askIn());
     }
   }
 }

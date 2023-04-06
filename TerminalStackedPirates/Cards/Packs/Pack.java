@@ -1,45 +1,48 @@
-//File: CardPack.java
+//File: Pack.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
 //Modified: 05-04-2023
-
 package Cards.Packs;
 
 import java.util.*;
 
-import Cards.Cards.Card;
-
 public abstract class Pack {
-  int cost = 50;
+  int cost;
   int rarity;
-  ArrayList<Card> cards;
-
-  protected abstract void generatePack(int rarity);
+  int index;
+  ArrayList<Integer> cRarities = new ArrayList<Integer>();
   
   public abstract String getName();
 
-  public ArrayList<Card> openPack(){
-    return cards;
-  }
+  // public ArrayList<Card> openPack(){
+  //   return cards;
+  // }
 
   public int getCost(){
     return cost;
   }
 
+  public int getIndex(){
+    return index;
+  }
+
   public String getRarity(){
     if(rarity == 0){
       return "Common";
-    } else if(rarity == 1){
-      return "Uncommon";
-    } else if(rarity == 2){
-      return "Rare";
-    } else if(rarity == 3){
-      return "Epic";
-    } else if(rarity == 4){
-      return "Legendary";
-    } else {
-      return "ERROR";
     }
+    
+    if(rarity == 1){
+      return "Uncommon";
+    }
+    
+    if(rarity == 2){
+      return "Rare";
+    }
+    
+    if(rarity == 3){
+      return "Epic";
+    }
+    return "legendary";
   }
 
   public String getColour(){
@@ -48,11 +51,46 @@ public abstract class Pack {
     }
     if(rarity == 1){
       return "36";
-    } else if(rarity == 2){
+    }
+
+    if(rarity == 2){
       return "35";
-    } else if(rarity == 3){
+    }
+
+    if(rarity == 3){
       return "33";
     }
     return "RAINBOWBABY";
+  }
+
+  protected void generatePack(int rarity){
+    Random rand = new Random();
+    int additionalCost = (rand.nextInt(101)/10) * 10;
+    cost = 100 + (rarity * 100) + additionalCost;
+    if(rarity == 0){
+      for(int i = 0; i < 5; i++){
+        cRarities.add(0);
+      }
+    } else if(rarity == 1){
+      cRarities.add(1);
+      if(rand.nextBoolean()){
+        cRarities.add(1);
+      } else {
+        cRarities.add(0);
+      }
+      for(int i = 1; i <= 3; i++){
+        cRarities.add(0);
+      }
+    } else {
+      cRarities.add(rarity);
+      if(rand.nextBoolean()){
+        cRarities.add(rarity);
+      } else {
+        cRarities.add(rarity - 1);
+      }
+      for(int i = 1; i <= 3; i++){
+        cRarities.add(rand.nextInt(rarity));
+      }
+    }
   }
 }
