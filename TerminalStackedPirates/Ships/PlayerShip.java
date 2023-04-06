@@ -5,7 +5,10 @@
 
 package Ships;
 
+import java.io.*;
 import java.util.*;
+import Cards.Cards.*;
+import static Globals.Tools.*;
 
 public class PlayerShip extends Ship{
   int travelUntilSink;
@@ -13,13 +16,14 @@ public class PlayerShip extends Ship{
 
   public PlayerShip(int size){
     this.size = size;
-    this.cards = new ArrayList<Card>();
-    this.repairs = 0;
     this.toughness = size * 100;
+    this.cards = new ArrayList<ShipCard>();
+    this.repairs = 0;
     this.travelUntilSink = 4;
     this.holeLevel = 0;
+    writeToCSV("playership", "PlayerShip.java",false,"Size,Toughness,Repairs,TravelUntilSink,HoleLevel,Cards", "%d,%d,%d,%d,%d,%s", this.size, this.toughness, this.cards.toString(), this.repairs, this.travelUntilSink, this.holeLevel);
   }
-  
+
   public int getHoleLevel(){
     return this.holeLevel;
   }

@@ -6,10 +6,13 @@
 package Ships;
 
 import java.util.*;
+import Cards.*;
+import Cards.Cards.Card;
+import Cards.Cards.ShipCard;
 
 public abstract class Ship {
   int size;
-  ArrayList<Card> cards; 
+  ArrayList<ShipCard> cards; 
   int repairs;
   int toughness; 
   
@@ -21,11 +24,11 @@ public abstract class Ship {
     this.size = size;
   }
 
-  public ArrayList<Card> getCards() {
+  public ArrayList<ShipCard> getCards() {
     return this.cards;
   }
 
-  public boolean addCard(Card newCard) {
+  public boolean addCard(ShipCard newCard) {
     if(cards.size() < size){
       this.cards.add(newCard);
       return true;

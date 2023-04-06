@@ -7,37 +7,33 @@ package Humans;
 
 import java.util.*;
 import Cards.*;
+import Cards.Cards.Card;
+import Cards.Cards.CrewCard;
 
 public abstract class Human {
   int level;
   int health;
-  ArrayList<Card> cards;
+  ArrayList<CrewCard> cards;
   String fname;
   String lname;
 
 
-  public boolean addCard(Card newCard) {
+  public int addCard(CrewCard newCard) {
     if(cards.size() < level){
-      if(newCard instanceof OneHandedTool){
-        for(Card card : cards){
-          if(card instanceof OneHandedTool){
-            return false;
-          }
-        }
-      } else if(newCard instanceof TwoHandedTool){
-        for(Card card : cards){
-          if(card instanceof TwoHandedTool){
-            return false;
-          }
+      for(Card card : cards){
+        if(card.getClass().isInstance(newCard)){
+          return 1;
         }
       }
       this.cards.add(newCard);
-      return true;
-    } else {
-      return false;
+      return 0;
     }
+    return 2;
   }
 
+  public void removeCard(CrewCard oldCard) {
+    this.cards.remove(oldCard);
+  }
 
   public int getLevel() {
     return this.level;
@@ -59,7 +55,7 @@ public abstract class Human {
     this.health -= damage;
   }
 
-  public ArrayList<Card> getCards() {
+  public ArrayList<CrewCard> getCards() {
     return this.cards;
   }
 

@@ -6,6 +6,7 @@
 package Ships;
 
 import java.util.*;
+import Cards.*;
 
 public class EnemyShip extends Ship{
   
