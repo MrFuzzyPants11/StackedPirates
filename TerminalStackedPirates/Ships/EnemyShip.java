@@ -4,10 +4,6 @@
 //Modified: 05-04-2023
 package Ships;
 
-import java.util.*;
-
-import Items.*;
-
 public class EnemyShip extends Ship{
   
 }
