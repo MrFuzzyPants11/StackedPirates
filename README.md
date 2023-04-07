@@ -1,2 +1,1 @@
-# Ideas List
 # StackedPirates
