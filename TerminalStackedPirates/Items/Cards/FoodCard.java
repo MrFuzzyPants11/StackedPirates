@@ -5,6 +5,7 @@
 package Items.Cards;
 
 import static Globals.Tools.*;
+
 public class FoodCard extends Card{
   /*
    * Constructor for a new FoodCard

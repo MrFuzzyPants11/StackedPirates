@@ -6,12 +6,8 @@
 package Globals;
 
 import static Globals.Tools.*;
-import java.util.*;
 import Humans.*;
-import Items.*;
-import Ships.*;
 import Encounters.*;
-import Encounters.subEncounters.*;
 
 public class StackedPiratesTerminal{
   /*
