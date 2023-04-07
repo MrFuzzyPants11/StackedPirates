@@ -6,7 +6,9 @@ package Ships;
 
 import java.io.*;
 import java.util.*;
-import Cards.Cards.*;
+
+import Items.Cards.*;
+
 import static Globals.Tools.*;
 
 public class PlayerShip extends Ship{

@@ -5,7 +5,8 @@
 package Ships;
 
 import java.util.*;
-import Cards.*;
+
+import Items.*;
 
 public class AllyShip extends Ship{
   

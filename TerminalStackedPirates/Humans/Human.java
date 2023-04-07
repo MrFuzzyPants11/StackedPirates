@@ -1,13 +1,13 @@
 //File: Human.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-04-2023
+//Modified: 05-07-2023
 package Humans;
 
 import java.util.*;
-import Cards.*;
-import Cards.Cards.Card;
-import Cards.Cards.CrewCard;
+
+import Items.Cards.Card;
+import Items.Cards.CrewCard;
 
 public abstract class Human {
   int level;
@@ -17,6 +17,10 @@ public abstract class Human {
   String lname;
 
 
+  /*
+   * Adds a card to the humans's deck
+   * @param newCard the card to be added
+   */
   public int addCard(CrewCard newCard) {
     if(cards.size() < level){
       for(Card card : cards){
@@ -30,48 +34,59 @@ public abstract class Human {
     return 2;
   }
 
+  /*
+   * Removes a card from the human's deck
+   * @param oldCard the card to be removed
+   */
   public void removeCard(CrewCard oldCard) {
     this.cards.remove(oldCard);
   }
 
+  /*
+   * Gets the human's level
+   * @return the human's level
+   */
   public int getLevel() {
     return this.level;
   }
 
-  public void setLevel(int level) {
-    this.level = level;
-  }
-
+  /*
+   * Gets the human's health
+   * @return the human's health
+   */
   public int getHealth() {
     return this.health;
   }
 
-  public void setHealth(int health) {
-    this.health = health;
-  }
-
+  /*
+   * Reduces the human's health
+   * @param damage the amount of damage to be taken
+   */
   public void reduceHealth(int damage){
     this.health -= damage;
   }
 
+  /*
+   * Gets the human's deck
+   * @return the human's deck
+   */
   public ArrayList<CrewCard> getCards() {
     return this.cards;
   }
 
+  /*
+   * Gets the human's first name
+   * @return the human's first name
+   */
   public String getFname() {
     return this.fname;
   }
 
-  public void setFname(String fname) {
-    this.fname = fname;
-  }
-
+  /*
+   * Gets the human's last name
+   * @return the human's last name
+   */
   public String getLname() {
     return this.lname;
   }
-
-  public void setLname(String lname) {
-    this.lname = lname;
-  }
-
 }

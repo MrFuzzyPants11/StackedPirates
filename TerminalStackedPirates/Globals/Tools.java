@@ -1,7 +1,7 @@
 //File: Tools.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-04-2023
+//Modified: 05-07-2023
 package Globals;
 
 import java.io.*;
@@ -9,17 +9,46 @@ import java.util.*;
 
 public class Tools {
   static Scanner scanner;
+  static Boolean namesLoaded = false;
+  static ArrayList<String> enFirstNames = new ArrayList<String>();
+  static ArrayList<String> esFirstNames = new ArrayList<String>();
+  static ArrayList<String> enLastNames = new ArrayList<String>();
+  static ArrayList<String> esLastNames = new ArrayList<String>();
 
   // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
   // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
   // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
 
+  /*
+   * Converts int to string
+   * @param num The number to convert
+   */
   public static String toStr(int num){
     return Integer.toString(num);
   }
 
+  /*
+   * Converts string to int
+   * @param str The string to convert
+   */
   public static int toInt(String str){
     return Integer.parseInt(str);
+  }
+
+  /*
+   * Converts string to boolean
+   * @param str The string to convert
+   */
+  public static boolean toBool(String str){
+    return Boolean.parseBoolean(str);
+  }
+
+  /*
+   * Converts boolean to string
+   * @param bool The boolean to convert
+   */
+  public static String toStr(boolean bool){
+    return Boolean.toString(bool);
   }
 
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
@@ -172,6 +201,46 @@ public class Tools {
     return input;
   }
 
+  // GENERATION METHODS | GENERATION METHODS | GENERATION METHODS
+  // GENERATION METHODS | GENERATION METHODS | GENERATION METHODS
+  // GENERATION METHODS | GENERATION METHODS | GENERATION METHODS
+
+  /*
+   * Generates a random first name from either the English or Spanish list
+   * @param english Whether to generate an English or Spanish name
+   * @return The generated name
+   */
+  public static String generateFirstName(Boolean english) {
+    if(!namesLoaded){
+      LoadNameFiles();
+    }
+
+    Random rand = new Random();
+    if(english){
+      return enFirstNames.get(rand.nextInt(enFirstNames.size()));
+    } else {
+      return esFirstNames.get(rand.nextInt(esFirstNames.size()));
+    }
+  }
+
+  /*
+   * Generates a random last name from either the English or Spanish list
+   * @param english Whether to generate an English or Spanish name
+   * @return The generated name
+   */
+  public static String generateLastName(Boolean english) {
+    if(!namesLoaded){
+      LoadNameFiles();
+    }
+
+    Random rand = new Random();
+    if(english){
+      return enLastNames.get(rand.nextInt(enLastNames.size()));
+    } else {
+      return esLastNames.get(rand.nextInt(esLastNames.size()));
+    }
+  }
+
   // CSV METHODS | CSV METHODS | CSV METHODS
   // CSV METHODS | CSV METHODS | CSV METHODS
   // CSV METHODS | CSV METHODS | CSV METHODS
@@ -181,12 +250,13 @@ public class Tools {
    */
   public static void cleanCSVFiles(){
     refreshCSV("allcards","Type,Rarity,Name");
-    refreshCSV("allpacks","Type,Rarity,Cost,Card1,Card2,Card3,Card4,Card5");
+    refreshCSV("allpacks","Type,Sold,Rarity,Cost,Card1,Card2,Card3,Card4,Card5");
     refreshCSV("human","");
-    refreshCSV("inventory","");
+    refreshCSV("inventory","Type,SubType,ItemIndex");
     refreshCSV("player","Fname,Lname,Level,Health,Gold,Cards");
     refreshCSV("playership","");
-    refreshCSV("ports","");
+    refreshCSV("ports","Name,SupplyStore,Tavern,Dockyard");
+    refreshCSV("supplystores","level,pack0,pack1,pack2,pack3,pack4,pack5,pack6,pack7,pack8,pack9");
   }
 
   /*
@@ -436,10 +506,52 @@ public class Tools {
           line = reader.readLine();
       }
       reader.close();
-      return lines.size() - 1;
+      return lines.size() - 2;
     } catch (Exception e){
       prln("getFromCSVIndex: " + comingFrom + ": Failed to read from CSV file.", "31");
       return Integer.MAX_VALUE;
+    }
+  }
+
+  // OTHER FILE METHODS | OTHER FILE METHODS | OTHER FILE METHODS
+  // OTHER FILE METHODS | OTHER FILE METHODS | OTHER FILE METHODS
+  // OTHER FILE METHODS | OTHER FILE METHODS | OTHER FILE METHODS
+
+  /*
+   * Loads the name files into arrayLists to store them in memory instead of accessing the very
+   * large text files every time a name is needed (Which will be often)
+   */
+  private static void LoadNameFiles(){
+    namesLoaded = true;
+    getFromTXT(enFirstNames,"Smashew Names/enfirstnames");
+    getFromTXT(esFirstNames,"Smashew Names/esfirstnames");
+    getFromTXT(enLastNames,"Smashew Names/enlastnames");
+    getFromTXT(esLastNames,"Smashew Names/esLastnames");
+  }
+
+  /*
+   * Gets a txt file as an ArrayList
+   * @param array the ArrayList to store the lines in
+   * @param filename The name of the file to read from
+   */
+  private static void getFromTXT(ArrayList<String> array,String filename){
+    try {
+
+      // Open the file for reading
+      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/"+ filename + ".txt"));
+
+      // Read each line and add it to the list
+      String line = reader.readLine();
+      while (line != null) {
+          array.add(line);
+          line = reader.readLine();
+      }
+
+      // Close the reader
+      reader.close();
+
+    } catch (IOException e) {
+      prln("getFromTXT: Failed to read from txt file.", "31");
     }
   }
 }

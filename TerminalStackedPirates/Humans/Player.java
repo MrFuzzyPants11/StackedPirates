@@ -1,18 +1,24 @@
 //File: Player.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-04-2023
+//Modified: 05-07-2023
 package Humans;
 
 import java.util.*;
-import Cards.Packs.*;
-import Cards.Cards.*;
+
+import Items.Item;
+import Items.Cards.*;
+import Items.Packs.*;
+
 import static Globals.Tools.*;
 
 public class Player extends Human{
   int gold;
   
-
+  /*
+   * Constructor to reload player data from CSV
+   * Used for loading a saved game
+   */
   public Player(){
     String[] playerData = getFromCSVRow("player", "Player.java", "Index", "0");
     this.fname = playerData[1];
@@ -27,6 +33,11 @@ public class Player extends Human{
     }
   }
 
+  /*
+   * Constructor to create a new player
+   * @param fname the player's first name
+   * @param lname the player's last name
+   */
   public Player(String fname, String lname){
     this.fname = fname;
     this.lname = lname;
@@ -39,20 +50,27 @@ public class Player extends Human{
         this.fname, this.lname, this.level, this.health, this.gold, this.cards.toString());
   }
 
-  public void addToInventory(Pack pack){
-    writeToCSV("player","Player.java", true, "Pack,Card,IndexOfItem","%d,%d,%d", 
-        1,0,pack.getIndex());
+  /* 
+   * Adds an item to the player's inventory
+   * @param item the item to be added
+   */
+  public void addToInventory(Item item){
+    writeToCSV("inventory","Player.java", true, "Type,SubType,ItemIndex","%s,%s,%d", 
+      item.getItemType(),item.getType(),item.getIndex());
   }
 
-  public void addToInventory(Card card){
-    writeToCSV("player","Player.java", true, "Pack,Card,IndexOfItem","%d,%d,%d", 
-        0,1,card.getIndex());
-  }
-
+  /*
+   * Gets the player's gold
+   * @return the player's gold
+   */
   public int getGold() {
     return this.gold;
   }
 
+  /*
+   * Removes gold from the amount of gold the player has
+   * @param amount the amount of gold to be removed
+   */
   public void spendGold(int amount){
     this.gold -= amount;
     writeToCSVValue("player", "Player.java", "Index", "0", "Gold", toStr(this.gold));

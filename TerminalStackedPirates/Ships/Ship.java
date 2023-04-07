@@ -5,9 +5,10 @@
 package Ships;
 
 import java.util.*;
-import Cards.*;
-import Cards.Cards.Card;
-import Cards.Cards.ShipCard;
+
+import Items.*;
+import Items.Cards.Card;
+import Items.Cards.ShipCard;
 
 public abstract class Ship {
   int size;
