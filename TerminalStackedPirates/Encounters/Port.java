@@ -173,7 +173,7 @@ public class Port extends Encounter{
       prln(" (Buy Ship Packs, Buy a new ship, upgrade your ship, or repair your ship)");
     }
 
-    pr("4. Leave ");
+    pr("Q. Leave ");
     pr("Port","34");
     prln(" on your Ship");
   }
@@ -209,7 +209,7 @@ public class Port extends Encounter{
         prln("There is no Dockyard here.");
         return this.enterSubEncounter(player,askIn());
       }
-    } else if(input == 4){
+    } else if(input == Integer.MAX_VALUE){
       prln("You leave the Port on your Ship.");
       return 1;
     } else if(input == Integer.MIN_VALUE){

@@ -230,14 +230,22 @@ public class Tools {
     pr("Enter Response: ");
     String userInput = scanner.nextLine();
     int input;
-    if(userInput.equals("i")){
+    if(userInput.equals("i") || userInput.equals("I")){
       viewInventory();
       input = Integer.MIN_VALUE;
-    } else if(userInput.equals("s")){
+    } else if(userInput.equals("s") || userInput.equals("S")){
       viewSettingsMenu();
       input = Integer.MIN_VALUE;
+    } else if(userInput.equals("q") || userInput.equals("Q")){
+      input = Integer.MAX_VALUE;
     } else {
-      input = toInt(userInput);
+      // I have to use Integer.parseInt() because I can't throw an error from toInt() without having to handle it everywhere
+      try {
+        input = Integer.parseInt(userInput);
+      } catch (NumberFormatException e) {
+        invalOp();
+        input = askIn();
+      }
     }
     lineBreaker("");
     return input;
@@ -255,40 +263,58 @@ public class Tools {
    * Prints the inventory CSV in a user viewable format (Inventory Screen)
    */
   public static void viewInventory(){
-    lineBreaker("INVENTORY");
-    ArrayList<Pack> packs = new ArrayList<Pack>();
-    ArrayList<Card> cards = new ArrayList<Card>();
-    int it = 0;
-    Item currentItem = getFromInventory(it);
-    while(currentItem != null){
-      if(currentItem instanceof Pack){
-        packs.add((Pack)currentItem);
-      } else if(currentItem instanceof Card){
-        cards.add((Card)currentItem);
+    while(true){
+      lineBreaker("INVENTORY");
+      ArrayList<Pack> packs = new ArrayList<Pack>();
+      ArrayList<Card> cards = new ArrayList<Card>();
+      int it = 0;
+      Item currentItem = getFromInventory(it);
+      while(currentItem != null){
+        if(currentItem instanceof Pack){
+          packs.add((Pack)currentItem);
+        } else if(currentItem instanceof Card){
+          cards.add((Card)currentItem);
+        }
+        it++;
+        currentItem = getFromInventory(it);
       }
-      it++;
-      currentItem = getFromInventory(it);
-    }
 
-    lineBreaker("PACKS");
-    int i = 0;
-    while(i < packs.size()){
-      pr((i + 1) + ". ");
-      pr(packs.get(i).getRarity(), packs.get(i).getColour());
-      prln(" " + packs.get(i).getName());
-      i++;
-    }
+      lineBreaker("PACKS");
+      int packNums = 0;
+      while(packNums < packs.size()){
+        pr((packNums + 1) + ". ");
+        pr(packs.get(packNums).getRarity(), packs.get(packNums).getColour());
+        prln(" " + packs.get(packNums).getName());
+        packNums++;
+      }
 
-    lineBreaker("CARDS");
-    for(int j = 0; j < cards.size(); j++){
-      pr((i + 1) + ". ");
-      pr(cards.get(j).getRarity(), cards.get(j).getColour());
-      prln(" " + cards.get(j).getName());
-      i++;
-    }
+      lineBreaker("CARDS");
+      int cardNums = packNums;
+      for(int j = 0; j < cards.size(); j++){
+        pr((cardNums + 1) + ". ");
+        pr(cards.get(j).getRarity(), cards.get(j).getColour());
+        prln(" " + cards.get(j).getName());
+        cardNums++;
+      }
 
-    prln("What would you like to do?");
-    int input = askIn();
+      prln("What would you like to do?");
+      prln("Enter a pack number to open it");
+      prln("Enter a card number to open it");
+      prln("Q. Close the Inventory");
+      int input = askIn();
+      if(input == Integer.MAX_VALUE){
+        break;
+      } else {
+        input -= 1;
+        if(input < packNums){
+          //openPack(packs.get(input));
+        } else if(input < cardNums){
+          //viewCard(cards.get(input - packs.size()));
+        } else {
+          invalOp();
+        }
+      }
+    }
   }
 
   // CSV METHODS | CSV METHODS | CSV METHODS

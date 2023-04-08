@@ -66,7 +66,7 @@ public class SupplyStore extends SubEncounter{
       prln(".");
       prln("What would you like to do?");
       prln("1. Buy a pack");
-      prln("2. Leave the store");
+      prln("Q. Leave the store");
       int input = askIn();
       if(input == 1){
         prln("Here are my packs:");
@@ -78,13 +78,13 @@ public class SupplyStore extends SubEncounter{
               prln(" - " + packs.get(i).getCost() + " gold");
             }
           }
-          prln("11. Leave the store");
+          prln("Q. Leave the store");
           pr("You have ");
           pr(player.getGold() + " Gold", "33");
           prln(".");
           prln("Which pack would you like to buy?");
           input = askIn();
-          if(input == 11){
+          if(input == Integer.MAX_VALUE){
             prln("You leave the store.");
             leave = true;
             break;
@@ -104,11 +104,11 @@ public class SupplyStore extends SubEncounter{
               pr(packs.get(input).getRarity(), packs.get(input).getColour());
               pr(" " + packs.get(input).getName() + " for ");
               prln(packs.get(input).getCost() + " gold?", "33");
-              prln("1. Yes");
-              prln("2. No");
+              prln(toStr(input + 1) + ". Yes");
+              prln("11. No");
               int oldInput = input;
               input = askIn();
-              if(input == 1){
+              if(input == (oldInput + 1)){
                 player.spendGold(packs.get(oldInput).getCost());
                 addToInventory(packs.get(oldInput));
                 packs.get(oldInput).sellPack();
@@ -118,10 +118,10 @@ public class SupplyStore extends SubEncounter{
           }
         }
         
-      } else if(input == 2){
+      } else if(input == Integer.MAX_VALUE){
         prln("You leave the store.");
         break;
-      } else {
+      } else if(input != Integer.MIN_VALUE){
         invalOp();
       }
     }
