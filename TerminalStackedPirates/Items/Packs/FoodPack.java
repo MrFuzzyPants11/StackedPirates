@@ -13,7 +13,7 @@ public class FoodPack extends Pack{
    */
   public FoodPack(boolean reload, int rarityOrIndex){
     if(reload){
-      String[] data = getFromCSVRow("allpacks", "FoodPack.java", "Index", "" + rarityOrIndex);
+      String[] data = getFromCSVRow("allpacks", "FoodPack.java", "Index", toStr(rarityOrIndex));
       this.index = toInt(data[0]);
       this.sold = toBool(data[2]);
       this.rarity = toInt(data[3]);
@@ -24,7 +24,7 @@ public class FoodPack extends Pack{
       }
     } else {
       this.rarity = rarityOrIndex;
-      generatePack(rarity,"FoodPack.java", "Food");
+      generatePack(rarity,"FoodPack.java", "food");
       this.index = getFromCSVLastIndex("allpacks", "FoodPack.java");
     }
   }
@@ -42,6 +42,6 @@ public class FoodPack extends Pack{
    * @return the type of the pack
    */
   public String getType(){
-    return "Food";
+    return "food";
   }
 }

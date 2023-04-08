@@ -21,7 +21,7 @@ public class Port extends Encounter{
    * @param index the index of the port
    */
   public Port(int index){
-    String[] data = getFromCSVRow("ports","Ports.java","Index", "" + index);
+    String[] data = getFromCSVRow("ports","Ports.java","Index", toStr(index));
     this.index = toInt(data[0]);
     this.name = data[1];
     this.storeIndex = toInt(data[2]);
@@ -69,7 +69,7 @@ public class Port extends Encounter{
    */
   public void enter(Player player){
     while(true){
-      lineBreaker();
+      lineBreaker(" Port ");
       pr("You have entered The ");
       pr("Port","34");
       prln(" of " + name);
@@ -102,7 +102,10 @@ public class Port extends Encounter{
       prln("Where would you like to go?");
       this.printSubEncounters();
       int input = askIn();
-      if(!this.enterSubEncounter(player, input)){
+      int choice = this.enterSubEncounter(player, input);
+      if(choice == 0 || choice == Integer.MIN_VALUE){ //If entered menu or sub encounter reload Port interaction
+        continue;
+      } else if(choice == 1){ //If left port leave it
         break;
       }
     }
@@ -179,36 +182,38 @@ public class Port extends Encounter{
    * Enters the sub encounter of the port
    * @param player the player
    * @param sub the sub encounter to enter
-   * @return whether the player entered a sub encounter (after making a choice)
+   * @return an int representing a sub encounter, leaving the port, or a menu action taken
    */
-  public boolean enterSubEncounter(Player player,int sub){ 
-    if(sub == 1){
+  public int enterSubEncounter(Player player,int input){ 
+    if(input == 1){
       if(store != null){
         store.enter(player);
-        return true;
+        return 0;
       } else {
         prln("There is no Supply Store here.");
         return this.enterSubEncounter(player,askIn());
       }
-    } else if(sub == 2){
+    } else if(input == 2){
       if(tavern != null){
         tavern.enter(player);
-        return true;
+        return 0;
       } else {
         prln("There is no Tavern here.");
         return this.enterSubEncounter(player,askIn());
       }
-    } else if(sub == 3){
+    } else if(input == 3){
       if(dock != null){
         dock.enter(player);
-        return true;
+        return 0;
       } else {
         prln("There is no Dockyard here.");
         return this.enterSubEncounter(player,askIn());
       }
-    } else if(sub == 4){
+    } else if(input == 4){
       prln("You leave the Port on your Ship.");
-      return false;
+      return 1;
+    } else if(input == Integer.MIN_VALUE){
+      return input;
     } else {
       invalOp();
       return this.enterSubEncounter(player,askIn());

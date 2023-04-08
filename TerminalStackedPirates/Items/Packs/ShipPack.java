@@ -13,7 +13,7 @@ public class ShipPack extends Pack{
    */
   public ShipPack(boolean reload, int rarityOrIndex){
     if(reload){
-      String[] data = getFromCSVRow("allpacks", "ShipPack.java", "Index", "" + rarityOrIndex);
+      String[] data = getFromCSVRow("allpacks", "ShipPack.java", "Index", toStr(rarityOrIndex));
       this.index = toInt(data[0]);
       this.sold = toBool(data[2]);
       this.rarity = toInt(data[3]);
@@ -24,7 +24,7 @@ public class ShipPack extends Pack{
       }
     } else {
       this.rarity = rarityOrIndex;
-      generatePack(rarity,"ShipPack.java", "Ship");
+      generatePack(rarity,"ShipPack.java", "ship");
       this.index = getFromCSVLastIndex("allpacks", "ShipPack.java");
     }
   }
@@ -42,6 +42,6 @@ public class ShipPack extends Pack{
    * @return the type of the pack
    */
   public String getType(){
-    return "Ship";
+    return "ship";
   }
 }

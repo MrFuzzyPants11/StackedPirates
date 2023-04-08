@@ -11,10 +11,10 @@ public class CrewCard extends Card {
   /*
    * Constructor for a new CrewCard
    */
-  public CrewCard(int rarity){
-    this.rarity = rarity;
+  public CrewCard(boolean reload,int rarityOrIndex){
+    rarity = rarityOrIndex;
     this.name = "TESTCREW";
-    writeToCSV("allcards", "CrewCard.java", true, "Type,Rarity,Name", "%s,%d,%s", "Crew", this.rarity, this.name);
+    writeToCSV("allcards", "CrewCard.java", true, "Type,Rarity,Name", "%s,%d,%s", "Crew",rarity, this.name);
     this.index = getFromCSVLastIndex("allCards", "CrewCard.java");
   }
 
@@ -23,6 +23,6 @@ public class CrewCard extends Card {
    * @return the type of the card
    */
   public String getType(){
-    return "Crew";
+    return "crew";
   }
 }

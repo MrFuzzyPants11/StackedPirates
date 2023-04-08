@@ -11,11 +11,11 @@ public class ShipCard extends Card{
   /*
    * Constructor for a new ShipCard
    */
-  public ShipCard(int rarity){
-    this.rarity = rarity;
+  public ShipCard(boolean reload, int rarityOrIndex){
+    rarity = rarityOrIndex;
     this.name = "TESTSHIP";
 
-    writeToCSV("allcards", "ShipCard.java", true, "Type,Rarity,Name", "%s,%d,%s", "Ship", this.rarity, this.name);
+    writeToCSV("allcards", "ShipCard.java", true, "Type,Rarity,Name", "%s,%d,%s", "Ship", rarity, name);
     this.index = getFromCSVLastIndex("allCards", "ShipCard.java");
   }
 
@@ -24,6 +24,6 @@ public class ShipCard extends Card{
    * @return the type of the card
    */
   public String getType(){
-    return "Ship";
+    return "ship";
   }
 }

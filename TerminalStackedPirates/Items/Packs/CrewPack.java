@@ -13,7 +13,7 @@ public class CrewPack extends Pack{
    */
   public CrewPack(boolean reload, int rarityOrIndex){
     if(reload){
-      String[] data = getFromCSVRow("allpacks", "CrewPack.java", "Index", "" + rarityOrIndex);
+      String[] data = getFromCSVRow("allpacks", "CrewPack.java", "Index", toStr(rarityOrIndex));
       this.index = toInt(data[0]);
       this.sold = toBool(data[2]);
       this.rarity = toInt(data[3]);
@@ -24,7 +24,7 @@ public class CrewPack extends Pack{
       }
     } else {
       this.rarity = rarityOrIndex;
-      generatePack(rarity,"CrewPack.java", "Crew");
+      generatePack(rarity,"CrewPack.java", "crew");
       this.index = getFromCSVLastIndex("allpacks", "CrewPack.java");
     }
   }
@@ -42,6 +42,6 @@ public class CrewPack extends Pack{
    * @return the type of the pack
    */
   public String getType(){
-    return "Crew";
+    return "crew";
   }
 }

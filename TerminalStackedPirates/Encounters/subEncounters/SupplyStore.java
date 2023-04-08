@@ -21,7 +21,7 @@ public class SupplyStore extends SubEncounter{
    */
   public SupplyStore(boolean reload, int levelOrIndex){
     if(reload){
-      String[] data = getFromCSVRow("supplystores","SupplyStore.java","Index", "" + levelOrIndex);
+      String[] data = getFromCSVRow("supplystores","SupplyStore.java","Index", toStr(levelOrIndex));
       this.index = toInt(data[0]);
       level = toInt(data[1]);
       this.packs = new ArrayList<Pack>();
@@ -42,7 +42,7 @@ public class SupplyStore extends SubEncounter{
       for(int i = 0; i < 5; i++){
         packs.add(new FoodPack(false,rand.nextInt(level + 1)));
       }
-      writeToCSV("supplystores","SupplyStore.java",true,"level,pack0,pack1,pack2,pack3,pack4,pack5,pack6,pack7,pack8,pack9",
+      writeToCSV("supplystores","SupplyStore.java",true,"Level,Pack0,Pack1,Pack2,Pack3,Pack4,Pack5,Pack6,Pack7,Pack8,Pack9",
         "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",level, packs.get(0).getIndex(), packs.get(1).getIndex(), packs.get(2).getIndex(), packs.get(3).getIndex(), 
         packs.get(4).getIndex(), packs.get(5).getIndex(), packs.get(6).getIndex(), packs.get(7).getIndex(), packs.get(8).getIndex(), packs.get(9).getIndex());
       this.index = getFromCSVLastIndex("supplystores","SupplyStore.java");
@@ -54,8 +54,10 @@ public class SupplyStore extends SubEncounter{
    * @param player the player
    */
   public void enter(Player player){
-    lineBreaker();
-    prln("You enter the supply store.");
+    lineBreaker(" Supply Store ");
+    pr("You enter the ");
+    pr("Supply Store", "34");
+    prln(".");
     prln("You see a variety of packs.");
     boolean leave = false;
     while(!leave){
@@ -77,6 +79,9 @@ public class SupplyStore extends SubEncounter{
             }
           }
           prln("11. Leave the store");
+          pr("You have ");
+          pr(player.getGold() + " Gold", "33");
+          prln(".");
           prln("Which pack would you like to buy?");
           input = askIn();
           if(input == 11){
@@ -91,6 +96,9 @@ public class SupplyStore extends SubEncounter{
             } else if(packs.get(input).getCost() > player.getGold()){
               prln("You do not have enough gold to buy this pack.");
               continue;
+            } else if(packs.get(input).getSold()){
+              prln("This pack has already been sold.");
+              continue;
             } else {
               pr("Are you sure you want to buy a ");
               pr(packs.get(input).getRarity(), packs.get(input).getColour());
@@ -102,9 +110,8 @@ public class SupplyStore extends SubEncounter{
               input = askIn();
               if(input == 1){
                 player.spendGold(packs.get(oldInput).getCost());
-                player.addToInventory(packs.get(oldInput));
-                packs.remove(oldInput).sellPack();
-                packIndexes.remove(oldInput);
+                addToInventory(packs.get(oldInput));
+                packs.get(oldInput).sellPack();
                 continue;
               }
             }

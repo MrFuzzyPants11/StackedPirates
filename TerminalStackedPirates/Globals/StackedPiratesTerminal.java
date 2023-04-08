@@ -17,6 +17,7 @@ public class StackedPiratesTerminal{
   public static void main(String args[]){
     initializeScanner();
     cleanCSVFiles();
+    //LoadNameFiles();
     prln("Welcome to Stacked Pirates!");
     Player player = new Player("Fuzzy", "Pants");
     pr("You are " + player.getFname() + " " + player.getLname() + ".\nYou are ");
@@ -24,8 +25,6 @@ public class StackedPiratesTerminal{
     pr(", have no cards, But do have ");
     prln(player.getGold() + " gold.", "33");
     Port port = new Port("Bruh", true);
-    port.enter(player);
-    port = new Port(0);
     port.enter(player);
     closeScanner();
   }

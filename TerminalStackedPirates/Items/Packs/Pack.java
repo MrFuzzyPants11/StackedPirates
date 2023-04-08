@@ -42,7 +42,7 @@ public abstract class Pack extends Item{
    */
   public void sellPack(){
     sold = true;
-    writeToCSVValue("allpacks", "Pack.java", "Index", "" + this.index, "Sold", "true");
+    writeToCSVValue("allpacks", "Pack.java", "Index", toStr(this.index), "Sold", "true");
   }
 
   /*

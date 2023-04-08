@@ -10,11 +10,11 @@ public class FoodCard extends Card{
   /*
    * Constructor for a new FoodCard
    */
-  public FoodCard(int rarity){
-    this.rarity = rarity;
+  public FoodCard(boolean reload, int rarityOrIndex){
+    this.rarity = rarityOrIndex;
     this.name = "TESTFOOD";
 
-    writeToCSV("allcards", "FoodCard.java", true, "Type,Rarity,Name", "%s,%d,%s", "Food", this.rarity, this.name);
+    writeToCSV("allcards", "FoodCard.java", true, "Type,Rarity,Name", "%s,%d,%s", "Food", rarity, this.name);
     this.index = getFromCSVLastIndex("allCards", "FoodCard.java");
   }
 
@@ -23,6 +23,6 @@ public class FoodCard extends Card{
    * @return the type of the card
    */
   public String getType(){
-    return "Food";
+    return "food";
   }
 }

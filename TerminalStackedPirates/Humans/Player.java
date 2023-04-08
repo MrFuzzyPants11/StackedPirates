@@ -8,7 +8,6 @@ import java.util.*;
 
 import Items.Item;
 import Items.Cards.*;
-
 import static Globals.Tools.*;
 
 public class Player extends Human{
@@ -25,11 +24,6 @@ public class Player extends Human{
     this.level = toInt(playerData[3]);
     this.health = toInt(playerData[4]);
     this.gold = toInt(playerData[5]);
-    this.cards = new ArrayList<CrewCard>();
-    String[] cardNames = playerData[6].split(",");
-    for(int i = 0; i < cardNames.length; i++){
-      this.cards.add(new CrewCard(0));
-    }
   }
 
   /*
@@ -43,19 +37,10 @@ public class Player extends Human{
     this.level = 1;
     this.health = 20;
     this.cards = new ArrayList<CrewCard>();
-    this.gold = 500;
+    this.gold = 1500;
 
     writeToCSV("player","Player.java", false, "Fname,Lname,Level,Health,Gold,Cards","%s,%s,%d,%d,%d,%s", 
         this.fname, this.lname, this.level, this.health, this.gold, this.cards.toString());
-  }
-
-  /* 
-   * Adds an item to the player's inventory
-   * @param item the item to be added
-   */
-  public void addToInventory(Item item){
-    writeToCSV("inventory","Player.java", true, "Type,SubType,ItemIndex","%s,%s,%d", 
-      item.getItemType(),item.getType(),item.getIndex());
   }
 
   /*
