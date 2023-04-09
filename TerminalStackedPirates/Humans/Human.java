@@ -1,7 +1,7 @@
 //File: Human.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-07-2023
+//Modified: 04-08-2023
 package Humans;
 
 import java.util.*;
@@ -12,9 +12,9 @@ import Items.Cards.CrewCard;
 public abstract class Human {
   int level;
   int health;
-  ArrayList<CrewCard> cards;
   String fname;
   String lname;
+  ArrayList<CrewCard> cards;
 
 
   /*
@@ -43,12 +43,22 @@ public abstract class Human {
   }
 
   /*
-   * Gets the human's level
+   * Gets the human's level for print purposes, AKA level + 1
+   * @return the human's level + 1
+   */
+  public int getLevelText() {
+    return this.level + 1;
+  }
+
+  /*
+   * Gets the human's actual level
    * @return the human's level
    */
   public int getLevel() {
     return this.level;
   }
+
+
 
   /*
    * Gets the human's health

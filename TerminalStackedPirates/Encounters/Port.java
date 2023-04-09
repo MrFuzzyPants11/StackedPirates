@@ -1,10 +1,11 @@
 //File: Port.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-07-2023
+//Modified: 04-08-2023
 package Encounters;
 
 import static Globals.Tools.*;
+import static Globals.Constants.*;
 import java.util.*;
 import Encounters.subEncounters.*;
 import Humans.Player;
@@ -21,7 +22,7 @@ public class Port extends Encounter{
    * @param index the index of the port
    */
   public Port(int index){
-    String[] data = getFromCSVRow("ports","Ports.java","Index", toStr(index));
+    String[] data = getFromCSVRow(PORTSCSV,"Ports.java",INDEX, toStr(index));
     this.index = toInt(data[0]);
     this.name = data[1];
     this.storeIndex = toInt(data[2]);
@@ -43,24 +44,24 @@ public class Port extends Encounter{
    * @param name the name of the port
    * @param full whether the port has all sub encounters
    */
-  public Port(String name, Boolean full) {
+  public Port(String name, Boolean full, int level) {
     this.name = name;
+    this.level = level;
     if(full){
-      store = new SupplyStore(false,1);
-      tavern = new Tavern(false,1);
-      dock = new Dockyard(false,1);
+      store = new SupplyStore(false,0);
+      tavern = new Tavern(false,0);
+      dock = new Dockyard(false,0);
       storeIndex = store.getIndex();
       tavernIndex = tavern.getIndex();
       dockIndex = dock.getIndex();
     } else {
-      Random rand = new Random();
       while(true){
-        if(generateSubEncounters(rand.nextInt(4) + 1,rand.nextInt(4) + 1,rand.nextInt(4) + 1)){
+        if(generateSubEncounters(generateLevel(level),generateLevel(level),generateLevel(level))){
           break;
         }
       }
     }
-    writeToCSV("ports","Port.java",true,"Name,SupplyStore,Tavern,Dockyard","%s,%d,%d,%d",name,storeIndex, tavernIndex, dockIndex);
+    writeToCSV(PORTSCSV,"Port.java",true,PORTSHEADER,PORTSFORMAT,name,level,storeIndex, tavernIndex, dockIndex);
   }
 
   /*
@@ -69,16 +70,17 @@ public class Port extends Encounter{
    */
   public void enter(Player player){
     while(true){
-      lineBreaker(" Port ");
+      lineBreaker("Port");
       pr("You have entered The ");
-      pr("Port","34");
+      pr("Level " + this.getLevelText(), LEVELCOLOUR);
+      pr(" Port",ENCOUNTERCOLOUR);
       prln(" of " + name);
 
       pr("This port has a ");
       
       if(store != null){
-        pr("Level " + store.getLevel(), "35");
-        pr(" Supply Store", "34");
+        pr("Level " + store.getLevelText(), LEVELCOLOUR);
+        pr(" Supply Store", ENCOUNTERCOLOUR);
       }
       if(store != null && tavern != null && dock != null){
         pr(", ");
@@ -87,15 +89,15 @@ public class Port extends Encounter{
         pr(", and a ");
       }
       if(tavern != null){
-        pr("Level " + tavern.getLevel(), "35");
-        pr(" Tavern","34");
+        pr("Level " + tavern.getLevelText(), LEVELCOLOUR);
+        pr(" Tavern",ENCOUNTERCOLOUR);
       }
       if((store != null || tavern != null) && dock != null){
         pr(", and a ");
       }
       if(dock != null){
-        pr("Level " + dock.getLevel(), "35");
-        pr(" Dockyard","34");
+        pr("Level " + dock.getLevelText(), LEVELCOLOUR);
+        pr(" Dockyard",ENCOUNTERCOLOUR);
       }
   
       prln(".");
@@ -103,7 +105,7 @@ public class Port extends Encounter{
       this.printSubEncounters();
       int input = askIn();
       int choice = this.enterSubEncounter(player, input);
-      if(choice == 0 || choice == Integer.MIN_VALUE){ //If entered menu or sub encounter reload Port interaction
+      if(choice == 0 || choice == MENUEXIT){ //If entered menu or sub encounter reload Port interaction
         continue;
       } else if(choice == 1){ //If left port leave it
         break;
@@ -157,24 +159,24 @@ public class Port extends Encounter{
   public void printSubEncounters(){
     if(store != null){
       pr("1. ");
-      pr("Supply Store","34");
+      pr("Supply Store",ENCOUNTERCOLOUR);
       prln(" (Buy Crew Packs, food packs, and sell goods)");
     }
 
     if(tavern != null){
       pr("2. ");
-      pr("Tavern","34");
+      pr("Tavern",ENCOUNTERCOLOUR);
       prln(" (Hire Crew, and get into fights)");
     }
 
     if(dock != null){
       pr("3. ");
-      pr("Dockyard","34");
+      pr("Dockyard",ENCOUNTERCOLOUR);
       prln(" (Buy Ship Packs, Buy a new ship, upgrade your ship, or repair your ship)");
     }
 
     pr("Q. Leave ");
-    pr("Port","34");
+    pr("Port",ENCOUNTERCOLOUR);
     prln(" on your Ship");
   }
 
@@ -190,7 +192,9 @@ public class Port extends Encounter{
         store.enter(player);
         return 0;
       } else {
-        prln("There is no Supply Store here.");
+        pr("There is no ");
+        pr("Supply Store",ENCOUNTERCOLOUR); 
+        prln("here.");
         return this.enterSubEncounter(player,askIn());
       }
     } else if(input == 2){
@@ -198,7 +202,9 @@ public class Port extends Encounter{
         tavern.enter(player);
         return 0;
       } else {
-        prln("There is no Tavern here.");
+        pr("There is no ");
+        pr("Tavern",ENCOUNTERCOLOUR); 
+        prln(" here.");
         return this.enterSubEncounter(player,askIn());
       }
     } else if(input == 3){
@@ -206,13 +212,15 @@ public class Port extends Encounter{
         dock.enter(player);
         return 0;
       } else {
-        prln("There is no Dockyard here.");
+        pr("There is no ");
+        pr("Dockyard",ENCOUNTERCOLOUR); 
+        prln(" here.");
         return this.enterSubEncounter(player,askIn());
       }
-    } else if(input == Integer.MAX_VALUE){
+    } else if(input == QUIT){
       prln("You leave the Port on your Ship.");
       return 1;
-    } else if(input == Integer.MIN_VALUE){
+    } else if(input == MENUEXIT){
       return input;
     } else {
       invalOp();

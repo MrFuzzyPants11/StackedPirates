@@ -1,8 +1,11 @@
 //File: Pack.java
 //Author: MrFuzzyPants
 //Created: 05-07-2023
-//Modified: 05-07-2023
+//Modified: 04-08-2023
 package Items;
+
+import static Globals.Constants.*;
+import static Globals.Tools.*;
 
 public abstract class Item {
   protected int rarity;
@@ -40,21 +43,21 @@ public abstract class Item {
    */
   public String getRarity(){
     if(rarity == 0){
-      return "Common";
+      return properCase(COMMON);
     }
     
     if(rarity == 1){
-      return "Uncommon";
+      return properCase(UNCOMMON);
     }
     
     if(rarity == 2){
-      return "Rare";
+      return properCase(RARE);
     }
     
     if(rarity == 3){
-      return "Epic";
+      return properCase(EPIC);
     }
-    return "legendary";
+    return properCase(LEGENDARY);
   }
 
   /*
@@ -63,19 +66,19 @@ public abstract class Item {
    */
   public String getColour(){
     if(rarity == 0){
-      return "";
+      return COMMONCOLOUR;
     }
     if(rarity == 1){
-      return "36";
+      return UNCOMMONCOLOUR;
     }
 
     if(rarity == 2){
-      return "35";
+      return RARECOLOUR;
     }
 
     if(rarity == 3){
-      return "33";
+      return EPICCOLOUR;
     }
-    return "RAINBOWBABY"; // If item is legendary return custom rainbow colour code
+    return LEGENDARYCOLOUR;
   }
 }

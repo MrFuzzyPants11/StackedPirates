@@ -1,12 +1,13 @@
 //File: PlayerShip.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-04-2023
+//Modified: 04-08-2023
 package Ships;
 
+import static Globals.Tools.*;
+import static Globals.Constants.*;
 import java.util.*;
 import Items.Cards.*;
-import static Globals.Tools.*;
 
 public class PlayerShip extends Ship{
   int travelUntilSink;
@@ -19,7 +20,7 @@ public class PlayerShip extends Ship{
     this.repairs = 0;
     this.travelUntilSink = 4;
     this.holeLevel = 0;
-    writeToCSV("playership", "PlayerShip.java",false,"Size,Toughness,Repairs,TravelUntilSink,HoleLevel,Cards", "%d,%d,%d,%d,%d,%s", this.size, this.toughness, this.cards.toString(), this.repairs, this.travelUntilSink, this.holeLevel);
+    writeToCSV(PLAYERSHIPCSV, "PlayerShip.java",false,PLAYERSHIPHEADER, PLAYERSHIPFORMAT);
   }
 
   public int getHoleLevel(){

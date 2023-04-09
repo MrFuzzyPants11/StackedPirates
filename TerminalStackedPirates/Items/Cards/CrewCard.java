@@ -1,10 +1,11 @@
 //File: CrewCard.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-07-2023
+//Modified: 04-08-2023
 package Items.Cards;
 
 import static Globals.Tools.*;
+import static Globals.Constants.*;
 
 public class CrewCard extends Card {
 
@@ -12,10 +13,17 @@ public class CrewCard extends Card {
    * Constructor for a new CrewCard
    */
   public CrewCard(boolean reload,int rarityOrIndex){
-    rarity = rarityOrIndex;
-    this.name = "TESTCREW";
-    writeToCSV("allcards", "CrewCard.java", true, "Type,Rarity,Name", "%s,%d,%s", "Crew",rarity, this.name);
-    this.index = getFromCSVLastIndex("allCards", "CrewCard.java");
+    if(reload){
+      String[] data = getFromCSVRow(ALLCARDSCSV, "CrewPack.java", INDEX, toStr(rarityOrIndex));
+      this.index = toInt(data[0]);
+      this.rarity = toInt(data[2]);
+      this.name = data[3];
+    } else {
+      this.name = "TESTCREW";
+      this.rarity = rarityOrIndex;
+      writeToCSV(ALLCARDSCSV, "CrewCard.java", true, ALLCARDSHEADER, ALLCARDSFORMAT, CREW,rarity, this.name);
+      this.index = getFromCSVLastIndex(ALLCARDSCSV, "CrewCard.java");
+    }
   }
 
   /*
@@ -23,6 +31,6 @@ public class CrewCard extends Card {
    * @return the type of the card
    */
   public String getType(){
-    return "crew";
+    return CREW;
   }
 }

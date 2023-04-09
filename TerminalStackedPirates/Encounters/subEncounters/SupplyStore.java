@@ -1,10 +1,12 @@
 //File: SupplyStore.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-07-2023
+//Modified: 04-08-2023
 package Encounters.subEncounters;
 
+import static Globals.Inventory.*;
 import static Globals.Tools.*;
+import static Globals.Constants.*;
 import java.util.*;
 
 import Humans.*;
@@ -21,7 +23,7 @@ public class SupplyStore extends SubEncounter{
    */
   public SupplyStore(boolean reload, int levelOrIndex){
     if(reload){
-      String[] data = getFromCSVRow("supplystores","SupplyStore.java","Index", toStr(levelOrIndex));
+      String[] data = getFromCSVRow(SUPPLYSTORESCSV,"SupplyStore.java",INDEX, toStr(levelOrIndex));
       this.index = toInt(data[0]);
       level = toInt(data[1]);
       this.packs = new ArrayList<Pack>();
@@ -35,17 +37,16 @@ public class SupplyStore extends SubEncounter{
     } else {
       packs = new ArrayList<Pack>();
       level = levelOrIndex;
-      Random rand = new Random();
       for(int i = 0; i < 5; i++){
-        packs.add(new CrewPack(false,rand.nextInt(level + 1)));
+        packs.add(new CrewPack(false,generateLevel(level)));
       }
       for(int i = 0; i < 5; i++){
-        packs.add(new FoodPack(false,rand.nextInt(level + 1)));
+        packs.add(new FoodPack(false,generateLevel(level)));
       }
-      writeToCSV("supplystores","SupplyStore.java",true,"Level,Pack0,Pack1,Pack2,Pack3,Pack4,Pack5,Pack6,Pack7,Pack8,Pack9",
-        "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d",level, packs.get(0).getIndex(), packs.get(1).getIndex(), packs.get(2).getIndex(), packs.get(3).getIndex(), 
-        packs.get(4).getIndex(), packs.get(5).getIndex(), packs.get(6).getIndex(), packs.get(7).getIndex(), packs.get(8).getIndex(), packs.get(9).getIndex());
-      this.index = getFromCSVLastIndex("supplystores","SupplyStore.java");
+      writeToCSV(SUPPLYSTORESCSV,"SupplyStore.java",true,SUPPLYSTORESHEADER,SUPPLYSTORESFORMAT,level, packs.get(0).getIndex(), 
+        packs.get(1).getIndex(), packs.get(2).getIndex(), packs.get(3).getIndex(), packs.get(4).getIndex(), 
+        packs.get(5).getIndex(), packs.get(6).getIndex(), packs.get(7).getIndex(), packs.get(8).getIndex(), packs.get(9).getIndex());
+      this.index = getFromCSVLastIndex(SUPPLYSTORESCSV,"SupplyStore.java");
     }
   }
 
@@ -54,15 +55,15 @@ public class SupplyStore extends SubEncounter{
    * @param player the player
    */
   public void enter(Player player){
-    lineBreaker(" Supply Store ");
+    lineBreaker("Supply Store");
     pr("You enter the ");
-    pr("Supply Store", "34");
+    pr("Supply Store", ENCOUNTERCOLOUR);
     prln(".");
     prln("You see a variety of packs.");
     boolean leave = false;
     while(!leave){
       pr("You have ");
-      pr(player.getGold() + " Gold", "33");
+      pr(player.getGold() + " Gold", GOLDCOLOUR);
       prln(".");
       prln("What would you like to do?");
       prln("1. Buy a pack");
@@ -80,32 +81,32 @@ public class SupplyStore extends SubEncounter{
           }
           prln("Q. Leave the store");
           pr("You have ");
-          pr(player.getGold() + " Gold", "33");
+          pr(player.getGold() + " Gold", GOLDCOLOUR);
           prln(".");
           prln("Which pack would you like to buy?");
           input = askIn();
-          if(input == Integer.MAX_VALUE){
+          if(input == QUIT){
             prln("You leave the store.");
             leave = true;
             break;
           } else {
-            input -= 1;
-            if(input > packs.size() - 1){
-              invalOp();
+            if(input == MENUEXIT){
               continue;
-            } else if(packs.get(input).getCost() > player.getGold()){
-              prln("You do not have enough gold to buy this pack.");
+            }
+            input -= 1;
+            if(packs.get(input).getCost() > player.getGold()){
+              prln("You do not have enough gold to buy this pack.","31");
               continue;
             } else if(packs.get(input).getSold()){
-              prln("This pack has already been sold.");
+              prln("A pack so good you'd buy it twice?\n\t\tyou can't though sorry.");
               continue;
             } else {
               pr("Are you sure you want to buy a ");
               pr(packs.get(input).getRarity(), packs.get(input).getColour());
               pr(" " + packs.get(input).getName() + " for ");
-              prln(packs.get(input).getCost() + " gold?", "33");
+              prln(packs.get(input).getCost() + " gold?", GOLDCOLOUR);
               prln(toStr(input + 1) + ". Yes");
-              prln("11. No");
+              prln("Q. No");
               int oldInput = input;
               input = askIn();
               if(input == (oldInput + 1)){
@@ -118,10 +119,10 @@ public class SupplyStore extends SubEncounter{
           }
         }
         
-      } else if(input == Integer.MAX_VALUE){
+      } else if(input == QUIT){
         prln("You leave the store.");
         break;
-      } else if(input != Integer.MIN_VALUE){
+      } else if(input != MENUEXIT){
         invalOp();
       }
     }

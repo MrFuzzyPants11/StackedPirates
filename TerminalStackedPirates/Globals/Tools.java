@@ -1,17 +1,16 @@
 //File: Tools.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-07-2023
+//Modified: 04-08-2023
 package Globals;
 
+import static Globals.Inventory.*;
+import static Globals.Constants.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
-import Items.*;
-import Items.Cards.*;
-import Items.Packs.*;
 
-public class Tools {
+public abstract class Tools {
 
   // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
   // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
@@ -47,6 +46,29 @@ public class Tools {
    */
   public static String toStr(boolean bool){
     return Boolean.toString(bool);
+  }
+
+  /*
+   * Waits a certain amount of time
+   * @param time The time to wait in milliseconds
+   * @return Whether the wait was successful
+   */
+  public static boolean sleep(int time){
+    try {
+      Thread.sleep(time);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    return true;
+  }
+
+  /*
+   * Returns the string with the first letter capitalized and the rest lowercase
+   * @param str The string to convert
+   * @return The converted string
+   */
+  public static String properCase(String str){
+    return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
   }
 
   // GENERATION METHODS | GENERATION METHODS | GENERATION METHODS
@@ -85,6 +107,30 @@ public class Tools {
     }
   }
 
+  /*
+   * Generates a random level to be used based on the inputed level
+   * @param val The level to generate from
+   * @return The generated level
+   */
+  public static int generateLevel(int val) {
+    Random rand = new Random();
+    if(val == MINLEVEL){
+      if (rand.nextInt(3) < 2) { // 66% chance of MINLEVEL IF VAL IS MINLEVEL
+        return MINLEVEL;
+      } else {
+        return MINLEVEL + 1;
+      }
+    }
+    if (val == MAXLEVEL) {
+      if (rand.nextInt(3) < 2) { // 66% chance of MAXLEVEL IF VAL IS MAXLEVEL
+        return MAXLEVEL;
+      } else {
+        return MAXLEVEL - 1;
+      }
+    }
+    return rand.nextInt(3) + val - 1; // val-1 or val or val + 1
+  }
+
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
@@ -119,9 +165,9 @@ public class Tools {
    * @param col The ANSI colour code to print the text in
    */
   public static void prln(String str, String col){
-    if(col.equals("RAINBOWBABY")){
+    if(col.equals(RAINBOW)){
       prln(rainbowIfier(str));
-    } else if(col.equals("BROWNBOWBABY")) {
+    } else if(col.equals(BROWNBOW)) {
       prln(brownbowIfier(str));
     } else {
       prln("\u001B[" + col + "m" + str + "\u001B[0m");
@@ -134,9 +180,9 @@ public class Tools {
    * @param col The ANSI colour code to print the text in
    */
   public static void pr(String str, String col){
-    if(col.equals("RAINBOWBABY")){
+    if(col.equals(RAINBOW)){
       pr(rainbowIfier(str));
-    } else if(col.equals("BROWNBOWBABY")) {
+    } else if(col.equals(BROWNBOW)) {
       pr(brownbowIfier(str));
     } else {
       pr("\u001B[" + col + "m" + str + "\u001B[0m");
@@ -149,9 +195,9 @@ public class Tools {
    * @param col The ANSI colour code to print the text in
    */
   public static void prnl(String str, String col){
-    if(col.equals("RAINBOWBABY")){
+    if(col.equals(RAINBOW)){
       prnl(rainbowIfier(str));
-    } else if(col.equals("BROWNBOWBABY")) {
+    } else if(col.equals(BROWNBOW)) {
       prnl(brownbowIfier(str));
     } else {
       prnl("\u001B[" + col + "m" + str + "\u001B[0m");
@@ -162,11 +208,18 @@ public class Tools {
    * Used internally to print rainbow text
    * @param str The string to print in rainbow text
    */
+  private static short rainbowMegaTracker = 0; // This makes the rainbow transition universally, if one string ends on green the next will start on cyan
+                                                // So rainbow isn't always red first. It's a bit of a hack but it works.
   private static String rainbowIfier(String str){
     final String[] rainbowColours = {"\u001B[31;3m", "\u001B[33;3m", "\u001B[32;3m", "\u001B[36;3m", "\u001B[34;3m", "\u001B[35;3m"};
     String temp = "";
     for (int i = 0; i < str.length(); i++) {
-      temp = temp + rainbowColours[i % rainbowColours.length] + str.charAt(i);
+      temp = temp + rainbowColours[rainbowMegaTracker] + str.charAt(i);
+      if(rainbowMegaTracker == 5){
+        rainbowMegaTracker = 0;
+      } else {
+        rainbowMegaTracker++;
+      }
     }
     return (temp + "\u001B[0m");
   }
@@ -175,11 +228,17 @@ public class Tools {
    * Used internally to print "brownbow" (black and white) text
    * @param str The string to print in brownbow text
    */
+  private static short brownbowMegaTracker = 0;
   private static String brownbowIfier(String str){
     final String[] brownbowColours = {"\u001B[30;1m","\u001B[30;1m","\u001B[37;1m","\u001B[37;1m"};
     String temp = "";
     for (int i = 0; i < str.length(); i++) {
-      temp = temp + brownbowColours[i % brownbowColours.length] + str.charAt(i);
+      temp = temp + brownbowColours[brownbowMegaTracker] + str.charAt(i);
+      if(rainbowMegaTracker == 3){
+        rainbowMegaTracker = 0;
+      } else {
+        rainbowMegaTracker++;
+      }
     }
     return (temp + "\u001B[0m");
   }
@@ -188,17 +247,54 @@ public class Tools {
    * Sends an invalid option message to the user
    */
   public static void invalOp(){
-    prln("That is not a valid option.", "31");
+    prln("That is not a valid option.", RED);
   }
 
   /*
    * Prints a line of text to separate sections of the terminal
+   * @param middle The text to print in the middle of the line
    */
   public static void lineBreaker(String middle){
     int sidedPaddingLength = (64 - middle.length()) / 2;
-    pr("<>".repeat(sidedPaddingLength / 2),"BROWNBOWBABY");
+    pr("<>".repeat(sidedPaddingLength / 2),BROWNBOW);
     pr(middle,"1;4");
-    prln("<>".repeat(sidedPaddingLength / 2),"BROWNBOWBABY");
+    prln("<>".repeat(sidedPaddingLength / 2),BROWNBOW);
+  }
+
+  /*
+   * Prints a line of text to separate sections of the terminal
+   * @param middle The text to print in the middle of the line
+   * @param col The ANSI colour code to print the text in
+   */
+  public static void lineBreaker(String middle, String col){
+    int sidedPaddingLength = (64 - middle.length()) / 2;
+    pr("<>".repeat(sidedPaddingLength / 2),col);
+    if(col.equals(RAINBOW)){
+      pr(rainbowIfierForLineBreaker(middle));
+    } else if(col.equals(BROWNBOW)) {
+      pr(middle,BROWNBOW);
+    } else {
+      pr(middle,col + ";1;4");
+    }
+    prln("<>".repeat(sidedPaddingLength / 2),col);
+  }
+
+  /*
+   * Used internally to print rainbow text in the lineBreaker text format
+   * @param str The string to print in rainbow text
+   */
+  private static String rainbowIfierForLineBreaker(String str){
+    final String[] rainbowColours = {"\u001B[31;1;4m", "\u001B[33;1;4m", "\u001B[32;1;4m", "\u001B[36;1;4m", "\u001B[34;1;4m", "\u001B[35;1;4m"};
+    String temp = "";
+    for (int i = 0; i < str.length(); i++) {
+      temp = temp + rainbowColours[rainbowMegaTracker] + str.charAt(i);
+      if(rainbowMegaTracker == 5){
+        rainbowMegaTracker = 0;
+      } else {
+        rainbowMegaTracker++;
+      }
+    }
+    return (temp + "\u001B[0m");
   }
 
 
@@ -232,12 +328,12 @@ public class Tools {
     int input;
     if(userInput.equals("i") || userInput.equals("I")){
       viewInventory();
-      input = Integer.MIN_VALUE;
-    } else if(userInput.equals("s") || userInput.equals("S")){
-      viewSettingsMenu();
-      input = Integer.MIN_VALUE;
+      input = MENUEXIT;
+    } else if(userInput.equals("p") || userInput.equals("P")){
+      viewPauseMenu();
+      input = MENUEXIT;
     } else if(userInput.equals("q") || userInput.equals("Q")){
-      input = Integer.MAX_VALUE;
+      input = QUIT;
     } else {
       // I have to use Integer.parseInt() because I can't throw an error from toInt() without having to handle it everywhere
       try {
@@ -252,69 +348,11 @@ public class Tools {
   }
 
   /*
-   * Prints out the settings menu
+   * Prints out the PAUSE menu
    */
-  public static void viewSettingsMenu(){
-    lineBreaker(" SETTINGS MENU");
+  public static void viewPauseMenu(){
+    lineBreaker("PAUSE MENU");
     int input = askIn();
-  }
-  
-  /* 
-   * Prints the inventory CSV in a user viewable format (Inventory Screen)
-   */
-  public static void viewInventory(){
-    while(true){
-      lineBreaker("INVENTORY");
-      ArrayList<Pack> packs = new ArrayList<Pack>();
-      ArrayList<Card> cards = new ArrayList<Card>();
-      int it = 0;
-      Item currentItem = getFromInventory(it);
-      while(currentItem != null){
-        if(currentItem instanceof Pack){
-          packs.add((Pack)currentItem);
-        } else if(currentItem instanceof Card){
-          cards.add((Card)currentItem);
-        }
-        it++;
-        currentItem = getFromInventory(it);
-      }
-
-      lineBreaker("PACKS");
-      int packNums = 0;
-      while(packNums < packs.size()){
-        pr((packNums + 1) + ". ");
-        pr(packs.get(packNums).getRarity(), packs.get(packNums).getColour());
-        prln(" " + packs.get(packNums).getName());
-        packNums++;
-      }
-
-      lineBreaker("CARDS");
-      int cardNums = packNums;
-      for(int j = 0; j < cards.size(); j++){
-        pr((cardNums + 1) + ". ");
-        pr(cards.get(j).getRarity(), cards.get(j).getColour());
-        prln(" " + cards.get(j).getName());
-        cardNums++;
-      }
-
-      prln("What would you like to do?");
-      prln("Enter a pack number to open it");
-      prln("Enter a card number to open it");
-      prln("Q. Close the Inventory");
-      int input = askIn();
-      if(input == Integer.MAX_VALUE){
-        break;
-      } else {
-        input -= 1;
-        if(input < packNums){
-          //openPack(packs.get(input));
-        } else if(input < cardNums){
-          //viewCard(cards.get(input - packs.size()));
-        } else {
-          invalOp();
-        }
-      }
-    }
   }
 
   // CSV METHODS | CSV METHODS | CSV METHODS
@@ -325,14 +363,14 @@ public class Tools {
    * Refreshes all CSVs to delete their contents
    */
   public static void cleanCSVFiles(){
-    refreshCSV("allcards","Type,Rarity,Name");
-    refreshCSV("allpacks","Type,Sold,Rarity,Cost,Card1,Card2,Card3,Card4,Card5");
-    refreshCSV("human","");
-    refreshCSV("inventory","InInventory,Type,SubType,ItemIndex");
-    refreshCSV("player","Fname,Lname,Level,Health,Gold,Cards");
-    refreshCSV("playership","");
-    refreshCSV("ports","Name,SupplyStore,Tavern,Dockyard");
-    refreshCSV("supplystores","Level,Pack0,Pack1,Pack2,Pack3,Pack4,Pack5,Pack6,Pack7,Pack8,Pack9");
+    refreshCSV(ALLCARDSCSV,ALLCARDSHEADER);
+    refreshCSV(ALLPACKSCSV,ALLPACKSHEADER);
+    refreshCSV(HUMANCSV,HUMANHEADER);
+    refreshCSV(INVENTORYCSV,INVENTORYHEADER);
+    refreshCSV(PLAYERCSV,PLAYERHEADER);
+    refreshCSV(PLAYERSHIPCSV,PLAYERSHIPHEADER);
+    refreshCSV(PORTSCSV,PORTSHEADER);
+    refreshCSV(SUPPLYSTORESCSV,SUPPLYSTORESHEADER);
   }
 
   /*
@@ -343,11 +381,11 @@ public class Tools {
   private static void refreshCSV(String filename, String headerRow) {
     try{
       BufferedWriter writer = new BufferedWriter(new FileWriter("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
-      writer.write("Index," + headerRow + "\n");
+      writer.write(INDEX + "," + headerRow + "\n");
 
       writer.close();
     } catch (Exception e){
-      prln("refreshCSV: Failed to write to CSV file.", "31");
+      prln("refreshCSV: Failed to write to CSV file.", RED);
     }
   }
 
@@ -367,7 +405,7 @@ public class Tools {
 
       // If the file is being overwritten, write the header row with index value
       if (!append) {
-        writer.write("Index," + headerRow + "\n");
+        writer.write(INDEX + "," + headerRow + "\n");
       }
 
       // Get the number of rows in the file (if overwritten will be 1)
@@ -390,7 +428,7 @@ public class Tools {
       }
         writer.close();
     } catch (Exception e){
-      prln("writeToCSV: " + comingFrom + ": Failed to write to CSV file.", "31");
+      prln("writeToCSV: " + comingFrom + ": Failed to write to CSV file.", RED);
     }
   }
 
@@ -425,7 +463,7 @@ public class Tools {
         }
       }
       if (searchColumnIndex == -1) {
-        prln("writeToCSVValue: " + comingFrom + ": " + searchColumn + "searchColumn not found in CSV file", "31");
+        prln("writeToCSVValue: " + comingFrom + ": " + searchColumn + "searchColumn not found in CSV file", RED);
       }
 
       // Find the row index of the value in that header column
@@ -437,7 +475,7 @@ public class Tools {
         }
       }
       if (rowIndex == -1) {
-        prln("writeToCSVValue: " + comingFrom + ": " + searchValue + "searchValue not found in CSV file", "31");
+        prln("writeToCSVValue: " + comingFrom + ": " + searchValue + "searchValue not found in CSV file", RED);
       }
 
       // Find the column index of the column to change
@@ -449,7 +487,7 @@ public class Tools {
         }
       }
       if (changeColumnIndex == -1) {
-        prln("writeToCSVValue: " + comingFrom + ": " + changeColumn + "changeColumn not found in CSV file", "31");
+        prln("writeToCSVValue: " + comingFrom + ": " + changeColumn + "changeColumn not found in CSV file", RED);
       }
 
       // Update the value in our array of the data
@@ -468,7 +506,7 @@ public class Tools {
       }
       writer.close();
     } catch (Exception e){
-      prln("writeToCSVValue: " + comingFrom + ": Failed to read from CSV file.", "31");
+      prln("writeToCSVValue: " + comingFrom + ": Failed to read from CSV file.", RED);
     }
   }
 
@@ -500,12 +538,12 @@ public class Tools {
         }
       }
       if (searchColumnIndex == -1) {
-        prln("getFromCSVValue: " +  comingFrom + ": " + searchColumn + "searchColumn not found in CSV file", "31");
+        prln("getFromCSVValue: " +  comingFrom + ": " + searchColumn + "searchColumn not found in CSV file", RED);
         reader.close();
         return null;
       }
       if (resultColumnIndex == -1) {
-        prln("getFromCSVValue: " + comingFrom + ": " + resultColumn + "resultColumn not found in CSV file", "31");
+        prln("getFromCSVValue: " + comingFrom + ": " + resultColumn + "resultColumn not found in CSV file", RED);
         reader.close();
         return null;
       }
@@ -523,7 +561,7 @@ public class Tools {
       reader.close();
       return null;
     } catch (Exception e){
-      prln("getFromCSVValue: " + comingFrom + ": Failed to read from CSV file.", "31");
+      prln("getFromCSVValue: " + comingFrom + ": Failed to read from CSV file.", RED);
       return null;
     }
   }
@@ -568,7 +606,7 @@ public class Tools {
       reader.close();
       return null;
     } catch (Exception e){
-      prln("getFromCSVRow: " + comingFrom + ": Failed to read from CSV file.", "31");
+      prln("getFromCSVRow: " + comingFrom + ": Failed to read from CSV file.", RED);
       return null;
     }
   }
@@ -595,7 +633,7 @@ public class Tools {
 
         reader.close();
     } catch (Exception e) {
-        prln("getFromCSVFile: " + comingFrom + ": Failed to read from CSV file.", "31");
+        prln("getFromCSVFile: " + comingFrom + ": Failed to read from CSV file.", RED);
     }
     return data;
   }
@@ -618,60 +656,9 @@ public class Tools {
       reader.close();
       return lines.size() - 2;
     } catch (Exception e){
-      prln("getFromCSVIndex: " + comingFrom + ": Failed to read from CSV file.", "31");
-      return Integer.MAX_VALUE;
+      prln("getFromCSVIndex: " + comingFrom + ": Failed to read from CSV file.", RED);
+      return MAXVALUE;
     }
-  }
-  // // INVENTORY SPECIFIC CSV METHODS | INVENTORY SPECIFIC CSV METHODS
-  // // INVENTORY SPECIFIC CSV METHODS | INVENTORY SPECIFIC CSV METHODS
-  // // INVENTORY SPECIFIC CSV METHODS | INVENTORY SPECIFIC CSV METHODS
-
-  /*
-   * Saves an item into the inventory CSV file
-   * @param item The item to save
-   */
-  public static void addToInventory(Item item){
-    writeToCSV("inventory","Tools.java",true,"InInventory,Type,SubType,ItemIndex","%s,%s,%s,%d","true",item.getItemType(),item.getType(),item.getIndex());
-  }
-
-  /*
-   * Removes an item from the inventory CSV file
-   * @param item The item to remove
-   */
-  public static void removeFromInventory(Item item){
-    writeToCSVValue("inventory","Tools.java","Index",toStr(item.getIndex()),"InInventory","false");
-  }
-
-  /*
-   * Gets an item from the inventory CSV file
-   * @param index The index of the item to get
-   * @return The item at the index
-   * @return null if the index is not found
-   */
-  public static Item getFromInventory(int index){
-    String[] itemData = getFromCSVRow("inventory","Tools.java","Index",toStr(index));
-    if(itemData != null){
-      if(toBool(itemData[1])){
-        if(itemData[2].equals("pack")){
-          if(itemData[3].equals("crew")){
-            return new CrewPack(true,toInt(itemData[4]));
-          } else if(itemData[3].equals("food")){
-            return new FoodPack(true,toInt(itemData[4]));
-          } else if(itemData[3].equals("ship")){
-            return new ShipPack(true,toInt(itemData[4]));
-          }
-        } else if(itemData[2].equals("card")){
-          if(itemData[3].equals("crew")){
-            return new CrewCard(true,toInt(itemData[4]));
-          } else if(itemData[3].equals("food")){
-            return new FoodCard(true,toInt(itemData[4]));
-          } else if(itemData[3].equals("ship")){
-            return new ShipCard(true,toInt(itemData[4]));
-          }
-        }
-      }
-    }
-    return null;
   }
 
   // OTHER FILE METHODS | OTHER FILE METHODS | OTHER FILE METHODS
@@ -683,10 +670,10 @@ public class Tools {
    * large text files every time a name is needed (Which will be often)
    */
   public static void LoadNameFiles(){
-    getFromTXT(enFirstNames,"Smashew Names/enfirstnames");
-    getFromTXT(esFirstNames,"Smashew Names/esfirstnames");
-    getFromTXT(enLastNames,"Smashew Names/enlastnames");
-    getFromTXT(esLastNames,"Smashew Names/esLastnames");
+    getFromTXT(enFirstNames,ENFIRSTNAMES);
+    getFromTXT(esFirstNames,ESFIRSTNAMES);
+    getFromTXT(enLastNames,ENLASTNAMES);
+    getFromTXT(esLastNames,ESLASTNAMES);
   }
 
   /*
@@ -711,7 +698,7 @@ public class Tools {
       reader.close();
 
     } catch (IOException e) {
-      prln("getFromTXT: Failed to read from txt file.", "31");
+      prln("getFromTXT: Failed to read from txt file.", RED);
     }
   }
 }

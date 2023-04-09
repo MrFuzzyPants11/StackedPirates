@@ -1,2 +1,2 @@
-Index,Fname,Lname,Level,Health,Gold,Cards
-0,Fuzzy,Pants,1,20,1500,[]
+index,fname,lname,level,health,gold,card1,card2,card3,card4,card5
+0,Fuzzy,Pants,0,20,1500,0,0,0,0,0

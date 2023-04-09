@@ -1,14 +1,11 @@
 //File: Player.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-07-2023
+//Modified: 04-08-2023
 package Humans;
 
-import java.util.*;
-
-import Items.Item;
-import Items.Cards.*;
 import static Globals.Tools.*;
+import static Globals.Constants.*;
 
 public class Player extends Human{
   int gold;
@@ -18,7 +15,7 @@ public class Player extends Human{
    * Used for loading a saved game
    */
   public Player(){
-    String[] playerData = getFromCSVRow("player", "Player.java", "Index", "0");
+    String[] playerData = getFromCSVRow(PLAYERCSV, "Player.java",INDEX, "0");
     this.fname = playerData[1];
     this.lname = playerData[2];
     this.level = toInt(playerData[3]);
@@ -34,13 +31,12 @@ public class Player extends Human{
   public Player(String fname, String lname){
     this.fname = fname;
     this.lname = lname;
-    this.level = 1;
-    this.health = 20;
-    this.cards = new ArrayList<CrewCard>();
-    this.gold = 1500;
+    this.level = STARTINGLEVEL;
+    this.health = STARTINGHEALTH;
+    this.gold = STARTINGGOLD;
 
-    writeToCSV("player","Player.java", false, "Fname,Lname,Level,Health,Gold,Cards","%s,%s,%d,%d,%d,%s", 
-        this.fname, this.lname, this.level, this.health, this.gold, this.cards.toString());
+    writeToCSV(PLAYERCSV,"Player.java", false, PLAYERHEADER,PLAYERFORMAT, 
+        this.fname, this.lname, this.level, this.health, this.gold, 0,0,0,0,0);
   }
 
   /*
@@ -57,6 +53,6 @@ public class Player extends Human{
    */
   public void spendGold(int amount){
     this.gold -= amount;
-    writeToCSVValue("player", "Player.java", "Index", "0", "Gold", toStr(this.gold));
+    writeToCSVValue(PLAYERCSV, "Player.java", INDEX, "0", GOLD, toStr(this.gold));
   }
 }

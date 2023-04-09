@@ -1,10 +1,11 @@
 //File: Card.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 05-07-2023
+//Modified: 04-08-2023
 package Items.Cards;
 
 import Items.Item;
+import static Globals.Constants.*;
 
 public abstract class Card extends Item{
   String name;
@@ -22,6 +23,6 @@ public abstract class Card extends Item{
    * @return "card"
    */
   public String getItemType(){
-    return "card";
+    return CARD;
   }
 }
