@@ -6,6 +6,7 @@ package Globals;
 
 import static Globals.Tools.*;
 import static Globals.Constants.*;
+import static Globals.Animations.*;
 import java.util.ArrayList;
 import Humans.Player;
 import Items.Item;
@@ -23,15 +24,17 @@ public abstract class Inventory {
       ArrayList<Pack> packs = new ArrayList<Pack>();
       ArrayList<Card> cards = new ArrayList<Card>();
       int it = 0;
-      Item currentItem = getFromInventory(it);
+      Pair<Boolean,Item> currentItem = getFromInventory(it);
       while(currentItem != null){
-        if(currentItem instanceof Pack){
-          Pack newPack = (Pack)currentItem;
-          if(!newPack.getOpened()){
-            packs.add(newPack);
+        if(currentItem.getFirst()){
+          if(currentItem.getSecond() instanceof Pack){
+            Pack newPack = (Pack)currentItem.getSecond();
+            if(!newPack.getOpened()){
+              packs.add(newPack);
+            }
+          } else if(currentItem.getSecond() instanceof Card){
+            cards.add((Card)currentItem.getSecond());
           }
-        } else if(currentItem instanceof Card){
-          cards.add((Card)currentItem);
         }
         it++;
         currentItem = getFromInventory(it);
@@ -72,7 +75,7 @@ public abstract class Inventory {
         if(input < packNums){
           openPack(packs.get(input));
         } else if(input < cardNums){
-          //viewCard(cards.get(input - packs.size()));
+          viewCardAnimation(1,cards.get(input));
         } else {
           invalOp();
         }
@@ -86,11 +89,13 @@ public abstract class Inventory {
       addToInventory(cards.get(i));
     }
     removeFromInventory(pack);
-    pr("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n<><><><><><><><><><><><><><>OPENING<><><><><><><><><><><><><><>\n<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
-    for(int i = 0; i < cards.size(); i++){
-      prln(cards.get(i).getRarity() + SPACE + cards.get(i).getName(), cards.get(i).getColour());
-    }
-    askIn();
+    openPackAnimation(cards.get(4).getRarity());
+    prnl("");
+    viewCardAnimation(5, cards.get(0), cards.get(1), cards.get(2), cards.get(3), cards.get(4));
+    // for(int i = 0; i < cards.size(); i++){
+    //   prln(cards.get(i).getRarity() + SPACE + cards.get(i).getName(), cards.get(i).getColour());
+    // }
+    sleep(ANIMATIONSPEED * 3);
   }
 
   // CSV METHODS | CSV METHODS | CSV METHODS
@@ -119,28 +124,28 @@ public abstract class Inventory {
    * @return The item at the index
    * @return null if the index is not found
    */
-  public static Item getFromInventory(int index){
+  public static Pair<Boolean,Item> getFromInventory(int index){
     String[] itemData = getFromCSVRow(INVENTORYCSV,"Inventory.java",INDEX,toStr(index));
+    Item item;
     if(itemData != null){
-      if(toBool(itemData[1])){
-        if(itemData[2].equals(PACK)){
-          if(itemData[3].equals(CREW)){
-            return new CrewPack(true,toInt(itemData[4]));
-          } else if(itemData[3].equals(FOOD)){
-            return new FoodPack(true,toInt(itemData[4]));
-          } else if(itemData[3].equals(SHIP)){
-            return new ShipPack(true,toInt(itemData[4]));
-          }
-        } else if(itemData[2].equals(CARD)){
-          if(itemData[3].equals(CREW)){
-            return new CrewCard(true,toInt(itemData[4]));
-          } else if(itemData[3].equals(FOOD)){
-            return new FoodCard(true,toInt(itemData[4]));
-          } else if(itemData[3].equals(SHIP)){
-            return new ShipCard(true,toInt(itemData[4]));
-          }
+      if(itemData[2].equals(PACK)){
+        if(itemData[3].equals(CREW)){
+          item = new CrewPack(true,toInt(itemData[4]));
+        } else if(itemData[3].equals(FOOD)){
+          item =  new FoodPack(true,toInt(itemData[4]));
+        } else { //If more types added 'if(itemData[3].equals(SHIP))'
+          item =  new ShipPack(true,toInt(itemData[4]));
+        }
+      } else { // If more item types added 'if(itemData[2].equals(CARD))
+        if(itemData[3].equals(CREW)){
+          item =  new CrewCard(true,toInt(itemData[4]));
+        } else if(itemData[3].equals(FOOD)){
+          item =  new FoodCard(true,toInt(itemData[4]));
+        } else { //If more types added 'if(itemData[3].equals(SHIP))
+          item =  new ShipCard(true,toInt(itemData[4]));
         }
       }
+      return new Pair<Boolean,Item>(toBool(itemData[1]),item);
     }
     return null;
   }

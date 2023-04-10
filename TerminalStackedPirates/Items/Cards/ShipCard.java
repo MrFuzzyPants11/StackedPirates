@@ -5,6 +5,9 @@
 package Items.Cards;
 
 import static Globals.Tools.*;
+
+import Items.Effects.ShipEffect;
+
 import static Globals.Constants.*;
 
 public class ShipCard extends Card{
@@ -14,14 +17,16 @@ public class ShipCard extends Card{
    */
   public ShipCard(boolean reload, int rarityOrIndex){
     if(reload){
-      String[] data = getFromCSVRow(ALLCARDSCSV, "CrewPack.java", INDEX, toStr(rarityOrIndex));
+      String[] data = getFromCSVRow(ALLCARDSCSV, "ShipPack.java", INDEX, toStr(rarityOrIndex));
       this.index = toInt(data[0]);
       this.rarity = toInt(data[2]);
       this.name = data[3];
+      this.effect = new ShipEffect(toInt(data[4]));
     } else {
       this.rarity = rarityOrIndex;
-      this.name = "TESTSHIP";
-      writeToCSV(ALLCARDSCSV, "ShipCard.java", true, ALLCARDSHEADER, ALLCARDSFORMAT, SHIP, rarity, this.name);
+      this.name = "TEST SHIP";
+      this.effect = new ShipEffect(rarityOrIndex);
+      writeToCSV(ALLCARDSCSV, "ShipCard.java", true, ALLCARDSHEADER, ALLCARDSFORMAT, SHIP, rarity, this.name,rarity);
       this.index = getFromCSVLastIndex(ALLCARDSCSV, "ShipCard.java");
     }
   }

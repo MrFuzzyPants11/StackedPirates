@@ -5,7 +5,11 @@
 package Items.Cards;
 
 import static Globals.Tools.*;
+
+import Items.Effects.CrewEffect;
+
 import static Globals.Constants.*;
+
 
 public class CrewCard extends Card {
 
@@ -18,10 +22,12 @@ public class CrewCard extends Card {
       this.index = toInt(data[0]);
       this.rarity = toInt(data[2]);
       this.name = data[3];
+      this.effect = new CrewEffect(toInt(data[4]));
     } else {
-      this.name = "TESTCREW";
+      this.name = "TEST CREW";
       this.rarity = rarityOrIndex;
-      writeToCSV(ALLCARDSCSV, "CrewCard.java", true, ALLCARDSHEADER, ALLCARDSFORMAT, CREW,rarity, this.name);
+      this.effect = new CrewEffect(rarityOrIndex);
+      writeToCSV(ALLCARDSCSV, "CrewCard.java", true, ALLCARDSHEADER, ALLCARDSFORMAT, CREW,rarity, this.name,rarity);
       this.index = getFromCSVLastIndex(ALLCARDSCSV, "CrewCard.java");
     }
   }

@@ -5,6 +5,9 @@
 package Items.Cards;
 
 import static Globals.Tools.*;
+
+import Items.Effects.FoodEffect;
+
 import static Globals.Constants.*;
 
 public class FoodCard extends Card{
@@ -13,14 +16,16 @@ public class FoodCard extends Card{
    */
   public FoodCard(boolean reload, int rarityOrIndex){
     if(reload){
-      String[] data = getFromCSVRow(ALLCARDSCSV, "CrewPack.java", INDEX, toStr(rarityOrIndex));
+      String[] data = getFromCSVRow(ALLCARDSCSV, "FoodPack.java", INDEX, toStr(rarityOrIndex));
       this.index = toInt(data[0]);
       this.rarity = toInt(data[2]);
       this.name = data[3];
+      this.effect = new FoodEffect(toInt(data[4]));
     } else {
       this.rarity = rarityOrIndex;
-      this.name = "TESTFOOD";
-      writeToCSV(ALLCARDSCSV, "FoodCard.java", true, ALLCARDSHEADER, ALLCARDSFORMAT, FOOD, rarity, this.name);
+      this.name = "TEST FOOD";
+      this.effect = new FoodEffect(rarityOrIndex);
+      writeToCSV(ALLCARDSCSV, "FoodCard.java", true, ALLCARDSHEADER, ALLCARDSFORMAT, FOOD, rarity, this.name,rarity);
       this.index = getFromCSVLastIndex(ALLCARDSCSV, "FoodCard.java");
     }
   }

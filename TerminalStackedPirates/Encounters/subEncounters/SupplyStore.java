@@ -102,7 +102,7 @@ public class SupplyStore extends SubEncounter{
               continue;
             } else {
               pr("Are you sure you want to buy a ");
-              pr(packs.get(input).getRarity(), packs.get(input).getColour());
+              pr(packs.get(input).getRarityText(), packs.get(input).getColour());
               pr(" " + packs.get(input).getName() + " for ");
               prln(packs.get(input).getCost() + " gold?", GOLDCOLOUR);
               prln(toStr(input + 1) + ". Yes");

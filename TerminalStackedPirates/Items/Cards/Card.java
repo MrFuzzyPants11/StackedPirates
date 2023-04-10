@@ -1,21 +1,32 @@
 //File: Card.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 04-08-2023
+//Modified: 04-10-2023
 package Items.Cards;
 
 import Items.Item;
+import Items.Effects.*;
+
 import static Globals.Constants.*;
 
 public abstract class Card extends Item{
   String name;
-
+  Effect effect;
+  
   /*
    * Gets the name of the card
    * @return the name of the card
    */
   public String getName(){
     return name;
+  }
+
+  /*
+   * Gets the effect of the card
+   * @return the effect of the card
+   */
+  public Effect getEffect(){
+    return effect;
   }
 
   /*

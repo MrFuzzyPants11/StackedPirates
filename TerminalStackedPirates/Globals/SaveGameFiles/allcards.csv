@@ -1,1 +1,11 @@
-index,type,rarity,name
+index,type,rarity,name,effectindex
+0,food,0,TEST FOOD,0
+1,food,0,TEST FOOD,0
+2,food,0,TEST FOOD,0
+3,food,0,TEST FOOD,0
+4,food,1,TEST FOOD,1
+5,food,0,TEST FOOD,0
+6,food,0,TEST FOOD,0
+7,food,1,TEST FOOD,1
+8,food,1,TEST FOOD,1
+9,food,2,TEST FOOD,2

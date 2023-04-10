@@ -41,23 +41,46 @@ public abstract class Item {
    * Converts the rarity number of an item to a string
    * @return the rarity of the item as a string
    */
+  public String getRarityText(){
+    if(rarity == COMMONNUM){
+      return firstCap(COMMON);
+    }
+    
+    if(rarity == UNCOMMONNUM){
+      return firstCap(UNCOMMON);
+    }
+    
+    if(rarity == RARENUM){
+      return firstCap(RARE);
+    }
+    
+    if(rarity == EPICNUM){
+      return firstCap(EPIC);
+    }
+    return firstCap(LEGENDARY);
+  }
+
+  /*
+   * Converts the rarity number of an item to a string
+   * @return the rarity of the item as a string
+   */
   public String getRarity(){
-    if(rarity == 0){
-      return properCase(COMMON);
+    if(rarity == COMMONNUM){
+      return COMMON;
     }
     
-    if(rarity == 1){
-      return properCase(UNCOMMON);
+    if(rarity == UNCOMMONNUM){
+      return UNCOMMON;
     }
     
-    if(rarity == 2){
-      return properCase(RARE);
+    if(rarity == RARENUM){
+      return RARE;
     }
     
-    if(rarity == 3){
-      return properCase(EPIC);
+    if(rarity == EPICNUM){
+      return EPIC;
     }
-    return properCase(LEGENDARY);
+    return LEGENDARY;
   }
 
   /*

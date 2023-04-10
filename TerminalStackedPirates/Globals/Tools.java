@@ -67,8 +67,33 @@ public abstract class Tools {
    * @param str The string to convert
    * @return The converted string
    */
-  public static String properCase(String str){
+  public static String firstCap(String str){
     return str.substring(0, 1).toUpperCase() + str.substring(1).toLowerCase();
+  }
+
+  /*
+   * Returns the string with the first letter of each word is capialized and the rest lowercase
+   * @param str The string to convert
+   * @return The converted string
+   */
+  public static String everyFirstCap(String str){
+    String[] words = str.split("\\s+");
+    StringBuilder output = new StringBuilder();
+    for (String word : words) {
+        output.append(word.substring(0, 1).toUpperCase());
+        output.append(word.substring(1));
+        output.append(" ");
+    }
+    return output.toString().trim();
+  }
+
+  /*
+   * Returns the string with all letters capitalized
+   * @param str The string to convert
+   * @return The converted string
+   */
+  public static String allCaps(String str){
+    return str.toUpperCase();
   }
 
   // GENERATION METHODS | GENERATION METHODS | GENERATION METHODS
@@ -352,7 +377,7 @@ public abstract class Tools {
    */
   public static void viewPauseMenu(){
     lineBreaker("PAUSE MENU");
-    int input = askIn();
+    //int input = askIn();
   }
 
   // CSV METHODS | CSV METHODS | CSV METHODS
@@ -699,6 +724,56 @@ public abstract class Tools {
 
     } catch (IOException e) {
       prln("getFromTXT: Failed to read from txt file.", RED);
+    }
+  }
+
+
+  // PAIR CLASS | PAIR CLASS | PAIR CLASS
+  // PAIR CLASS | PAIR CLASS | PAIR CLASS
+  // PAIR CLASS | PAIR CLASS | PAIR CLASS
+
+  /*
+   * A class to store two values of any type
+   */
+  public static class Pair<T, U> {
+    private T first;
+    private U second;
+
+    public Pair(T first, U second) {
+      this.first = first;
+      this.second = second;
+    }
+
+    /*
+     * Gets the first value
+     * @return The first value
+     */
+    public T getFirst() {
+      return first;
+    }
+
+    /*
+     * Gets the second value
+     * @return The second value
+     */
+    public U getSecond() {
+      return second;
+    }
+
+    /*
+     * Sets the first value
+     * @param first The new first value
+     */
+    public void setFirst(T first) {
+      this.first = first;
+    }
+
+    /*
+     * Sets the second value
+     * @param second The new second value
+     */
+    public void setSecond(U second) {
+      this.second = second;
     }
   }
 }

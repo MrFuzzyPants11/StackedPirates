@@ -40,7 +40,6 @@ public abstract class Pack extends Item{
     writeToCSVValue(ALLPACKSCSV, "Pack.java", INDEX, toStr(this.index), SOLD, TRUE);
   }
 
-
   /*
    * Gets that this is a pack type
    * @return "pack"
@@ -88,7 +87,6 @@ public abstract class Pack extends Item{
       type,sold,opened,rarity,cost, cRarities.get(0), cRarities.get(1), cRarities.get(2), cRarities.get(3), cRarities.get(4));
   }
 
-
   /*
    * Generates a pack and writes it to the CSV file
    * @param rarity the rarity of the pack
@@ -99,75 +97,79 @@ public abstract class Pack extends Item{
     Random rand = new Random();
     int additionalCost = (rand.nextInt(101)/10) * 10;
     cost = 100 + (rarity * 100) + additionalCost;
-    if(rarity == 0){ // From a common pack there is a:
-      cRarities.add(0);
-      cRarities.add(0);
-      cRarities.add(0);
-      cRarities.add(0); // 99.99% chance to get a common
-      cRarities.add(1); // 100% chance to get uncommon
-      if(rand.nextInt(11) == 9){// 9% chance to get rare
-        cRarities.remove(0);
-        cRarities.add(2);
+    if(rarity == COMMONNUM){ // From a common pack there is a:
+      cRarities.add(COMMONNUM);
+      cRarities.add(COMMONNUM);
+      cRarities.add(COMMONNUM);
+      cRarities.add(COMMONNUM); // 99.99% chance to get a common
+      if(rand.nextInt(100) == 69){
+        cRarities.add(COMMONNUM); // 1% chance to get a dud pack of all commons
+      } else { 
+        cRarities.add(UNCOMMONNUM); // 99% chance to get uncommon
+        if(rand.nextInt(11) == 9){// 9% chance to get rare
+          cRarities.remove(0);
+          cRarities.add(RARENUM);
+        }
+        if(rand.nextInt(33) == 7){// 3% chance to get epic
+          cRarities.remove(COMMONNUM);
+          cRarities.add(EPICNUM);
+        }
+        if(rand.nextInt(100) == 69){// 1% chance to get legendary
+          cRarities.remove(0);
+          cRarities.add(LEGENDARYNUM);
+        }
       }
-      if(rand.nextInt(33) == 7){// 3% chance to get epic
-        cRarities.remove(0);
-        cRarities.add(3);
-      }
-      if(rand.nextInt(100) == 69){// 1% chance to get legendary
-        cRarities.remove(0);
-        cRarities.add(4);
-      }
-    } else if(rarity == 1){// From an uncommon pack there is a:
-      cRarities.add(0);
-      cRarities.add(0); // 99.99% chance to get a common
-      cRarities.add(1); // 100% chance to get 2 uncommons
-      cRarities.add(1);
-      cRarities.add(2); // 100% chance to get rare
+    } else if(rarity == UNCOMMONNUM){// From an uncommon pack there is a:
+      cRarities.add(COMMONNUM);
+      cRarities.add(COMMONNUM); // 99.99% chance to get a common
+      cRarities.add(UNCOMMONNUM); // 100% chance to get 2 uncommons
+      cRarities.add(UNCOMMONNUM);
+      cRarities.add(RARENUM); // 100% chance to get rare
       if(rand.nextInt(11) == 7){// 9% chance to get epic
         cRarities.remove(0);
-        cRarities.add(3);
+        cRarities.add(EPICNUM);
       }
       if(rand.nextInt(50) == 34){// 2% chance to get legendary
         cRarities.remove(0);
-        cRarities.add(4);
+        cRarities.add(LEGENDARYNUM);
       }
-    } else if(rarity == 2){
-      cRarities.add(0); // 92% chance to get a common
+    } else if(rarity == RARENUM){
+      cRarities.add(COMMONNUM); // 92% chance to get a common
       if(rand.nextBoolean()){ // 48% chance to get another uncommon
-        cRarities.add(0);
+        cRarities.add(COMMONNUM);
       } else {
-        cRarities.add(1);
+        cRarities.add(UNCOMMONNUM);
       }
-      cRarities.add(1); // 100% chance to get uncommon
-      cRarities.add(2); // 100% chance to get rare
-      cRarities.add(3); // 100% chance to get epic
+      cRarities.add(UNCOMMONNUM); // 100% chance to get uncommon
+      cRarities.add(RARENUM); // 100% chance to get rare
+      cRarities.add(EPICNUM); // 100% chance to get epic
       if(rand.nextInt(25) == 20){// 4% chance to get legendary
         cRarities.remove(0);
-        cRarities.add(4);
+        cRarities.add(LEGENDARYNUM);
       }
-    } else if(rarity == 3){
+    } else if(rarity == EPICNUM){
       if(rand.nextBoolean()){ // 45% chance to get another uncommon or a common
-        cRarities.add(0);
+        cRarities.add(COMMONNUM);
       } else {
-        cRarities.add(1);
+        cRarities.add(UNCOMMONNUM);
       }
-      cRarities.add(1); // 100% chance to get uncommon
-      cRarities.add(2); // 100% chance to get rare
-      cRarities.add(3);
-      cRarities.add(3); // 100% chance to get 2 epics
+      cRarities.add(UNCOMMONNUM); // 100% chance to get uncommon
+      cRarities.add(RARENUM); // 100% chance to get rare
+      cRarities.add(EPICNUM);
+      cRarities.add(EPICNUM); // 100% chance to get 2 epics
       if(rand.nextInt(10) == 5){// 10% chance to get legendary
         cRarities.remove(0);
-        cRarities.add(4);
+        cRarities.add(LEGENDARYNUM);
       }
     } else {
-      cRarities.add(1); // 50% chance to get uncommon
-      cRarities.add(2);
-      cRarities.add(2); // 100% chance to get 2 rares
-      cRarities.add(3);
-      cRarities.add(3); // 100% chance to get 2 epics
+      cRarities.add(UNCOMMONNUM); // 50% chance to get uncommon
+      cRarities.add(RARENUM);
+      cRarities.add(RARENUM); // 100% chance to get 2 rares
+      cRarities.add(EPICNUM);
+      cRarities.add(EPICNUM); // 100% chance to get 2 epics
       if(rand.nextInt(2) == 1){// 50% chance to get legendary
         cRarities.remove(0);
-        cRarities.add(4);
+        cRarities.add(LEGENDARYNUM);
       }
     }
     writePack(comingFrom, type, cRarities);

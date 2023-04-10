@@ -1,4 +1,4 @@
-//File: Tools.java
+//File: Animations.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
 //Modified: 04-08-2023
@@ -11,6 +11,7 @@ public abstract class Constants {
   public static final String SHIP = "ship";
   public static final String CARD = "card";
   public static final String PACK = "pack";
+  public static final String EFFECT = "effect";
 
   // Header Columns
   public static final String INDEX = "index";
@@ -26,7 +27,7 @@ public abstract class Constants {
   public static final String CARD4 = "card4";
   public static final String CARD5 = "card5";
   public static final String ININVENTORY = "ininventory";
-  public static final String SUBTYPE = "subiype";
+  public static final String SUBTYPE = "subtype";
   public static final String ITEMINDEX = "itemindex";
   public static final String FNAME = "fname";
   public static final String LNAME = "lname";
@@ -46,6 +47,9 @@ public abstract class Constants {
   public static final String PACK7 = "pack7";
   public static final String PACK8 = "pack8";
   public static final String PACK9 = "pack9";
+  public static final String HEALTHRESTORED = "healthrestored";
+  public static final String DESCRIPTION = "description";
+  public static final String EFFECTINDEX = "effectindex";
 
   // RARITIES
   public static final String COMMON = "common";
@@ -89,12 +93,19 @@ public abstract class Constants {
   public static final String ESFIRSTNAMES = NAMESFOLDER + "/esfirstnames";
   public static final String ENLASTNAMES = NAMESFOLDER + "/enlastnames";
   public static final String ESLASTNAMES = NAMESFOLDER + "/eslastnames";
+  public static final String FOODEFFECTCSV = "foodeffects";
+  public static final String CREWEFFECTCSV = "creweffects";
+  public static final String SHIPEFFECTCSV = "shipeffects";
 
   // Headers and formats
-  public static final String ALLCARDSHEADER = TYPE + "," + RARITY + "," + NAME;
-  public static final String ALLCARDSFORMAT = "%s,%d,%s";
+  public static final String ALLCARDSHEADER = TYPE + "," + RARITY + "," + NAME + "," + EFFECTINDEX;
+  public static final String ALLCARDSFORMAT = "%s,%d,%s,%d";
   public static final String ALLPACKSHEADER = TYPE + "," + SOLD + "," + OPENED + "," + RARITY + "," + COST + "," + CARD1 + "," + CARD2 + "," + CARD3 + "," + CARD4 + "," + CARD5;
   public static final String ALLPACKSFORMAT = "%s,%s,%s,%d,%d,%d,%d,%d,%d,%d";
+  public static final String CREWEFFECTHEADER = RARITY + "," + DESCRIPTION;
+  public static final String CREWEFFECTFORMAT = "%d,%s";
+  public static final String FOODEFFECTHEADER = RARITY + "," + DESCRIPTION + "," + HEALTHRESTORED;
+  public static final String FOODEFFECTFORMAT = "%d,%s,%d";
   public static final String HUMANHEADER = "";
   public static final String INVENTORYHEADER = ININVENTORY + "," + TYPE + "," + SUBTYPE + "," + ITEMINDEX;
   public static final String INVENTORYFORMAT = "%s,%s,%s,%d";
@@ -104,10 +115,17 @@ public abstract class Constants {
   public static final String PLAYERSHIPFORMAT = "";
   public static final String PORTSHEADER = NAME + "," + LEVEL + "," + SUPPLYSTORE + "," + TAVERN + "," + DOCKYARD;
   public static final String PORTSFORMAT = "%s,%d,%d,%d,%d";
+  public static final String SHIPEFFECTHEADER = RARITY + "," + DESCRIPTION;
+  public static final String SHIPEFFECTFORMAT = "%d,%s";
   public static final String SUPPLYSTORESHEADER = LEVEL + "," + PACK0 + "," + PACK1 + "," + PACK2 + "," + PACK3 + "," + PACK4 + "," + PACK5 + "," + PACK6 + "," + PACK7 + "," + PACK8 + "," + PACK9;
   public static final String SUPPLYSTORESFORMAT = "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d";
 
   // NUMBERS
+  public static final int COMMONNUM = 0;
+  public static final int UNCOMMONNUM = 1;
+  public static final int RARENUM = 2;
+  public static final int EPICNUM = 3;
+  public static final int LEGENDARYNUM = 4;
   public static final int MINVALUE = Integer.MIN_VALUE;
   public static final int MENUEXIT = MINVALUE;
   public static final int MAXVALUE = Integer.MAX_VALUE;
@@ -116,10 +134,11 @@ public abstract class Constants {
   public static final int MAXRARITY = 4;
   public static final int MINLEVEL = 0;
   public static final int MAXLEVEL = 4;
+  public static final int ANIMATIONSPEED = 1000;
 
   // Initial Values
   public static final int STARTINGLEVEL = 0;
-  public static final int STARTINGHEALTH = 20;
+  public static final int STARTINGHEALTH = 50;
   public static final int STARTINGGOLD = 1500;
 
   // OTHER
