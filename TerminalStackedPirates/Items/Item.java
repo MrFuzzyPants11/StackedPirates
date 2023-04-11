@@ -43,29 +43,6 @@ public abstract class Item {
    */
   public String getRarityText(){
     if(rarity == COMMONNUM){
-      return firstCap(COMMON);
-    }
-    
-    if(rarity == UNCOMMONNUM){
-      return firstCap(UNCOMMON);
-    }
-    
-    if(rarity == RARENUM){
-      return firstCap(RARE);
-    }
-    
-    if(rarity == EPICNUM){
-      return firstCap(EPIC);
-    }
-    return firstCap(LEGENDARY);
-  }
-
-  /*
-   * Converts the rarity number of an item to a string
-   * @return the rarity of the item as a string
-   */
-  public String getRarity(){
-    if(rarity == COMMONNUM){
       return COMMON;
     }
     
@@ -81,6 +58,14 @@ public abstract class Item {
       return EPIC;
     }
     return LEGENDARY;
+  }
+
+  /*
+   * Converts the rarity number of an item to a string
+   * @return the rarity of the item as a string
+   */
+  public int getRarity(){
+    return rarity;
   }
 
   /*

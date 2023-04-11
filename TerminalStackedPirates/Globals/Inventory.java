@@ -44,7 +44,7 @@ public abstract class Inventory {
       int packNums = 0;
       while(packNums < packs.size()){
         pr((packNums + 1) + ". ");
-        pr(packs.get(packNums).getRarity(), packs.get(packNums).getColour());
+        pr(packs.get(packNums).getRarityText(), packs.get(packNums).getColour());
         prln(" " + packs.get(packNums).getName());
         packNums++;
       }
@@ -53,7 +53,7 @@ public abstract class Inventory {
       int cardNums = packNums;
       for(int j = 0; j < cards.size(); j++){
         pr((cardNums + 1) + ". ");
-        pr(cards.get(j).getRarity(), cards.get(j).getColour());
+        pr(cards.get(j).getRarityText(), cards.get(j).getColour());
         prln(" " + cards.get(j).getName());
         cardNums++;
       }

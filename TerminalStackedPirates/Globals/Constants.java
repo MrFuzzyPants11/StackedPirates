@@ -139,7 +139,7 @@ public abstract class Constants {
   // Initial Values
   public static final int STARTINGLEVEL = 0;
   public static final int STARTINGHEALTH = 50;
-  public static final int STARTINGGOLD = 1500;
+  public static final int STARTINGGOLD = 696969;
 
   // OTHER
   public static final String TRUE = "true";

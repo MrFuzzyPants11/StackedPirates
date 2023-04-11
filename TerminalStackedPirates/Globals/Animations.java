@@ -15,7 +15,7 @@ public abstract class Animations {
   /*
    * Prints the opening animation for a pack
    */
-  public static void openPackAnimation(String type){
+  public static void openPackAnimation(int rarity){
     pr("\u001B[31m<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
       +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
       +"<><><><><><><><><><><><><>< \u001B[0mOPENING\u001B[31m <><><><><><><><><><><><><><>\n"
@@ -64,31 +64,35 @@ public abstract class Animations {
 
     sleep(ANIMATIONSPEED);
 
-    if(type.equals(COMMON)){
-      pr("\033[3F\r\u001B[0m<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><> COMMON <><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>");
+    if(rarity == COMMONNUM){
+      pr("\033[3F\r");
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",COMMONCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",COMMONCOLOUR);
+      prln("<><><><><><><><><><><><><><> COMMON <><><><><><><><><><><><><><>",COMMONCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",COMMONCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",COMMONCOLOUR);
 
-    } else if(type.equals(UNCOMMON)){
-      pr("\033[3F\r\u001B[36m<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><>< \u001B[0mUNCOMMON\u001B[36m ><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\u001B[0m");
-    } else if(type.equals(RARE)){
-      pr("\033[3F\r\u001B[35m<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><>< \u001B[0mRARE\u001B[35m ><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\u001B[0m");
-    } else if(type.equals(EPIC)){
-      pr("\033[3F\r\u001B[33m<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><>< \u001B[0mEPIC\u001B[33m ><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\n"
-      +"<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>\u001B[0m");
+    } else if(rarity == UNCOMMONNUM){
+      pr("\033[3F\r");
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",UNCOMMONCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",UNCOMMONCOLOUR);
+      prln("<><><><><><><><><><><><><>< UNCOMMON ><><><><><><><><><><><><><>",UNCOMMONCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",UNCOMMONCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",UNCOMMONCOLOUR);
+    } else if(rarity == RARENUM){
+      pr("\033[3F\r");
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",RARECOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",RARECOLOUR);
+      prln("<><><><><><><><><><><><><><>< RARE ><><><><><><><><><><><><><><>",RARECOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",RARECOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",RARECOLOUR);
+    } else if(rarity == EPICNUM){
+      pr("\033[3F\r");
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",EPICCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",EPICCOLOUR);
+      prln("<><><><><><><><><><><><><><>< EPIC ><><><><><><><><><><><><><><>",EPICCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",EPICCOLOUR);
+      prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",EPICCOLOUR);
     } else {
       pr("\033[3F\r");
       prln("<><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><><>",LEGENDARYCOLOUR);
@@ -109,10 +113,15 @@ public abstract class Animations {
     String[][] allCardArts = new String[numCards][20];
     for (int i = 0; i < numCards; i++) {
       if(cards[i] instanceof FoodCard){
-        if(rand.nextBoolean()){
-          addCardToArray(allCardArts[i],FOODPLATECARD, cards[i]);
-        } else {
+        int randomInt = rand.nextInt(4);
+        if(randomInt == 0){
+          addCardToArray(allCardArts[i],FOODPLATECARD,cards[i]);
+        } else if(randomInt == 1){
           addCardToArray(allCardArts[i],FOODCHERRYCARD,cards[i]);
+        } else if(randomInt == 2){
+          addCardToArray(allCardArts[i],FOODCHOCOLATECARD,cards[i]);
+        } else if(randomInt == 3){
+          addCardToArray(allCardArts[i],FOODTEACARD,cards[i]);
         }
       } else if(cards[i] instanceof CrewCard){
         int randomInt = rand.nextInt(4);
@@ -152,10 +161,10 @@ public abstract class Animations {
   public static void addCardToArray(String[] allCardArts, String[] cardArt,Card card){
     int lengthAdded = 0;
     for(int i = 0; i < 20; i++){
+      String temp = "";
       if(cardArt[i].equals(NAMEBAR)){
         lengthAdded = 0;
         int strLen = card.getName().length();
-        String temp = "";
         if(strLen == 30){
           temp = "|" + everyFirstCap(card.getName()) + "|";
         } else if(strLen == 29){
@@ -171,11 +180,14 @@ public abstract class Animations {
         allCardArts[i] = temp;
       } else if(cardArt[i].equals(RARITYPLACEHOLDER)){
         lengthAdded = 0;
-        String temp = " ".repeat(13 - card.getRarityText().length());
-        temp = "|  " + allCaps(card.getType()) + " CARD" + "   " + temp + allCaps(card.getRarityText()) + "   |"; 
+        if(card.getRarity() == LEGENDARYNUM){
+          temp = "|  " + allCaps(card.getType()) + " CARD" + "       \u001B[31;3mL\u001B[33;3mE\u001B[32;3mG\u001B[36;3mE\u001B[34;3mN\u001B[35;3mD\u001B[31;3mA\u001B[33;3mR\u001B[32;3mY\u001B[0m   |";
+        } else {
+          temp = " ".repeat(13 - card.getRarityText().length());
+          temp = "|  " + allCaps(card.getType()) + " CARD" + "   " + temp + "\u001B[" + card.getColour() + "m" +  allCaps(card.getRarityText()) + "\u001B[0m   |"; 
+        }
         allCardArts[i] = temp;
       } else if(cardArt[i].equals(EFFECTPLACEHOLDER)){
-        String temp = "";
         if(lengthAdded < card.getEffect().getDescription().length()){
           String sub = card.getEffect().getDescription().substring(lengthAdded);
           if(sub.charAt(0) == ' '){

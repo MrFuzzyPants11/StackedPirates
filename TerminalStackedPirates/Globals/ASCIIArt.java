@@ -10,6 +10,8 @@ public abstract class ASCIIArt {
   public static final String EFFECTPLACEHOLDER = "effect placeholder";
   public static final String[] FOODPLATECARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾/|‾‾|","|  ||||    .-\"`‾‾‾`\"-.    / |  |","|  ||||  .'  .-'`'-.  '.  | |  |","|  \\  / /  .'       '.  \\ \\ |  |","|   %%  \\  '.       .'  /  ||  |","|   %%   '.  `-.,.-'  .'   %%  |","|   %%     '-.,___,.-'     %%  |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
   public static final String[] FOODCHERRYCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|      `~-._.-(`-.__`-.        |","|              \\    `~~`       |","|         .--./ \\              |","|        /#   \\  \\.--.         |","|        \\    /  /#   \\        |","|         '--'   \\    /        |","|-----------------'--'---------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
+  public static final String[] FOODCHOCOLATECARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|  _____________,-.___     _   |","| |____        { {]_]_]   [_]  |","| |___ `-----.__\\ \\_]_]_    . `|","| |   `-----.____} }]_]_]_   , |","| |_____________/ {_]_]_]_] , `|","|               `-'            |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
+  public static final String[] FOODTEACARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|                    ;,'       |","|            _o_    ;:;'       |","|        ,-.'---`.__ ;         |","|       ((j`=====',-'          |","|        `-\\     /             |","|           `=-='              |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ " };
   public static final String[] CREWKNIFECARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|            \\-\\               |","|             \\-\\              |","|           ‾‾| |‾‾            |","|             | |              |","|             | |              |","|              V               |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
   public static final String[] CREWGUNCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|            ___________,      |","|        \\-'       _____|      |","|         )   _ __/            |","|        / `./_/     __,_____  |","|       |   |      / __.==--\"  |","|       |   \\     /#(-'        |","|-------`---'-----`-'----------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ " };
   public static final String[] CREWTUNICCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|           ___   __           |","|         /|   `-´  |\\         |","|        /?|   o    |_\\        |","|          | w      |          |","|          |     ,\" |          |","|          |________|          |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
@@ -37,7 +39,7 @@ public abstract class ASCIIArt {
 //    |                              |
 //    |                              |
 //    |                              |
-//    |                              ||
+//    |                              |
 //     \____________________________/
 // FOODCHERRYCARD
 //     ______________________________
@@ -60,6 +62,48 @@ public abstract class ASCIIArt {
 //    |                              |
 //    |                              |
 //     \____________________________/
+// FOODCHOCOLATECARD
+//     ______________________________
+//    /______________________________\
+//    |                              |
+//    |‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
+//    |  _____________,-.___     _   |
+//    | |____        { {]_]_]   [_]  |
+//    | |___ `-----.__\ \_]_]_    . `|
+//    | |   `-----.____} }]_]_]_   , |
+//    | |_____________/ {_]_]_]_] , `|
+//    |               `-'            |
+//    |------------------------------|
+//    |  Food Card       UNCOMMON    |
+//    |------------------------------|
+//    |                              |
+//    |                              |
+//    |                              |
+//    |                              |
+//    |                              |
+//    |                              |
+//     \____________________________/ 
+// FOODTEACARD
+//     ______________________________ 
+//    /______________________________\
+//    |                              |
+//    |‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
+//    |                    ;,'       |
+//    |            _o_    ;:;'       |
+//    |        ,-.'---`.__ ;         |
+//    |       ((j`=====',-'          |
+//    |        `-\     /             |
+//    |           `-=-'              |
+//    |------------------------------|
+//    |  Food Card       UNCOMMON    |
+//    |------------------------------|
+//    |                              |
+//    |                              |
+//    |                              |
+//    |                              |
+//    |                              |
+//    |                              |
+//     \____________________________/ 
 // CREWKNIFECARD
 //     ______________________________
 //    /______________________________\

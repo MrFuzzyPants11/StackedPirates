@@ -75,7 +75,7 @@ public class SupplyStore extends SubEncounter{
           for(int i = 0; i < packs.size(); i++){
             if(!packs.get(i).getSold()){
               pr(packIndexes.get(i) + ". " + packs.get(i).getName() + " ");
-              pr(packs.get(i).getRarity(), packs.get(i).getColour());
+              pr(firstCap(packs.get(i).getRarityText()), packs.get(i).getColour());
               prln(" - " + packs.get(i).getCost() + " gold");
             }
           }
@@ -102,7 +102,7 @@ public class SupplyStore extends SubEncounter{
               continue;
             } else {
               pr("Are you sure you want to buy a ");
-              pr(packs.get(input).getRarityText(), packs.get(input).getColour());
+              pr(firstCap(packs.get(input).getRarityText()), packs.get(input).getColour());
               pr(" " + packs.get(input).getName() + " for ");
               prln(packs.get(input).getCost() + " gold?", GOLDCOLOUR);
               prln(toStr(input + 1) + ". Yes");

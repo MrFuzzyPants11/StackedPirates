@@ -15,7 +15,7 @@ public abstract class Tools {
   // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
   // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
   // BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS | BASIC METHOD SHORTENING TOOLS
-
+  
   /*
    * Converts int to string
    * @param num The number to convert
@@ -240,7 +240,7 @@ public abstract class Tools {
     String temp = "";
     for (int i = 0; i < str.length(); i++) {
       temp = temp + rainbowColours[rainbowMegaTracker] + str.charAt(i);
-      if(rainbowMegaTracker == 5){
+      if(rainbowMegaTracker >= 5){
         rainbowMegaTracker = 0;
       } else {
         rainbowMegaTracker++;
@@ -259,10 +259,10 @@ public abstract class Tools {
     String temp = "";
     for (int i = 0; i < str.length(); i++) {
       temp = temp + brownbowColours[brownbowMegaTracker] + str.charAt(i);
-      if(rainbowMegaTracker == 3){
-        rainbowMegaTracker = 0;
+      if(brownbowMegaTracker >= 3){
+        brownbowMegaTracker = 0;
       } else {
-        rainbowMegaTracker++;
+        brownbowMegaTracker++;
       }
     }
     return (temp + "\u001B[0m");
@@ -312,12 +312,12 @@ public abstract class Tools {
     final String[] rainbowColours = {"\u001B[31;1;4m", "\u001B[33;1;4m", "\u001B[32;1;4m", "\u001B[36;1;4m", "\u001B[34;1;4m", "\u001B[35;1;4m"};
     String temp = "";
     for (int i = 0; i < str.length(); i++) {
-      temp = temp + rainbowColours[rainbowMegaTracker] + str.charAt(i);
-      if(rainbowMegaTracker == 5){
+      if(rainbowMegaTracker >= 5){
         rainbowMegaTracker = 0;
       } else {
         rainbowMegaTracker++;
       }
+      temp = temp + rainbowColours[rainbowMegaTracker] + str.charAt(i);
     }
     return (temp + "\u001B[0m");
   }
@@ -347,27 +347,34 @@ public abstract class Tools {
    * This can also go to other menus if special characters are entered
    * @return The string the user entered as an int
    */
+  public static final Map<Character,Integer> charMap = Map.ofEntries(Map.entry('A', -1),Map.entry('a', -1),Map.entry('B', -2),Map.entry('b', -2),Map.entry('C', -3),Map.entry('c', -3),Map.entry('D', -4),Map.entry('d', -4),Map.entry('E', -5),Map.entry('e', -5),Map.entry('F', -6),Map.entry('f', -6),Map.entry('G', -7),Map.entry('g', -7),Map.entry('H', -8),Map.entry('h', -8),Map.entry('I', -9),Map.entry('i', -9),Map.entry('J', -10),Map.entry('j', -10),Map.entry('K', -11),Map.entry('k', -11),Map.entry('L', -12),Map.entry('l', -12),Map.entry('M', -13),Map.entry('m', -13),Map.entry('N', -14),Map.entry('n', -14),Map.entry('O', -15),Map.entry('o', -15),Map.entry('P', -16),Map.entry('p', -16),Map.entry('Q', -17),Map.entry('q', -17),Map.entry('R', -18),Map.entry('r', -18),Map.entry('S', -19),Map.entry('s', -19),Map.entry('T', -20),Map.entry('t', -20),Map.entry('U', -21),Map.entry('u', -21),Map.entry('V', -22),Map.entry('v', -22),Map.entry('W', -23),Map.entry('w', -23),Map.entry('X', -24),Map.entry('x', -24),Map.entry('Y', -25),Map.entry('y', -25),Map.entry('Z', -26),Map.entry('z', -26));
+
   public static int askIn(){
     pr("Enter Response: ");
     String userInput = scanner.nextLine();
-    int input;
-    if(userInput.equals("i") || userInput.equals("I")){
-      viewInventory();
-      input = MENUEXIT;
-    } else if(userInput.equals("p") || userInput.equals("P")){
-      viewPauseMenu();
-      input = MENUEXIT;
-    } else if(userInput.equals("q") || userInput.equals("Q")){
-      input = QUIT;
-    } else {
-      // I have to use Integer.parseInt() because I can't throw an error from toInt() without having to handle it everywhere
-      try {
-        input = Integer.parseInt(userInput);
-      } catch (NumberFormatException e) {
-        invalOp();
-        input = askIn();
+    int input = -6969;
+    // I have to use Integer.parseInt() because I can't throw an error from toInt() without having to handle it everywhere
+    try {
+      input = Integer.parseInt(userInput);
+    } catch (NumberFormatException e) {
+      if(charMap.containsKey(userInput.charAt(0))){
+        input = charMap.get(userInput.charAt(0));
       }
     }
+
+    if(input == -9){ // If the user enters 'i' or 'I'
+      viewInventory();
+      input = MENUEXIT;
+    } else if(input == -16){ // If the user enters 'p' or 'P'
+      viewPauseMenu();
+      input = MENUEXIT;
+    } else if(input == -17){ // If the user enters 'q' or 'Q'
+      input = QUIT;
+    } else if(input < 0){ // If they didn't enter an int or a char
+      invalOp();
+      input = askIn();
+    }
+
     lineBreaker("");
     return input;
   }
