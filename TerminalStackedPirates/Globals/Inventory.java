@@ -1,7 +1,7 @@
 //File: Inventory.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 04-08-2023
+//Modified: 04-10-2023
 package Globals;
 
 import static Globals.Tools.*;

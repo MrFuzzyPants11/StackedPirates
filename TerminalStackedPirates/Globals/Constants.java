@@ -1,7 +1,7 @@
-//File: Animations.java
+//File: Constants.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 04-08-2023
+//Modified: 04-11-2023
 package Globals;
 
 public abstract class Constants {

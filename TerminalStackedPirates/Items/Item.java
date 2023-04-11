@@ -1,11 +1,10 @@
 //File: Pack.java
 //Author: MrFuzzyPants
 //Created: 05-07-2023
-//Modified: 04-08-2023
+//Modified: 04-10-2023
 package Items;
 
 import static Globals.Constants.*;
-import static Globals.Tools.*;
 
 public abstract class Item {
   protected int rarity;

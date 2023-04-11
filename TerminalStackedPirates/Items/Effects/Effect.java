@@ -1,7 +1,7 @@
-//File: Tools.java
+//File: Effect.java
 //Author: MrFuzzyPants
 //Created: 04-09-2023
-//Modified: 04-09-2023
+//Modified: 04-10-2023
 package Items.Effects;
 
 import Items.Item;

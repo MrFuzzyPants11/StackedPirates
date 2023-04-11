@@ -1,7 +1,7 @@
-//File: Tools.java
+//File: ASCIArt.java
 //Author: MrFuzzyPants
-//Created: 04-08-2023
-//Modified: 04-08-2023
+//Created: 04-09-2023
+//Modified: 04-10-2023
 package Globals;
 
 public abstract class ASCIIArt {
