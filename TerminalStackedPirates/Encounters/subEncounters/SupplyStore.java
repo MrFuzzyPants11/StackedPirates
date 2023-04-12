@@ -24,9 +24,9 @@ public class SupplyStore extends SubEncounter{
   public SupplyStore(boolean reload, int levelOrIndex){
     if(reload){
       String[] data = getFromCSVRow(SUPPLYSTORESCSV,"SupplyStore.java",INDEX, toStr(levelOrIndex));
-      this.index = toInt(data[0]);
+      index = levelOrIndex;
       level = toInt(data[1]);
-      this.packs = new ArrayList<Pack>();
+      packs = new ArrayList<Pack>();
       for(int i = 2; i < data.length; i++){
         if(Integer.parseInt(data[i]) < 100){
           packs.add(new CrewPack(true, toInt(data[i])));
@@ -56,7 +56,7 @@ public class SupplyStore extends SubEncounter{
    */
   public void enter(Player player){
     lineBreaker("Supply Store");
-    pr("You enter the ");
+    pr("You enter Hannigan's ");
     pr("Supply Store", ENCOUNTERCOLOUR);
     prln(".");
     prln("You see a variety of packs.");

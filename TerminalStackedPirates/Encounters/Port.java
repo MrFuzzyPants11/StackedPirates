@@ -44,13 +44,13 @@ public class Port extends Encounter{
    * @param name the name of the port
    * @param full whether the port has all sub encounters
    */
-  public Port(String name, Boolean full, int level) {
-    this.name = name;
+  public Port(Boolean full, int level) {
+    this.name = "Nassau";
     this.level = level;
     if(full){
-      store = new SupplyStore(false,0);
-      tavern = new Tavern(false,0);
-      dock = new Dockyard(false,0);
+      store = new SupplyStore(false,MINLEVEL);
+      tavern = new Tavern(false,MINLEVEL);
+      dock = new Dockyard(false,MINLEVEL);
       storeIndex = store.getIndex();
       tavernIndex = tavern.getIndex();
       dockIndex = dock.getIndex();

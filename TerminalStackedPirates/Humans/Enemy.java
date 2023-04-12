@@ -4,6 +4,6 @@
 //Modified: 04-04-2023
 package Humans;
 
-public class Enemy {
+public class Enemy extends NPC{
   
 }

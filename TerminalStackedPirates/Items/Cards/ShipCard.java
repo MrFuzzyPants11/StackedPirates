@@ -17,17 +17,17 @@ public class ShipCard extends Card{
    */
   public ShipCard(boolean reload, int rarityOrIndex){
     if(reload){
-      String[] data = getFromCSVRow(ALLCARDSCSV, "ShipPack.java", INDEX, toStr(rarityOrIndex));
+      String[] data = getFromCSVRow(SHIPCARDSCSV, "ShipPack.java", INDEX, toStr(rarityOrIndex));
       this.index = toInt(data[0]);
-      this.rarity = toInt(data[2]);
-      this.name = data[3];
-      this.effect = new ShipEffect(toInt(data[4]));
+      this.rarity = toInt(data[1]);
+      this.name = data[2];
+      this.effect = new ShipEffect(toInt(data[3]));
     } else {
       this.rarity = rarityOrIndex;
       this.name = "TEST SHIP";
       this.effect = new ShipEffect(rarityOrIndex);
-      writeToCSV(ALLCARDSCSV, "ShipCard.java", true, ALLCARDSHEADER, ALLCARDSFORMAT, SHIP, rarity, this.name,rarity);
-      this.index = getFromCSVLastIndex(ALLCARDSCSV, "ShipCard.java");
+      writeToCSV(SHIPCARDSCSV, "ShipCard.java", true, SHIPCARDSHEADER, SHIPCARDSFORMAT, rarity, this.name,rarity);
+      this.index = getFromCSVLastIndex(SHIPCARDSCSV, "ShipCard.java");
     }
   }
 

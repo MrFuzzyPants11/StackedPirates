@@ -4,43 +4,13 @@
 //Modified: 04-08-2023
 package Humans;
 
-import java.util.*;
-
-import Items.Cards.Card;
+import java.util.ArrayList;
 import Items.Cards.CrewCard;
 
 public abstract class Human {
   int level;
   int health;
-  String fname;
-  String lname;
-  ArrayList<CrewCard> cards;
-
-
-  /*
-   * Adds a card to the humans's deck
-   * @param newCard the card to be added
-   */
-  public int addCard(CrewCard newCard) {
-    if(cards.size() < level){
-      for(Card card : cards){
-        if(card.getClass().isInstance(newCard)){
-          return 1;
-        }
-      }
-      this.cards.add(newCard);
-      return 0;
-    }
-    return 2;
-  }
-
-  /*
-   * Removes a card from the human's deck
-   * @param oldCard the card to be removed
-   */
-  public void removeCard(CrewCard oldCard) {
-    this.cards.remove(oldCard);
-  }
+  ArrayList<CrewCard> equippedCards = new ArrayList<CrewCard>();
 
   /*
    * Gets the human's level for print purposes, AKA level + 1
@@ -57,8 +27,6 @@ public abstract class Human {
   public int getLevel() {
     return this.level;
   }
-
-
 
   /*
    * Gets the human's health
@@ -77,26 +45,33 @@ public abstract class Human {
   }
 
   /*
-   * Gets the human's deck
-   * @return the human's deck
+   * Saves the inputted crew card to the human's equipped cards
+   * @param card the crew card to be saved
+   * @return true if the card was saved, false if the card was not saved
    */
-  public ArrayList<CrewCard> getCards() {
-    return this.cards;
+  public boolean equipCard(CrewCard card){
+    for(int i = 0; i < this.equippedCards.size(); i++){
+      if(card.getCrewType().equals(equippedCards.get(i).getCrewType())){
+        return false;
+      }
+    }
+    this.equippedCards.add(card);
+    return true;
   }
 
   /*
-   * Gets the human's first name
-   * @return the human's first name
+   * Removes the inputted crew card from the human's equipped cards
+   * @param card the crew card to be removed
    */
-  public String getFname() {
-    return this.fname;
+  public void unequipCard(CrewCard card){
+    this.equippedCards.remove(card);
   }
 
   /*
-   * Gets the human's last name
-   * @return the human's last name
+   * Gets the human's equipped cards
+   * @return the human's equipped cards
    */
-  public String getLname() {
-    return this.lname;
+  public ArrayList<CrewCard> getEquippedCards(){
+    return this.equippedCards;
   }
 }

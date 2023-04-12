@@ -10,7 +10,7 @@ import static Globals.Constants.*;
 public class ShipEffect extends Effect{
 
   public ShipEffect(int index){
-    String[] data = getFromCSVRow(SHIPEFFECTCSV, "ShipEffect.java", INDEX, toStr(index));
+    String[] data = getFromCSVRow(SHIPEFFECTSCSV, "ShipEffect.java", INDEX, toStr(index));
     this.index = toInt(data[0]);
     this.rarity = toInt(data[1]);
     this.description = data[2];

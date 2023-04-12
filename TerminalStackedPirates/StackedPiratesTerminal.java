@@ -1,7 +1,7 @@
 //File: StackedPiratesTerminal.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 04-08-2023
+//Modified: 04-11-2023
 
 import Humans.*;
 
@@ -15,23 +15,43 @@ public class StackedPiratesTerminal{
    * @param args command line arguments
    */
   public static void main(String args[]){
-    Player player = initializeGame();
-    if(player != null){
-      prln("Welcome to Stacked Pirates!");
-      pr("You are " + player.getFname() + " " + player.getLname() + ".\nYou are ");
-      pr("Level " + player.getLevelText(),LEVELCOLOUR);
-      pr(", have no cards, But do have ");
-      prln(player.getGold() + " gold.", GOLDCOLOUR);
-      Port port = new Port("Bruh", true, 0);
-      port.enter(player);
-      closeScanner();
+    prln("Start a new game or load a saved game?");
+    prln("1. Load Game");
+    prln("2. New Game");
+    int input = 2; // = askIn();
+    if(input == 1){
+      //Player player = initializeLoadGame();
+      //return;
+    } else if(input == 2){
+      // prln("Are you sure you want to start a new game?");
+      // prln("This will delete any saved game",RED);
+      // prln("1. Start New Game");
+      // prln("Q. Cancel");
+      // input = askIn();
+      // if(input == 1){
+      //   prln("Starting new game");
+      // } else {
+      //   prln("Cancelling");
+      //   return;
+      // }
+      Player player = initializeNewGame();
+      if(player != null){
+        pr("Welcome to Stacked Pirates");
+        pr(" Captain" + player.getName() + "!\nYou are ");
+        pr("Level " + player.getLevelText(),LEVELCOLOUR);
+        pr(", have no cards, But do have ");
+        prln(player.getGold() + " gold.", GOLDCOLOUR);
+        Port port = new Port(true, 0);
+        port.enter(player);
+        closeScanner();
+      }
     }
   }
 
   /*
    * Method for generating game world and files
    */
-  private static Player initializeGame(){
+  private static Player initializeNewGame(){
     //Clean any CSV files that need to be
     cleanCSVFiles();
 
@@ -41,11 +61,25 @@ public class StackedPiratesTerminal{
     // Load the scanner
     initializeScanner();
 
+    // Ask for player name
+    //pr("What would you like your name to be? ");
+    //String name = askStr();
+    
     // Ask for additional settings
     // ...
     //Generate world
 
-    return new Player("Fuzzy", "Pants");
+    return new Player("FuzzyPants");
+  }
+
+  private static Player initializeLoadGame(){
+    // Load name files into memory
+    LoadNameFiles();
+
+    // Load the scanner
+    initializeScanner();
+
+    return new Player();
   }
 
   /*

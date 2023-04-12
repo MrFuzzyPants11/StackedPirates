@@ -9,34 +9,40 @@ import static Globals.Constants.*;
 
 public class Player extends Human{
   int gold;
-  
+  String name;
+
   /*
    * Constructor to reload player data from CSV
    * Used for loading a saved game
    */
   public Player(){
     String[] playerData = getFromCSVRow(PLAYERCSV, "Player.java",INDEX, "0");
-    this.fname = playerData[1];
-    this.lname = playerData[2];
-    this.level = toInt(playerData[3]);
-    this.health = toInt(playerData[4]);
-    this.gold = toInt(playerData[5]);
+    this.name = playerData[1];
+    this.level = toInt(playerData[2]);
+    this.health = toInt(playerData[3]);
+    this.gold = toInt(playerData[4]);
   }
 
   /*
    * Constructor to create a new player
-   * @param fname the player's first name
-   * @param lname the player's last name
+   * @param name the player's name
    */
-  public Player(String fname, String lname){
-    this.fname = fname;
-    this.lname = lname;
+  public Player(String name){
+    this.name = name;
     this.level = STARTINGLEVEL;
     this.health = STARTINGHEALTH;
     this.gold = STARTINGGOLD;
 
     writeToCSV(PLAYERCSV,"Player.java", false, PLAYERHEADER,PLAYERFORMAT, 
-        this.fname, this.lname, this.level, this.health, this.gold, 0,0,0,0,0);
+        this.name, this.level, this.health, this.gold, -1,-1,-1,-1,-1);
+  }
+
+  /*
+   * Gets the player's name
+   * @return the player's name
+   */
+  public String getName() {
+    return this.name;
   }
 
   /*

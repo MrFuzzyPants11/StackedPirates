@@ -11,7 +11,7 @@ public class FoodEffect extends Effect{
   private int healthRestored;
 
   public FoodEffect(int index){
-    String[] data = getFromCSVRow(FOODEFFECTCSV, "FoodEffect.java", INDEX, toStr(index));
+    String[] data = getFromCSVRow(FOODEFFECTSCSV, "FoodEffect.java", INDEX, toStr(index));
     this.index = toInt(data[0]);
     this.rarity = toInt(data[1]);
     this.description = data[2];

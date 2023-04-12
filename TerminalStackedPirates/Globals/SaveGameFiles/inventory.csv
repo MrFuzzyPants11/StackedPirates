@@ -1,15 +1,1 @@
 index,ininventory,type,subtype,itemindex
-0,false,pack,crew,1
-1,false,pack,food,6
-2,true,pack,food,7
-3,true,pack,food,9
-4,true,card,crew,0
-5,true,card,crew,1
-6,true,card,crew,2
-7,true,card,crew,3
-8,true,card,crew,4
-9,true,card,food,5
-10,true,card,food,6
-11,true,card,food,7
-12,true,card,food,8
-13,true,card,food,9

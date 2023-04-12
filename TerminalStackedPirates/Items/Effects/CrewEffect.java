@@ -9,7 +9,7 @@ import static Globals.Constants.*;
 
 public class CrewEffect extends Effect{
   public CrewEffect(int index){
-    String[] data = getFromCSVRow(CREWEFFECTCSV, "CrewEffect.java", INDEX, toStr(index));
+    String[] data = getFromCSVRow(CREWEFFECTSCSV, "CrewEffect.java", INDEX, toStr(index));
     this.index = toInt(data[0]);
     this.rarity = toInt(data[1]);
     this.description = data[2];

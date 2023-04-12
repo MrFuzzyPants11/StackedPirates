@@ -108,11 +108,10 @@ public abstract class Tools {
   static ArrayList<String> enFirstNames = new ArrayList<String>();
   static ArrayList<String> esFirstNames = new ArrayList<String>();
   public static String generateFirstName(Boolean english) {
-    Random rand = new Random();
     if(english){
-      return enFirstNames.get(rand.nextInt(enFirstNames.size()));
+      return enFirstNames.get(generateRand(enFirstNames.size()));
     } else {
-      return esFirstNames.get(rand.nextInt(esFirstNames.size()));
+      return esFirstNames.get(generateRand(esFirstNames.size()));
     }
   }
 
@@ -124,11 +123,10 @@ public abstract class Tools {
   static ArrayList<String> enLastNames = new ArrayList<String>();
   static ArrayList<String> esLastNames = new ArrayList<String>();
   public static String generateLastName(Boolean english) {
-    Random rand = new Random();
     if(english){
-      return enLastNames.get(rand.nextInt(enLastNames.size()));
+      return enLastNames.get(generateRand(enLastNames.size()));
     } else {
-      return esLastNames.get(rand.nextInt(esLastNames.size()));
+      return esLastNames.get(generateRand(esLastNames.size()));
     }
   }
 
@@ -138,22 +136,39 @@ public abstract class Tools {
    * @return The generated level
    */
   public static int generateLevel(int val) {
-    Random rand = new Random();
     if(val == MINLEVEL){
-      if (rand.nextInt(3) < 2) { // 66% chance of MINLEVEL IF VAL IS MINLEVEL
+      if (generateRand(3) < 2) { // 66% chance of MINLEVEL IF VAL IS MINLEVEL
         return MINLEVEL;
       } else {
         return MINLEVEL + 1;
       }
     }
     if (val == MAXLEVEL) {
-      if (rand.nextInt(3) < 2) { // 66% chance of MAXLEVEL IF VAL IS MAXLEVEL
+      if (generateRand(3) < 2) { // 66% chance of MAXLEVEL IF VAL IS MAXLEVEL
         return MAXLEVEL;
       } else {
         return MAXLEVEL - 1;
       }
     }
-    return rand.nextInt(3) + val - 1; // val-1 or val or val + 1
+    return generateRand(3) + val - 1; // val-1 or val or val + 1
+  }
+
+  /*
+   * Generates a random number between 0 and max - 1
+   * @param max The max number to generate (-1)
+   * @return The generated number
+   */
+  public static int generateRand(int max) {
+    Random rand = new Random();
+    return rand.nextInt(max);
+  }
+
+  /*
+   * Generates a random boolean
+   */
+  public static boolean generateRand() {
+    Random rand = new Random();
+    return rand.nextBoolean();
   }
 
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
@@ -348,7 +363,6 @@ public abstract class Tools {
    * @return The string the user entered as an int
    */
   public static final Map<Character,Integer> charMap = Map.ofEntries(Map.entry('A', -1),Map.entry('a', -1),Map.entry('B', -2),Map.entry('b', -2),Map.entry('C', -3),Map.entry('c', -3),Map.entry('D', -4),Map.entry('d', -4),Map.entry('E', -5),Map.entry('e', -5),Map.entry('F', -6),Map.entry('f', -6),Map.entry('G', -7),Map.entry('g', -7),Map.entry('H', -8),Map.entry('h', -8),Map.entry('I', -9),Map.entry('i', -9),Map.entry('J', -10),Map.entry('j', -10),Map.entry('K', -11),Map.entry('k', -11),Map.entry('L', -12),Map.entry('l', -12),Map.entry('M', -13),Map.entry('m', -13),Map.entry('N', -14),Map.entry('n', -14),Map.entry('O', -15),Map.entry('o', -15),Map.entry('P', -16),Map.entry('p', -16),Map.entry('Q', -17),Map.entry('q', -17),Map.entry('R', -18),Map.entry('r', -18),Map.entry('S', -19),Map.entry('s', -19),Map.entry('T', -20),Map.entry('t', -20),Map.entry('U', -21),Map.entry('u', -21),Map.entry('V', -22),Map.entry('v', -22),Map.entry('W', -23),Map.entry('w', -23),Map.entry('X', -24),Map.entry('x', -24),Map.entry('Y', -25),Map.entry('y', -25),Map.entry('Z', -26),Map.entry('z', -26));
-
   public static int askIn(){
     pr("Enter Response: ");
     String userInput = scanner.nextLine();
@@ -379,6 +393,13 @@ public abstract class Tools {
     return input;
   }
 
+  public static String askStr(){
+    pr("Enter Response: ");
+    String userInput = scanner.nextLine();
+    lineBreaker("");
+    return userInput;
+  }
+
   /*
    * Prints out the PAUSE menu
    */
@@ -395,14 +416,18 @@ public abstract class Tools {
    * Refreshes all CSVs to delete their contents
    */
   public static void cleanCSVFiles(){
-    refreshCSV(ALLCARDSCSV,ALLCARDSHEADER);
+    refreshCSV(ALLCREWSCSV,ALLCREWSHEADER);
     refreshCSV(ALLPACKSCSV,ALLPACKSHEADER);
-    refreshCSV(HUMANCSV,HUMANHEADER);
+    refreshCSV(BARTENDERSCSV,BARTENDERSHEADER);
+    refreshCSV(CREWCARDSCSV,CREWCARDSHEADER);
+    refreshCSV(FOODCARDSCSV,FOODCARDSHEADER);
     refreshCSV(INVENTORYCSV,INVENTORYHEADER);
     refreshCSV(PLAYERCSV,PLAYERHEADER);
     refreshCSV(PLAYERSHIPCSV,PLAYERSHIPHEADER);
     refreshCSV(PORTSCSV,PORTSHEADER);
+    refreshCSV(SHIPCARDSCSV,SHIPCARDSHEADER);
     refreshCSV(SUPPLYSTORESCSV,SUPPLYSTORESHEADER);
+    refreshCSV(TAVERNSCSV,TAVERNSHEADER);
   }
 
   /*
