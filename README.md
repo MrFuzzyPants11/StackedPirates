@@ -4,9 +4,10 @@ In this game you equip cards to yourself, your crew, and your ship to travel the
 very much a WIP.
 
 ## To properly display Unicode in your CMD windows you must either
-1. Run "chcp 65001" in your terminal every time you launch it.
-2. 1. run 'intl.cpl' (using win + r)
-2. 2. Go the administrative tab
-2. 3. "Click Change System Locale..."
-2. 4. Tick the "Beta: Use Unicode UTF-8 for worldwide language support" box
-2. 5. press okay and reboot your PC. 
+- Run "chcp 65001" in your terminal every time you launch it.
+- Or change it permanently:
+  - run 'intl.cpl' (using win + r)
+  - Go the administrative tab
+  - "Click Change System Locale..."
+  - Tick the "Beta: Use Unicode UTF-8 for worldwide language support" box
+  - press okay and reboot your PC. 
