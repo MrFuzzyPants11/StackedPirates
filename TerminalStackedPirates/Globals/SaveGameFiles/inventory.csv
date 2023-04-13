@@ -1,1 +1,7 @@
 index,ininventory,type,subtype,itemindex
+0,false,pack,crew,1
+1,true,card,crew,0
+2,true,card,crew,1
+3,true,card,crew,2
+4,true,card,crew,3
+5,true,card,crew,4

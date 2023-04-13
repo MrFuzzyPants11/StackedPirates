@@ -40,7 +40,7 @@ public class CrewCard extends Card {
       } else if(temptype == 4){
         this.crewType = PANTS;
       }
-      writeToCSV(CREWCARDSCSV, "CrewCard.java", true, CREWCARDSHEADER, CREWCARDSFORMAT, rarity, this.name,crewType,-1);
+      writeToCSV(CREWCARDSCSV, "CrewCard.java", true, CREWCARDSHEADER, CREWCARDSFORMAT, rarity, this.name,crewType,rarity);
       this.index = getFromCSVLastIndex(CREWCARDSCSV, "CrewCard.java");
     }
   }

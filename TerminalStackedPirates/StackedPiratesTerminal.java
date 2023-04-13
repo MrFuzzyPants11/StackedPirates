@@ -72,15 +72,15 @@ public class StackedPiratesTerminal{
     return new Player("FuzzyPants");
   }
 
-  private static Player initializeLoadGame(){
-    // Load name files into memory
-    LoadNameFiles();
+  // private static Player initializeLoadGame(){
+  //   // Load name files into memory
+  //   LoadNameFiles();
 
-    // Load the scanner
-    initializeScanner();
+  //   // Load the scanner
+  //   initializeScanner();
 
-    return new Player();
-  }
+  //   return new Player();
+  // }
 
   /*
    * Method for the gameplay loop

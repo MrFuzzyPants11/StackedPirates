@@ -4,7 +4,6 @@
 //Modified: 04-08-2023
 package Encounters.subEncounters;
 
-import Items.Cards.FoodCard;
 import Items.Packs.FoodPack;
 import static Globals.Constants.*;
 import static Globals.Tools.*;

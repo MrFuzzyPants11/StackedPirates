@@ -25,7 +25,7 @@ public class FoodCard extends Card{
       this.rarity = rarityOrIndex;
       this.name = "TEST FOOD";
       this.effect = new FoodEffect(rarityOrIndex);
-      writeToCSV(FOODCARDSCSV, "FoodCard.java", true, FOODCARDSHEADER, FOODCARDSFORMAT, rarity, this.name,-1);
+      writeToCSV(FOODCARDSCSV, "FoodCard.java", true, FOODCARDSHEADER, FOODCARDSFORMAT, rarity, this.name,rarity);
       this.index = getFromCSVLastIndex(FOODCARDSCSV, "FoodCard.java");
     }
   }
