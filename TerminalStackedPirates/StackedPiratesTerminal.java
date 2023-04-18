@@ -4,7 +4,6 @@
 //Modified: 04-11-2023
 
 import Humans.*;
-
 import static Globals.Tools.*;
 import static Globals.Constants.*;
 import Encounters.*;

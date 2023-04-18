@@ -1,7 +1,7 @@
 //File: ASCIArt.java
 //Author: MrFuzzyPants
 //Created: 04-09-2023
-//Modified: 04-10-2023
+//Modified: 04-18-2023
 package Globals;
 
 public abstract class ASCIIArt {
@@ -16,8 +16,8 @@ public abstract class ASCIIArt {
   public static final String[] CREWGUNCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|            ___________,      |","|        \\-'       _____|      |","|         )   _ __/            |","|        / `./_/     __,_____  |","|       |   |      / __.==--\"  |","|       |   \\     /#(-'        |","|-------`---'-----`-'----------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ " };
   public static final String[] CREWTUNICCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|           ___   __           |","|         /|   `-´  |\\         |","|        /?|   o    |_\\        |","|          | w      |          |","|          |     ,\" |          |","|          |________|          |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
   public static final String[] CREWBOOTSCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|         ,|_|,   ,|_|,        |","|         |===|   |===|        |","|         |   |   |   |        |","|         /  &|   |&  \\        |","|     .-'`  , )* *( ,  `'-.    |","|     `\"\"\"\"\"`\"`   `\"`\"\"\"\"\"`    |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
-  public static final String[] SHIPSHIPCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|         |    |    |          |","|        )_)  )_)  )_)         |","|       )___))___))___)\\       |","|      )____)____)_____)\\\\     |","|    _____|____|____|_____\\\\\\__ |","|----\\                   /-----|","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
-  public static final String[] SHIPCANNONCARD = {" ______________________________ "," /______________________________\\ ",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|                              |","|             .-._______       |","|         .={ . }..--\"\"        |","|        [ /\"`._.'              |","|                              |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
+  public static final String[] SHIPSHIPCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|         |    |    |          |","|        )_)  )_)  )_)         |","|       )___))___))___)\\       |","|      )____)____)_____)\\\\     |","|    _____|____|____|_____\\\\\\__|","|----\\                   /-----|","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
+  public static final String[] SHIPCANNONCARD = {" ______________________________ ","/______________________________\\",NAMEBAR,"|‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|","|                              |","|                              |","|             .-._______       |","|         .={ . }..--\"\"        |","|        [ /\"`._.'             |","|                              |","|------------------------------|",RARITYPLACEHOLDER,"|------------------------------|",EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER,EFFECTPLACEHOLDER," \\____________________________/ "};
 }
 // REFERENCE IMAGES:
 // FOODPLATECARD
@@ -126,7 +126,7 @@ public abstract class ASCIIArt {
 //    |                              |
 //     \____________________________/
 // CREWGUNCARD
-//      ______________________________
+//     ______________________________
 //    /______________________________\
 //    |                              |
 //    |‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾‾|
@@ -218,6 +218,7 @@ public abstract class ASCIIArt {
 //    |             .-._______       |
 //    |         .={ . }..--""        |
 //    |        [/"`._.'              |
+//    |                              |
 //    |                              |
 //    |------------------------------|
 //    |  Ship Card       UNCOMMON    |

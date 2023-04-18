@@ -108,6 +108,7 @@ public class Tavern extends SubEncounter{
    * @param player the player
    */
   public void talkToBartender(Player player){
+    prln("You approach the bar.");
     while(true){
       prln("Hey there Captain! What can I get you?");
       for(int i = 0; i < foodPacks.size(); i++){
