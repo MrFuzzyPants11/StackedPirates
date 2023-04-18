@@ -1,6 +1,6 @@
-index,fname,lname,increw,level,health,card0,card1,card2,card3,card4
-0,Ashly,Garcia Blanco,false,1,50,-1,-1,-1,-1,-1
-1,Denise,Vanaprasert,false,0,50,-1,-1,-1,-1,-1
-2,Odilio,Dumitriu,false,0,50,-1,-1,-1,-1,-1
-3,Boutaina,Boneta,false,1,50,-1,-1,-1,-1,-1
-4,Alondra,Eroles,false,0,50,-1,-1,-1,-1,-1
+index,fname,lname,increw,level,health,cost,intavern,card0,card1,card2,card3,card4
+0,Sofie,Ugarriza,false,0,50,16,true,-1,-1,-1,-1,-1
+1,Yarelis,Garcia Serrano,false,0,50,20,true,-1,-1,-1,-1,-1
+2,Dong,Asaeli,false,1,50,12,true,-1,-1,-1,-1,-1
+3,Dale,Mondoza,false,1,50,15,true,-1,-1,-1,-1,-1
+4,Stewart,Croon,false,0,50,12,true,-1,-1,-1,-1,-1

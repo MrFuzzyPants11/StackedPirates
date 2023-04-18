@@ -1,7 +1,7 @@
 //File: Constants.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 04-11-2023
+//Modified: 04-18-2023
 package Globals;
 
 public abstract class Constants {
@@ -15,12 +15,18 @@ public abstract class Constants {
 
   // Header Columns
   public static final String BARTENDERINDEX = "bartenderindex";
+  public static final String BLACKMARKETDEALER = "blackmarketdealer";
   public static final String CARD0 = "card0";
   public static final String CARD1 = "card1";
   public static final String CARD2 = "card2";
   public static final String CARD3 = "card3";
   public static final String CARD4 = "card4";
   public static final String COST = "cost";
+  public static final String CREW0 = "crew0";
+  public static final String CREW1 = "crew1";
+  public static final String CREW2 = "crew2";
+  public static final String CREW3 = "crew3";
+  public static final String CREW4 = "crew4";
   public static final String CREWCARDTYPE = "crewcardtype";
   public static final String CREWINDEX0 = "crewindex0";
   public static final String CREWINDEX1 = "crewindex1";
@@ -45,6 +51,7 @@ public abstract class Constants {
   public static final String HAT = "hat";
   public static final String HEALTH = "health";
   public static final String HEALTHRESTORED = "healthrestored";
+  public static final String HOLELEVEL = "holelevel";
   public static final String INCREW = "increw";
   public static final String INDEX = "index";
   public static final String ININVENTORY = "ininventory";
@@ -66,13 +73,19 @@ public abstract class Constants {
   public static final String PACK9 = "pack9";
   public static final String PANTS = "pants";
   public static final String RARITY = "rarity";
+  public static final String REPAIRS = "repairs";
+  public static final String SIZE = "size";  
   public static final String SOLD = "sold";
   public static final String SUBTYPE = "subtype";
   public static final String SUPPLYSTORE = "supplystore";
   public static final String TAVERN = "tavern";
+  public static final String TOUGHNESS = "toughness";
+  public static final String TRAVELUNTILSINK = "traveluntilsink";
   public static final String TUNIC = "tunic";
   public static final String TWOHANDEDWEAPON = "twohandedweapon";
   public static final String TYPE = "type";
+  public static final String INTAVERN = "intavern";
+
 
   // RARITIES
   public static final String COMMON = "common";
@@ -102,27 +115,35 @@ public abstract class Constants {
   public static final String RARECOLOUR = MAGENTA;
   public static final String UNCOMMONCOLOUR = CYAN;
 
-  // FILE NAMES
-  public static final String ALLCREWSCSV = "allcrews";
-  public static final String ALLPACKSCSV = "allpacks";
-  public static final String BARTENDERSCSV = "bartenders";
-  public static final String CREWCARDSCSV = "crewcards";
-  public static final String CREWEFFECTSCSV = "creweffects";
-  public static final String NAMESFOLDER = "SmashewNames"; // Not in correct alphabetical place
-  public static final String ENFIRSTNAMES = NAMESFOLDER + "/enfirstnames";
-  public static final String ENLASTNAMES = NAMESFOLDER + "/enlastnames";
-  public static final String ESFIRSTNAMES = NAMESFOLDER + "/esfirstnames";
-  public static final String ESLASTNAMES = NAMESFOLDER + "/eslastnames";
-  public static final String FOODCARDSCSV = "foodcards";
-  public static final String FOODEFFECTSCSV = "foodeffects";
-  public static final String INVENTORYCSV = "inventory";
-  public static final String PLAYERCSV = "player";
-  public static final String PLAYERSHIPCSV = "playership";
-  public static final String PORTSCSV = "ports";
-  public static final String SHIPCARDSCSV = "shipcards";
-  public static final String SHIPEFFECTSCSV = "shipeffects";
-  public static final String SUPPLYSTORESCSV = "supplystores";
-  public static final String TAVERNSCSV = "taverns"; 
+  // Folder names
+  public static final String ROUTINGLOCATION = "TerminalStackedPirates/"; // This should be set to "" when running outside of VSC
+  public static final String FILELOCATION = ROUTINGLOCATION + "Globals/";
+  public static final String SAVEGAMELOCATION = FILELOCATION + "SaveGameFiles/";
+  public static final String IMMUTABLEFILELOCATION = FILELOCATION + "ImmutableFiles/";
+  public static final String NAMESFOLDER = IMMUTABLEFILELOCATION + "SmashewNames/";
+  public static final String EFFECTSFOLDER = IMMUTABLEFILELOCATION + "Effects/";
+
+  // File paths
+  public static final String ALLCREWSCSV = SAVEGAMELOCATION + "allcrews.csv";
+  public static final String ALLPACKSCSV = SAVEGAMELOCATION + "allpacks.csv";
+  public static final String BARTENDERSCSV = SAVEGAMELOCATION + "bartenders.csv";
+  public static final String CREWCARDSCSV = SAVEGAMELOCATION + "crewcards.csv";
+  public static final String CREWEFFECTS = EFFECTSFOLDER + "creweffects.csv";
+  public static final String ENFIRSTNAMES = NAMESFOLDER + "enfirstnames.txt";
+  public static final String ENLASTNAMES = NAMESFOLDER + "enlastnames.txt";
+  public static final String ESFIRSTNAMES = NAMESFOLDER + "esfirstnames.txt";
+  public static final String ESLASTNAMES = NAMESFOLDER + "eslastnames.txt";
+  public static final String FOODCARDSCSV = SAVEGAMELOCATION + "foodcards.csv";
+  public static final String FOODEFFECTS = EFFECTSFOLDER + "foodeffects.csv";
+  public static final String INVENTORYCSV = SAVEGAMELOCATION + "inventory.csv";
+  public static final String PLAYERCSV = SAVEGAMELOCATION + "player.csv";
+  public static final String PLAYERSHIPCSV = SAVEGAMELOCATION + "playership.csv";
+  public static final String PORTSCSV = SAVEGAMELOCATION + "ports.csv";
+  public static final String SHIPCARDSCSV = SAVEGAMELOCATION + "shipcards.csv";
+  public static final String SHIPEFFECTS = EFFECTSFOLDER + "shipeffects.csv";
+  public static final String SUPPLYSTORESCSV = SAVEGAMELOCATION + "supplystores.csv";
+  public static final String TAVERNSCSV = SAVEGAMELOCATION + "taverns.csv"; 
+  public static final String CREWLISTCSV = SAVEGAMELOCATION + "crewlist.csv";
 
 
   // Headers and formats
@@ -132,22 +153,24 @@ public abstract class Constants {
   public static final String SHIPCARDSHEADER = RARITY + "," + NAME + "," + EFFECTINDEX;
   public static final String CREWCARDSFORMAT = "%d,%s,%s,%d";
   public static final String CREWCARDSHEADER = RARITY + "," + NAME + "," + CREWCARDTYPE + "," + EFFECTINDEX;
-  public static final String ALLCREWSFORMAT = "%s,%s,%s,%d,%d,%d,%d,%d,%d,%d";
-  public static final String ALLCREWSHEADER = FNAME + "," + LNAME + "," + INCREW + "," + LEVEL + "," + HEALTH + "," + CARD0 + "," + CARD1 + "," + CARD2 + "," + CARD3 + "," + CARD4;
+  public static final String ALLCREWSFORMAT = "%s,%s,%s,%d,%d,%d,%s,%d,%d,%d,%d,%d";
+  public static final String ALLCREWSHEADER = FNAME + "," + LNAME + "," + INCREW + "," + LEVEL + "," + HEALTH + "," + COST + "," + INTAVERN +","+ CARD0 + "," + CARD1 + "," + CARD2 + "," + CARD3 + "," + CARD4;
   public static final String ALLPACKSFORMAT = "%s,%s,%s,%d,%d,%d,%d,%d,%d,%d";
   public static final String ALLPACKSHEADER = TYPE + "," + SOLD + "," + OPENED + "," + RARITY + "," + COST + "," + CARD0 + "," + CARD1 + "," + CARD2 + "," + CARD3 + "," + CARD4;
-  public static final String BARTENDERSFORMAT = "%s,%s,%d,%d";
-  public static final String BARTENDERSHEADER = FNAME + "," + LNAME + "," + LEVEL + "," + HEALTH;
+  public static final String BARTENDERSFORMAT = "%s,%s,%d,%d,%s";
+  public static final String BARTENDERSHEADER = FNAME + "," + LNAME + "," + LEVEL + "," + HEALTH + "," + BLACKMARKETDEALER;
   public static final String CREWEFFECTFORMAT = "%d,%s";
   public static final String CREWEFFECTHEADER = RARITY + "," + DESCRIPTION;
+  public static final String CREWLISTFORMAT = "%d,%d,%d,%d,%d";
+  public static final String CREWLISTHEADER = CREW0 + "," + CREW1 + "," + CREW2 + "," + CREW3 + "," + CREW4;
   public static final String FOODEFFECTFORMAT = "%d,%s,%d";
   public static final String FOODEFFECTHEADER = RARITY + "," + DESCRIPTION + "," + HEALTHRESTORED;
   public static final String INVENTORYFORMAT = "%s,%s,%s,%d";
   public static final String INVENTORYHEADER = ININVENTORY + "," + TYPE + "," + SUBTYPE + "," + ITEMINDEX;
   public static final String PLAYERFORMAT = "%s,%d,%d,%d,%d,%d,%d,%d,%d";
   public static final String PLAYERHEADER = NAME + "," + LEVEL + "," + HEALTH + "," + GOLD + "," + CARD0 + "," + CARD1 + "," + CARD2 + "," + CARD3 + "," + CARD4;
-  public static final String PLAYERSHIPFORMAT = "";
-  public static final String PLAYERSHIPHEADER = "";
+  public static final String PLAYERSHIPFORMAT = "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d";
+  public static final String PLAYERSHIPHEADER = SIZE + "," + TOUGHNESS + "," + REPAIRS + "," + TRAVELUNTILSINK + "," + HOLELEVEL + "," + CARD0 + "," + CARD1 + "," + CARD2 + "," + CARD3 + "," + CARD4;
   public static final String PORTSFORMAT = "%s,%d,%d,%d,%d";
   public static final String PORTSHEADER = NAME + "," + LEVEL + "," + SUPPLYSTORE + "," + TAVERN + "," + DOCKYARD;
   public static final String SHIPEFFECTFORMAT = "%d,%s";
@@ -184,4 +207,7 @@ public abstract class Constants {
   public static final String FALSE = "false";
   public static final String SPACE = " ";
   public static final String TRUE = "true";
+  public static final String[] TAVERNTYPES = {"Pub","Bar","Tavern","Cantina","Saloon","Beach Club", "Ale House", "Lounge", "Canteen", "Tavern", "Speakeasy", "Beer Hole", "Brewery"};
+  public static final String[] JOINCREW = {"Yeah I'll join your crew!", "Sure.","Better than sitting around here.", "I hope you offer dental.", "Good time to confront my Thalassophobia.", 
+                                            "Thank god my mother-in-law was driving me insane."};
 }

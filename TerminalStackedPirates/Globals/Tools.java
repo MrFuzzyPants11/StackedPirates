@@ -1,11 +1,11 @@
 //File: Tools.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 04-11-2023
+//Modified: 04-18-2023
 package Globals;
 
-import static Globals.Inventory.*;
 import static Globals.Constants.*;
+import static Globals.PlayerAttributes.Inventory.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
@@ -51,15 +51,13 @@ public abstract class Tools {
   /*
    * Waits a certain amount of time
    * @param time The time to wait in milliseconds
-   * @return Whether the wait was successful
    */
-  public static boolean sleep(int time){
+  public static void sleep(int time){
     try {
       Thread.sleep(time);
     } catch (InterruptedException e) {
-      e.printStackTrace();
+      // Do nothing, if it can't wait that wont break anything
     }
-    return true;
   }
 
   /*
@@ -428,16 +426,22 @@ public abstract class Tools {
     refreshCSV(SHIPCARDSCSV,SHIPCARDSHEADER);
     refreshCSV(SUPPLYSTORESCSV,SUPPLYSTORESHEADER);
     refreshCSV(TAVERNSCSV,TAVERNSHEADER);
+    refreshCSV(CREWLISTCSV,CREWLISTHEADER);
   }
 
   /*
    * Refreshes a CSV file to delete its contents
-   * @param filename The name of the file to refresh
+   * @param filepath The name of the file to refresh
    * @param headerRow The header row to write to the file
    */
-  private static void refreshCSV(String filename, String headerRow) {
+  private static void refreshCSV(String filepath, String headerRow) {
     try{
-      BufferedWriter writer = new BufferedWriter(new FileWriter("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      //Check if file exists and create it if not
+      if (!Files.exists(Paths.get(filepath))) {
+        Files.createFile(Paths.get(filepath));
+        prln("refreshCSV: Created new CSV file.", GREEN); // TODO: Remove this message after testing
+      }
+      BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
       writer.write(INDEX + "," + headerRow + "\n");
 
       writer.close();
@@ -448,16 +452,15 @@ public abstract class Tools {
 
   /*
    * Writes a row of data to a CSV file
-   * @param filename The name of the file to write to
+   * @param filepath The name of the file to write to
    * @param comingFrom The name of the class that called this method (For error reporting)
    * @param append Whether to append to the file or overwrite it
    * @param headerRow The header row to write to the file
    * @param format The format of the data to write to the file
    * @param data The data to write to the file
    */
-  public static void writeToCSV(String filename, String comingFrom, boolean append, String headerRow, String format, Object... data) {
+  public static void writeToCSV(String filepath, String comingFrom, boolean append, String headerRow, String format, Object... data) {
     try{
-      String filepath = "TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv";
       BufferedWriter writer = new BufferedWriter(new FileWriter(filepath, append));
 
       // If the file is being overwritten, write the header row with index value
@@ -491,18 +494,18 @@ public abstract class Tools {
 
   /*
    * Writes a specific value to a CSV row
-   * @param filename The name of the file to read from
+   * @param filepath The name of the file to read from
    * @param comingFrom The name of the class that called this method (For error reporting)
    * @param searchColumn The column to search for the search value
    * @param searchValue The value to search for in the search column
    * @param changeColumn The column to change the value in
    * @param newValue The new value to change the value in the change column to
    */
-  public static void writeToCSVValue(String filename, String comingFrom, String searchColumn, String searchValue, String changeColumn, String newValue) {
+  public static void writeToCSVValue(String filepath, String comingFrom, String searchColumn, String searchValue, String changeColumn, String newValue) {
     try{
       // Read the CSV file into a 2D array (data[][])
       List<String[]> lines = new ArrayList<>();
-      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      BufferedReader reader = new BufferedReader(new FileReader(filepath));
       String line;
       while ((line = reader.readLine()) != null) {
         String[] values = line.split(",");
@@ -520,7 +523,7 @@ public abstract class Tools {
         }
       }
       if (searchColumnIndex == -1) {
-        prln("writeToCSVValue: " + comingFrom + ": " + searchColumn + "searchColumn not found in CSV file", RED);
+        prln("writeToCSVValue: " + comingFrom + ": " + searchColumn + " searchColumn not found in CSV file", RED);
       }
 
       // Find the row index of the value in that header column
@@ -532,7 +535,7 @@ public abstract class Tools {
         }
       }
       if (rowIndex == -1) {
-        prln("writeToCSVValue: " + comingFrom + ": " + searchValue + "searchValue not found in CSV file", RED);
+        prln("writeToCSVValue: " + comingFrom + ": " + searchValue + " searchValue not found in CSV file", RED);
       }
 
       // Find the column index of the column to change
@@ -544,14 +547,14 @@ public abstract class Tools {
         }
       }
       if (changeColumnIndex == -1) {
-        prln("writeToCSVValue: " + comingFrom + ": " + changeColumn + "changeColumn not found in CSV file", RED);
+        prln("writeToCSVValue: " + comingFrom + ": " + changeColumn + " changeColumn not found in CSV file", RED);
       }
 
       // Update the value in our array of the data
       data[rowIndex][changeColumnIndex] = newValue;
 
       // Write the updated array back to the CSV file
-      BufferedWriter writer = new BufferedWriter(new FileWriter("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
       for (int i = 0; i < data.length; i++) {
         for (int j = 0; j < data[i].length; j++) {
           writer.write(data[i][j]);
@@ -569,7 +572,7 @@ public abstract class Tools {
 
   /*
    * Gets a specific value from a CSV file
-   * @param filename The name of the file to read from
+   * @param filepath The name of the file to read from
    * @param comingFrom The name of the class that called this method (For error reporting)
    * @param searchColumn The column to search for the search value
    * @param searchValue The value to search for in the search column
@@ -577,9 +580,9 @@ public abstract class Tools {
    * @return The value in the result column of the row with the search value in the search column
    * @return null if the search value or either columns are not found
    */
-  public static String getFromCSVValue(String filename, String comingFrom, String searchColumn, String searchValue, String resultColumn){
+  public static String getFromCSVValue(String filepath, String comingFrom, String searchColumn, String searchValue, String resultColumn){
     try {
-      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      BufferedReader reader = new BufferedReader(new FileReader(filepath));
 
       // Get the index of the search column and result column
       String headerRow = reader.readLine();
@@ -625,16 +628,16 @@ public abstract class Tools {
 
   /*
    * Gets a specific row from a CSV file
-   * @param filename The name of the file to read from
+   * @param filepath The name of the file to read from
    * @param comingFrom The name of the class that called this method (For error reporting)
    * @param columnName The name of the column to search for the value
    * @param value The value to search for in the column
    * @return The row with the value in the column as a String array
    * @return null if the value or column are not found
    */
-  public static String[] getFromCSVRow(String filename, String comingFrom, String columnName, String value) {
+  public static String[] getFromCSVRow(String filepath, String comingFrom, String columnName, String value) {
     try{
-      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      BufferedReader reader = new BufferedReader(new FileReader(filepath));
       
       // Get the index of the column
       String header = reader.readLine();
@@ -670,14 +673,14 @@ public abstract class Tools {
 
   /*
    * Gets the entire contents of a CSV file as a 2D array
-   * @param filename The name of the file to read from
+   * @param filepath The name of the file to read from
    * @param comingFrom The name of the class that called this method (For error reporting)
    * @return The contents of the CSV file as a 2D array
    */
-  public static ArrayList<ArrayList<String>> getFromCSVFile(String filename, String comingFrom) {
+  public static ArrayList<ArrayList<String>> getFromCSVFile(String filepath, String comingFrom) {
     ArrayList<ArrayList<String>> data = new ArrayList<ArrayList<String>>();
     try {
-        BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/" + filename + ".csv"));
+        BufferedReader reader = new BufferedReader(new FileReader(filepath));
 
         // Read in rows and split into columns
         String row;
@@ -696,14 +699,14 @@ public abstract class Tools {
   }
   /*
    * Gets the last index of a CSV file
-   * @param filename The name of the file to read from
+   * @param filepath The name of the file to read from
    * @param comingFrom The name of the class that called this method (For error reporting)
    * @return The last index of the CSV file
    * @return Integer.MAX_VALUE if the file does not exist
    */
-  public static int getFromCSVLastIndex(String filename, String comingFrom) {
+  public static int getFromCSVLastIndex(String filepath, String comingFrom) {
     try{
-      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/SaveGameFiles/" + filename + ".csv"));
+      BufferedReader reader = new BufferedReader(new FileReader(filepath));
       List<String> lines = new ArrayList<String>();
       String line = reader.readLine();
       while (line != null) {
@@ -727,22 +730,22 @@ public abstract class Tools {
    * large text files every time a name is needed (Which will be often)
    */
   public static void LoadNameFiles(){
-    getFromTXT(enFirstNames,ENFIRSTNAMES);
-    getFromTXT(esFirstNames,ESFIRSTNAMES);
-    getFromTXT(enLastNames,ENLASTNAMES);
-    getFromTXT(esLastNames,ESLASTNAMES);
+    enFirstNames = getFromTXT(ENFIRSTNAMES);
+    esFirstNames = getFromTXT(ESFIRSTNAMES);
+    enLastNames = getFromTXT(ENLASTNAMES);
+    esLastNames = getFromTXT(ESLASTNAMES);
   }
 
   /*
    * Gets a txt file as an ArrayList
    * @param array the ArrayList to store the lines in
-   * @param filename The name of the file to read from
+   * @param filepath The name of the file to read from
    */
-  private static void getFromTXT(ArrayList<String> array,String filename){
+  private static ArrayList<String> getFromTXT(String filepath){
     try {
-
+      ArrayList<String> array = new ArrayList<String>();
       // Open the file for reading
-      BufferedReader reader = new BufferedReader(new FileReader("TerminalStackedPirates/Globals/"+ filename + ".txt"));
+      BufferedReader reader = new BufferedReader(new FileReader(filepath));
 
       // Read each line and add it to the list
       String line = reader.readLine();
@@ -753,9 +756,10 @@ public abstract class Tools {
 
       // Close the reader
       reader.close();
-
+      return array;
     } catch (IOException e) {
       prln("getFromTXT: Failed to read from txt file.", RED);
+      return null;
     }
   }
 

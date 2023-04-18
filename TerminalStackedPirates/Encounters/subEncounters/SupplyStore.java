@@ -4,17 +4,15 @@
 //Modified: 04-10-2023
 package Encounters.subEncounters;
 
-import static Globals.Inventory.*;
 import static Globals.Tools.*;
 import static Globals.Constants.*;
+import static Globals.PlayerAttributes.Inventory.*;
 import java.util.*;
-
 import Humans.*;
 import Items.Packs.*;
 
 public class SupplyStore extends SubEncounter{
   ArrayList<Pack> packs;
-  ArrayList<String> packIndexes = new ArrayList<String>(Arrays.asList("01", "02", "03", "04", "05", "06", "07", "08", "09", "10"));
 
   /*
    * Constructor for a new supply store
@@ -74,7 +72,7 @@ public class SupplyStore extends SubEncounter{
         while(true){
           for(int i = 0; i < packs.size(); i++){
             if(!packs.get(i).getSold()){
-              pr(packIndexes.get(i) + ". " + packs.get(i).getName() + " ");
+              pr((i + 1) + ". " + packs.get(i).getName() + " ");
               pr(firstCap(packs.get(i).getRarityText()), packs.get(i).getColour());
               prln(" - " + packs.get(i).getCost() + " gold");
             }
@@ -96,10 +94,8 @@ public class SupplyStore extends SubEncounter{
             input -= 1;
             if(packs.get(input).getCost() > player.getGold()){
               prln("You do not have enough gold to buy this pack.","31");
-              continue;
             } else if(packs.get(input).getSold()){
               prln("A pack so good you'd buy it twice?\n\t\tyou can't though sorry.");
-              continue;
             } else {
               pr("Are you sure you want to buy a ");
               pr(firstCap(packs.get(input).getRarityText()), packs.get(input).getColour());
@@ -113,7 +109,6 @@ public class SupplyStore extends SubEncounter{
                 player.spendGold(packs.get(oldInput).getCost());
                 addToInventory(packs.get(oldInput));
                 packs.get(oldInput).sellPack();
-                continue;
               }
             }
           }

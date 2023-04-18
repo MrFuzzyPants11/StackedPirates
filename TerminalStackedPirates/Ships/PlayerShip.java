@@ -7,22 +7,46 @@ package Ships;
 import static Globals.Tools.*;
 import static Globals.Constants.*;
 import java.util.*;
+import Humans.Crew;
 import Items.Cards.*;
 
 public class PlayerShip extends Ship{
   int travelUntilSink;
   int holeLevel;
 
-  public PlayerShip(int size){
-    this.size = size;
-    this.toughness = size * 100;
-    this.cards = new ArrayList<ShipCard>();
-    this.repairs = 0;
-    this.travelUntilSink = 4;
-    this.holeLevel = 0;
-    writeToCSV(PLAYERSHIPCSV, "PlayerShip.java",false,PLAYERSHIPHEADER, PLAYERSHIPFORMAT);
+  /*
+   * Constructor for a new PlayerShip
+   */
+  public PlayerShip(boolean reload){
+    if(reload){
+      String[] data = getFromCSVRow(PLAYERSHIPCSV,"PlayerShip.java",INDEX, "0");
+      this.size = toInt(data[1]);
+      this.toughness = toInt(data[2]);
+      this.repairs = toInt(data[3]);
+      this.travelUntilSink = toInt(data[4]);
+      this.holeLevel = toInt(data[5]);
+      this.cards = new ArrayList<ShipCard>();
+      for(int i = 6; i < data.length; i++){
+        if(toInt(data[i]) != -1){
+          cards.add(new ShipCard(true, toInt(data[i])));
+        }
+      }
+
+    } else {
+      this.size = MINLEVEL;
+      this.toughness = size + 1 * 100;
+      this.repairs = 0;
+      this.travelUntilSink = 4;
+      this.holeLevel = 0;
+      this.cards = new ArrayList<ShipCard>();
+      writeToCSV(PLAYERSHIPCSV, "PlayerShip.java",false,PLAYERSHIPHEADER, PLAYERSHIPFORMAT,size,toughness,repairs,travelUntilSink,holeLevel,-1,-1,-1,-1,-1);
+    }
   }
 
+  /*
+   * Gets the hole level of the ship
+   * @return the hole level of the ship
+   */
   public int getHoleLevel(){
     return this.holeLevel;
   }
@@ -56,10 +80,18 @@ public class PlayerShip extends Ship{
     }
   }
 
+  /*
+   * Gets the amount of travel until the ship sinks
+   * @return the amount of travel until the ship sinks
+   */
   public int getTravelUntilSink(){
     return this.travelUntilSink;
   }
 
+  /*
+   * Checks if the ship can travel
+   * @return true if the ship can travel
+   */
   public boolean canTravel(){
     if(holeLevel > 0){
       if(travelUntilSink <= 0){

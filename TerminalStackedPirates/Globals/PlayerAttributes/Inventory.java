@@ -1,13 +1,14 @@
 //File: Inventory.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 04-10-2023
-package Globals;
+//Modified: 04-18-2023
+package Globals.PlayerAttributes;
 
 import static Globals.Tools.*;
 import static Globals.Constants.*;
 import static Globals.Animations.*;
 import java.util.ArrayList;
+import Globals.Tools.Pair;
 import Humans.Player;
 import Items.Item;
 import Items.Packs.*;

@@ -32,7 +32,6 @@ public class Player extends Human{
     this.level = STARTINGLEVEL;
     this.health = STARTINGHEALTH;
     this.gold = STARTINGGOLD;
-
     writeToCSV(PLAYERCSV,"Player.java", false, PLAYERHEADER,PLAYERFORMAT, 
         this.name, this.level, this.health, this.gold, -1,-1,-1,-1,-1);
   }

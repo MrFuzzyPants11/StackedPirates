@@ -27,6 +27,7 @@ public class FoodPack extends Pack{
     } else {
       this.rarity = rarityOrIndex;
       generatePack(rarity,"FoodPack.java", FOOD);
+      cost -= 100;
       this.index = getFromCSVLastIndex(ALLPACKSCSV, "FoodPack.java");
     }
   }
