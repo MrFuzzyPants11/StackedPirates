@@ -7,7 +7,6 @@ package Ships;
 import static Globals.Tools.*;
 import static Globals.Constants.*;
 import java.util.*;
-import Humans.Crew;
 import Items.Cards.*;
 
 public class PlayerShip extends Ship{

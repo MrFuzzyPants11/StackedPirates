@@ -7,8 +7,10 @@ package Globals.PlayerAttributes;
 import static Globals.Tools.*;
 import static Globals.Constants.*;
 import static Globals.Animations.*;
+import static Globals.PlayerAttributes.CrewList.*;
 import java.util.ArrayList;
 import Globals.Tools.Pair;
+import Humans.Crew;
 import Humans.Player;
 import Items.Item;
 import Items.Packs.*;
@@ -22,6 +24,7 @@ public abstract class Inventory {
     Player player = new Player();
     while(true){
       lineBreaker("INVENTORY");
+      ArrayList<Crew> crewMembers = getCrew();
       ArrayList<Pack> packs = new ArrayList<Pack>();
       ArrayList<Card> cards = new ArrayList<Card>();
       int it = 0;
@@ -41,21 +44,30 @@ public abstract class Inventory {
         currentItem = getFromInventory(it);
       }
 
+      lineBreaker("CREW");
+      int crewNums = 0;
+      while(crewNums < crewMembers.size()){
+        pr((crewNums + 1) + ". ");
+        pr(crewMembers.get(crewNums).getFname() + " " + crewMembers.get(crewNums).getLname() + " Equipped with: ");
+        prln("TEMPLATE");
+        crewNums++;
+      }
+
       lineBreaker("PACKS");
-      int packNums = 0;
-      while(packNums < packs.size()){
+      int packNums = crewNums;
+      for(int i = 0; i < packs.size(); i++){
         pr((packNums + 1) + ". ");
-        pr(packs.get(packNums).getRarityText(), packs.get(packNums).getColour());
-        prln(" " + packs.get(packNums).getName());
+        pr(packs.get(i).getRarityText(), packs.get(i).getColour());
+        prln(" " + packs.get(i).getName());
         packNums++;
       }
 
       lineBreaker("CARDS");
       int cardNums = packNums;
-      for(int j = 0; j < cards.size(); j++){
+      for(int i = 0; i < cards.size(); i++){
         pr((cardNums + 1) + ". ");
-        pr(cards.get(j).getRarityText(), cards.get(j).getColour());
-        prln(" " + cards.get(j).getName());
+        pr(cards.get(i).getRarityText(), cards.get(i).getColour());
+        prln(" " + cards.get(i).getName());
         cardNums++;
       }
       
@@ -65,6 +77,7 @@ public abstract class Inventory {
       prln(".");
 
       prln("What would you like to do?");
+      prln("Enter a crew number to view them");
       prln("Enter a pack number to open it");
       prln("Enter a card number to view it");
       prln("Q. Close the Inventory");
@@ -73,12 +86,14 @@ public abstract class Inventory {
         break;
       } else {
         input -= 1;
-        if(input < packNums){
-          openPack(packs.get(input));
-        } else if(input < cardNums){
-          viewCardAnimation(1,cards.get(input));
-        } else {
+        if(input < 0 || input >= cardNums){
           invalOp();
+        } else if(input < crewNums){
+          // viewCrew(crewMembers.get(input);
+        } else if(input < packNums){
+          openPack(packs.get(input - crewNums));
+        } else if(input < cardNums){
+          viewCardAnimation(1,cards.get(input - packNums));
         }
       }
     }
@@ -146,6 +161,7 @@ public abstract class Inventory {
           item =  new ShipCard(true,toInt(itemData[4]));
         }
       }
+      // Returns if item is in inventory and the item.
       return new Pair<Boolean,Item>(toBool(itemData[1]),item);
     }
     return null;
