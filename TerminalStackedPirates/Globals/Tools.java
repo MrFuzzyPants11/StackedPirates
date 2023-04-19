@@ -9,6 +9,9 @@ import static Globals.PlayerAttributes.Inventory.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
+import Items.Item;
+import Items.Packs.*;
+import Items.Cards.*;
 
 public abstract class Tools {
 
@@ -167,6 +170,88 @@ public abstract class Tools {
   public static boolean generateRand() {
     Random rand = new Random();
     return rand.nextBoolean();
+  }
+
+  // MISC METHODS | MISC METHODS | MISC METHODS
+  // MISC METHODS | MISC METHODS | MISC METHODS
+  // MISC METHODS | MISC METHODS | MISC METHODS
+
+  /*
+   * Sorts a Pack ArrayList by rarity
+   * @Param ArrayList of Packs
+   */
+  public static ArrayList<Pack> sortPacksByRarity(ArrayList<Pack> packs){
+    ArrayList<Pack> sortedList = new ArrayList<Pack>();
+    for(int i = 0; i < packs.size();i++){
+      if(packs.get(i).getRarity() == COMMONNUM){
+        sortedList.add(packs.get(i));
+      }
+    }
+
+    for(int i = 0; i < packs.size();i++){
+      if(packs.get(i).getRarity() == UNCOMMONNUM){
+        sortedList.add(packs.get(i));
+      }
+    }
+
+    for(int i = 0; i < packs.size();i++){
+      if(packs.get(i).getRarity() == RARENUM){
+        sortedList.add(packs.get(i));
+      }
+    }
+
+    for(int i = 0; i < packs.size();i++){
+      if(packs.get(i).getRarity() == EPICNUM){
+        sortedList.add(packs.get(i));
+      }
+    }
+
+    for(int i = 0; i < packs.size();i++){
+      if(packs.get(i).getRarity() == LEGENDARYNUM){
+        sortedList.add(packs.get(i));
+      }
+    }
+
+    return sortedList;
+  }
+
+  /*
+   * Sorts a Card ArrayList by rarity
+   * @Param ArrayList of Cards
+   */
+  public static ArrayList<Card> sortCardsByRarity(ArrayList<Card> cards){
+    ArrayList<Card> sortedList = new ArrayList<Card>();
+    for(int i = 0; i < cards.size();i++){
+      if(cards.get(i).getRarity() == COMMONNUM){
+        sortedList.add(cards.get(i));
+      }
+    }
+
+    for(int i = 0; i < cards.size();i++){
+      if(cards.get(i).getRarity() == UNCOMMONNUM){
+        sortedList.add(cards.get(i));
+      }
+    }
+
+    for(int i = 0; i < cards.size();i++){
+      if(cards.get(i).getRarity() == RARENUM){
+        sortedList.add(cards.get(i));
+      }
+    }
+
+    for(int i = 0; i < cards.size();i++){
+      if(cards.get(i).getRarity() == EPICNUM){
+        sortedList.add(cards.get(i));
+      }
+    }
+
+    for(int i = 0; i < cards.size();i++){
+      if(cards.get(i).getRarity() == LEGENDARYNUM){
+        sortedList.add(cards.get(i));
+      }
+    }
+
+    return sortedList;
   }
 
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
@@ -442,7 +527,7 @@ public abstract class Tools {
         prln("refreshCSV: Created new CSV file.", GREEN); // TODO: Remove this message after testing
       }
       BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-      writer.write(INDEX + "," + headerRow + "\n");
+      writer.write(INDEX + COMMA + headerRow + "\n");
 
       writer.close();
     } catch (Exception e){
@@ -465,7 +550,7 @@ public abstract class Tools {
 
       // If the file is being overwritten, write the header row with index value
       if (!append) {
-        writer.write(INDEX + "," + headerRow + "\n");
+        writer.write(INDEX + COMMA + headerRow + "\n");
       }
 
       // Get the number of rows in the file (if overwritten will be 1)
@@ -475,13 +560,13 @@ public abstract class Tools {
       }
 
       // Use that number to add an index to all the rows
-      int numCols = format.split(",").length;
+      int numCols = format.split(COMMA).length;
       for (int i = 0; i < data.length; i += numCols) {
-        writer.write(numRows + i/numCols + ",");
+        writer.write(numRows + i/numCols + COMMA);
         for (int j = 0; j < numCols; j++) {
           writer.write(String.valueOf(data[i + j]));
           if (j < numCols - 1) {
-            writer.write(",");
+            writer.write(COMMA);
           }
         }
         writer.write("\n");
@@ -508,7 +593,7 @@ public abstract class Tools {
       BufferedReader reader = new BufferedReader(new FileReader(filepath));
       String line;
       while ((line = reader.readLine()) != null) {
-        String[] values = line.split(",");
+        String[] values = line.split(COMMA);
         lines.add(values);
       }
       reader.close();
@@ -559,7 +644,7 @@ public abstract class Tools {
         for (int j = 0; j < data[i].length; j++) {
           writer.write(data[i][j]);
           if (j < data[i].length - 1) {
-            writer.write(",");
+            writer.write(COMMA);
           }
         }
         writer.write("\n");
@@ -586,7 +671,7 @@ public abstract class Tools {
 
       // Get the index of the search column and result column
       String headerRow = reader.readLine();
-      String[] columns = headerRow.split(",");
+      String[] columns = headerRow.split(COMMA);
       int searchColumnIndex = -1;
       int resultColumnIndex = -1;
       for (int i = 0; i < columns.length; i++) {
@@ -611,7 +696,7 @@ public abstract class Tools {
       // Search for the search value in the search column then save that row in a string array
       String row;
       while ((row = reader.readLine()) != null) {
-        String[] values = row.split(",");
+        String[] values = row.split(COMMA);
         if (values[searchColumnIndex].equals(searchValue)) {
             reader.close();
             return values[resultColumnIndex]; //Return the value in the result column from that array
@@ -641,7 +726,7 @@ public abstract class Tools {
       
       // Get the index of the column
       String header = reader.readLine();
-      String[] columnNames = header.split(",");
+      String[] columnNames = header.split(COMMA);
       int columnIndex = -1;
       for (int i = 0; i < columnNames.length; i++) {
           if (columnNames[i].equals(columnName)) {
@@ -657,7 +742,7 @@ public abstract class Tools {
       // Search for the value in the column then save that row in a string array
       String line;
       while ((line = reader.readLine()) != null) {
-          String[] row = line.split(",");
+          String[] row = line.split(COMMA);
           if (row[columnIndex].equals(value)) {
               reader.close();
               return row; //Return that array
@@ -686,7 +771,7 @@ public abstract class Tools {
         String row;
         reader.readLine(); // Skip header row
         while ((row = reader.readLine()) != null) {
-            String[] columns = row.split(",");
+            String[] columns = row.split(COMMA);
             ArrayList<String> rowData = new ArrayList<String>(Arrays.asList(columns));
             data.add(rowData);
         }

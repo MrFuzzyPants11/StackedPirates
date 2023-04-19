@@ -1,0 +1,2 @@
+This file exists purely because the a directoy cannot be blanked in Github, 
+but I need it here so that the game saves properly.

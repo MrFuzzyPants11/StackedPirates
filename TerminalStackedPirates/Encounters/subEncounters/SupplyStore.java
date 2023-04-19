@@ -93,7 +93,7 @@ public class SupplyStore extends SubEncounter{
             }
             input -= 1;
             if(packs.get(input).getCost() > player.getGold()){
-              prln("You do not have enough gold to buy this pack.","31");
+              prln("You do not have enough gold to buy this pack.",RED);
             } else if(packs.get(input).getSold()){
               prln("A pack so good you'd buy it twice?\n\t\tyou can't though sorry.");
             } else {

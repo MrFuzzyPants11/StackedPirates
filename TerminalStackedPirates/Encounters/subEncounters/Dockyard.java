@@ -5,6 +5,11 @@
 package Encounters.subEncounters;
 
 import Humans.Player;
+import static Globals.Tools.*;
+import static Globals.Constants.*;
+import static Globals.PlayerAttributes.Inventory.*;
+import java.util.ArrayList;
+import Items.Packs.ShipPack;
 
 public class Dockyard extends SubEncounter{
   private String name;
@@ -87,7 +92,7 @@ public class Dockyard extends SubEncounter{
         }
         input -= 1;
         if(shipPacks.get(input).getCost() > player.getGold()){
-          prln("You do not have enough gold to buy this pack.","31");
+          prln("You do not have enough gold to buy this pack.",RED);
         } else if(shipPacks.get(input).getSold()){
           prln("A pack so good you'd buy it twice?\n\t\tyou can't though sorry.\n");
         } else {

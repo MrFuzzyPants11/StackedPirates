@@ -1,7 +1,7 @@
 //File: Inventory.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 04-18-2023
+//Modified: 04-19-2023
 package Globals.PlayerAttributes;
 
 import static Globals.Tools.*;
@@ -43,6 +43,9 @@ public abstract class Inventory {
         it++;
         currentItem = getFromInventory(it);
       }
+
+      packs = sortPacksByRarity(packs);
+      cards = sortCardsByRarity(cards);
 
       lineBreaker("CREW");
       int crewNums = 0;
@@ -108,9 +111,9 @@ public abstract class Inventory {
     openPackAnimation(cards.get(4).getRarity());
     prnl("");
     viewCardAnimation(5, cards.get(0), cards.get(1), cards.get(2), cards.get(3), cards.get(4));
-    // for(int i = 0; i < cards.size(); i++){
-    //   prln(cards.get(i).getRarity() + SPACE + cards.get(i).getName(), cards.get(i).getColour());
-    // }
+    for(int i = 0; i < cards.size(); i++){
+      prln(cards.get(i).getRarityText() + SPACE + cards.get(i).getName(), cards.get(i).getColour());
+    }
     sleep(ANIMATIONSPEED * 3);
   }
 
