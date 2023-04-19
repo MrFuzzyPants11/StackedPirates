@@ -1,7 +1,7 @@
 //File: Ship.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 04-04-2023
+//Modified: 04-19-2023
 package Ships;
 
 import java.util.*;
@@ -11,7 +11,6 @@ import Items.Cards.ShipCard;
 public abstract class Ship {
   int size;
   ArrayList<ShipCard> cards; 
-  int repairs;
   int toughness; 
   
   public int getSize() {
@@ -37,18 +36,6 @@ public abstract class Ship {
 
   public void removeCard(Card card) {
     cards.remove(card);
-  }
-
-  public void setRepairs(int repairs) {
-    this.repairs = repairs;
-  }
-
-  public int getRepairs(){
-    return this.repairs;
-  }
-
-  public void reduceRepairs(int used){
-    this.repairs -= used;
   }
 
   public void setToughness(int toughness) {

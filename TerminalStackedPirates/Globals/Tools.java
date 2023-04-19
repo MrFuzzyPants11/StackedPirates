@@ -1,7 +1,7 @@
 //File: Tools.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 04-18-2023
+//Modified: 04-19-2023
 package Globals;
 
 import static Globals.Constants.*;
@@ -9,7 +9,6 @@ import static Globals.PlayerAttributes.Inventory.*;
 import java.io.*;
 import java.nio.file.*;
 import java.util.*;
-import Items.Item;
 import Items.Packs.*;
 import Items.Cards.*;
 
@@ -335,7 +334,7 @@ public abstract class Tools {
                                                 // So rainbow isn't always red first. It's a bit of a hack but it works.
   private static String rainbowIfier(String str){
     final String[] rainbowColours = {"\u001B[31;3m", "\u001B[33;3m", "\u001B[32;3m", "\u001B[36;3m", "\u001B[34;3m", "\u001B[35;3m"};
-    String temp = "";
+    String temp = EMPTY;
     for (int i = 0; i < str.length(); i++) {
       temp = temp + rainbowColours[rainbowMegaTracker] + str.charAt(i);
       if(rainbowMegaTracker >= 5){
@@ -354,7 +353,7 @@ public abstract class Tools {
   private static short brownbowMegaTracker = 0;
   private static String brownbowIfier(String str){
     final String[] brownbowColours = {"\u001B[30;1m","\u001B[30;1m","\u001B[37;1m","\u001B[37;1m"};
-    String temp = "";
+    String temp = EMPTY;
     for (int i = 0; i < str.length(); i++) {
       temp = temp + brownbowColours[brownbowMegaTracker] + str.charAt(i);
       if(brownbowMegaTracker >= 3){
@@ -408,7 +407,7 @@ public abstract class Tools {
    */
   private static String rainbowIfierForLineBreaker(String str){
     final String[] rainbowColours = {"\u001B[31;1;4m", "\u001B[33;1;4m", "\u001B[32;1;4m", "\u001B[36;1;4m", "\u001B[34;1;4m", "\u001B[35;1;4m"};
-    String temp = "";
+    String temp = EMPTY;
     for (int i = 0; i < str.length(); i++) {
       if(rainbowMegaTracker >= 5){
         rainbowMegaTracker = 0;
@@ -459,27 +458,27 @@ public abstract class Tools {
       }
     }
 
-    if(input == -9){ // If the user enters 'i' or 'I'
+    if(input == I){ // If the user enters 'i' or 'I'
       viewInventory();
       input = MENUEXIT;
-    } else if(input == -16){ // If the user enters 'p' or 'P'
+    } else if(input == P){ // If the user enters 'p' or 'P'
       viewPauseMenu();
       input = MENUEXIT;
-    } else if(input == -17){ // If the user enters 'q' or 'Q'
+    } else if(input == Q){ // If the user enters 'q' or 'Q'
       input = QUIT;
-    } else if(input < 0){ // If they didn't enter an int or a char
+    } else if(input == -6969){ // If they didn't enter an int or a char
       invalOp();
       input = askIn();
     }
 
-    lineBreaker("");
+    lineBreaker(EMPTY);
     return input;
   }
 
   public static String askStr(){
     pr("Enter Response: ");
     String userInput = scanner.nextLine();
-    lineBreaker("");
+    lineBreaker(EMPTY);
     return userInput;
   }
 
@@ -524,7 +523,6 @@ public abstract class Tools {
       //Check if file exists and create it if not
       if (!Files.exists(Paths.get(filepath))) {
         Files.createFile(Paths.get(filepath));
-        prln("refreshCSV: Created new CSV file.", GREEN); // TODO: Remove this message after testing
       }
       BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
       writer.write(INDEX + COMMA + headerRow + "\n");

@@ -1,7 +1,7 @@
 //File: Animations.java
 //Author: MrFuzzyPants
 //Created: 04-09-2023
-//Modified: 04-10-2023
+//Modified: 04-19-2023
 package Globals;
 
 import static Globals.Constants.*;
@@ -148,7 +148,7 @@ public abstract class Animations {
       for(int j = 0; j < numCards; j++){
         pr(allCardArts[j][i]);
       }
-      prln("");
+      prln(EMPTY);
     }
   }
 
@@ -161,7 +161,7 @@ public abstract class Animations {
   public static void addCardToArray(String[] allCardArts, String[] cardArt,Card card){
     int lengthAdded = 0;
     for(int i = 0; i < 20; i++){
-      String temp = "";
+      String temp = EMPTY;
       if(cardArt[i].equals(NAMEBAR)){
         lengthAdded = 0;
         int strLen = card.getName().length();

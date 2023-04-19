@@ -83,11 +83,12 @@ public abstract class Inventory {
       prln("Enter a crew number to view them");
       prln("Enter a pack number to open it");
       prln("Enter a card number to view it");
+      prln("S. To open the ship inventory");
       prln("Q. Close the Inventory");
       int input = askIn();
-      if(input == Integer.MAX_VALUE){
+      if(input == QUIT){
         break;
-      } else {
+      } else { //Add inventory = S check here.
         input -= 1;
         if(input < 0 || input >= cardNums){
           invalOp();

@@ -67,7 +67,9 @@ public class StackedPiratesTerminal{
     // Ask for additional settings
     // ...
     //Generate world
-
+    //Load blank ship into CSV
+    writeToCSV(PLAYERSHIPCSV, "StackedPiratesTerminal.java",false,PLAYERSHIPHEADER, PLAYERSHIPFORMAT,MINLEVEL,(MINLEVEL + 1) * 100,0,4,0,-1,-1,-1,-1,-1);
+    
     return new Player("FuzzyPants");
   }
 

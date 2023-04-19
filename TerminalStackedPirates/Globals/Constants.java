@@ -1,7 +1,7 @@
 //File: Constants.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 04-18-2023
+//Modified: 04-19-2023
 package Globals;
 
 public abstract class Constants {
@@ -119,7 +119,7 @@ public abstract class Constants {
   public static final String UNCOMMONCOLOUR = CYAN;
 
   // Folder names
-  public static final String ROUTINGLOCATION = "TerminalStackedPirates/"; // This should be set to "" when running outside of VSC
+  public static final String ROUTINGLOCATION = "TerminalStackedPirates/"; // This should be set to EMPTY when running outside of VSC
   public static final String FILELOCATION = ROUTINGLOCATION + "Globals/";
   public static final String SAVEGAMELOCATION = FILELOCATION + "SaveGameFiles/";
   public static final String IMMUTABLEFILELOCATION = FILELOCATION + "ImmutableFiles/";
@@ -184,7 +184,7 @@ public abstract class Constants {
   public static final String TAVERNSHEADER = NAME + COMMA + LEVEL + COMMA + BARTENDERINDEX + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4 + COMMA + CREWINDEX0 + COMMA + CREWINDEX1 + COMMA + CREWINDEX2 + COMMA + CREWINDEX3 + COMMA + CREWINDEX4 + COMMA + CREWINDEX5 + COMMA + CREWINDEX6 + COMMA + CREWINDEX7 + COMMA + CREWINDEX8 + COMMA + CREWINDEX9+ COMMA + CREWINDEX10 + COMMA + CREWINDEX11 + COMMA + CREWINDEX12 + COMMA + CREWINDEX13 + COMMA + CREWINDEX14;
 
 
-  // NUMBERS
+  // Numbers
   public static final int ANIMATIONSPEED = 1000;
   public static final int COMMONNUM = 0;
   public static final int EPICNUM = 3;
@@ -199,12 +199,41 @@ public abstract class Constants {
   public static final int QUIT = MAXVALUE;
   public static final int RARENUM = 2;
   public static final int UNCOMMONNUM = 1;
+  public static final int REPAIRAMOUNT = 75;
 
   // Initial Values
   public static final int STARTINGGOLD = 696969;
   public static final int STARTINGHEALTH = 50;
   public static final int STARTINGLEVEL = 0;
 
+  // Single Letter Translation codes
+  public static final int A = -1;
+  public static final int B = -2;
+  public static final int C = -3;
+  public static final int D = -4;
+  public static final int E = -5;
+  public static final int F = -6;
+  public static final int G = -7;
+  public static final int H = -8;
+  public static final int I = -9;
+  public static final int J = -10;
+  public static final int K = -11;
+  public static final int L = -12;
+  public static final int M = -13;
+  public static final int N = -14;
+  public static final int O = -15;
+  public static final int P = -16;
+  public static final int Q = -17;
+  public static final int R = -18;
+  public static final int S = -19;
+  public static final int T = -20;
+  public static final int U = -21;
+  public static final int V = -22;
+  public static final int W = -23;
+  public static final int X = -24;
+  public static final int Y = -25;
+  public static final int Z = -26;
+  
   // OTHER
   public static final String FALSE = "false";
   public static final String TRUE = "true";

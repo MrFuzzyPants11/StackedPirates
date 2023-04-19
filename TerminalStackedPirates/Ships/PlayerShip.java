@@ -1,7 +1,7 @@
 //File: PlayerShip.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 04-08-2023
+//Modified: 04-19-2023
 package Ships;
 
 import static Globals.Tools.*;
@@ -10,36 +10,55 @@ import java.util.*;
 import Items.Cards.*;
 
 public class PlayerShip extends Ship{
+  int repairs;
   int travelUntilSink;
   int holeLevel;
 
   /*
    * Constructor for a new PlayerShip
    */
-  public PlayerShip(boolean reload){
-    if(reload){
-      String[] data = getFromCSVRow(PLAYERSHIPCSV,"PlayerShip.java",INDEX, "0");
-      this.size = toInt(data[1]);
-      this.toughness = toInt(data[2]);
-      this.repairs = toInt(data[3]);
-      this.travelUntilSink = toInt(data[4]);
-      this.holeLevel = toInt(data[5]);
-      this.cards = new ArrayList<ShipCard>();
-      for(int i = 6; i < data.length; i++){
-        if(toInt(data[i]) != -1){
-          cards.add(new ShipCard(true, toInt(data[i])));
-        }
+  public PlayerShip(){
+    String[] data = getFromCSVRow(PLAYERSHIPCSV,"PlayerShip.java",INDEX, "0");
+    this.size = toInt(data[1]);
+    this.toughness = toInt(data[2]);
+    this.repairs = toInt(data[3]);
+    this.travelUntilSink = toInt(data[4]);
+    this.holeLevel = toInt(data[5]);
+    this.cards = new ArrayList<ShipCard>();
+    for(int i = 6; i < data.length; i++){
+      if(toInt(data[i]) != -1){
+        cards.add(new ShipCard(true, toInt(data[i])));
       }
-
-    } else {
-      this.size = MINLEVEL;
-      this.toughness = size + 1 * 100;
-      this.repairs = 0;
-      this.travelUntilSink = 4;
-      this.holeLevel = 0;
-      this.cards = new ArrayList<ShipCard>();
-      writeToCSV(PLAYERSHIPCSV, "PlayerShip.java",false,PLAYERSHIPHEADER, PLAYERSHIPFORMAT,size,toughness,repairs,travelUntilSink,holeLevel,-1,-1,-1,-1,-1);
     }
+  }
+  /*
+   * Gets the number of repairs the PlayerShip has
+   * @Return the repairs
+   */
+  public int getRepairs(){
+    return this.repairs;
+  }
+
+  /*
+   * Adds one repair kit to the ship
+   * @Param int the amount of repairs to add
+   */
+  public void addRepairs(int added){
+    this.repairs += added;
+  }
+
+  /*
+   * Reduces the number of Repairs by the amount used
+   * @Param int the amount being used
+   * @Return true if able to remove that many repairs
+   * @Return false if unable to remove that many repairs
+   */
+  public boolean reduceRepairs(int used){
+    if(this.repairs < used){
+      return false;
+    }
+    this.repairs -= used;
+    return true;
   }
 
   /*

@@ -1,7 +1,7 @@
 //File: Tavern.java
 //Author: MrFuzzyPants
 //Created: 05-04-2023
-//Modified: 04-18-2023
+//Modified: 04-19-2023
 package Encounters.subEncounters;
 
 import Items.Packs.FoodPack;
