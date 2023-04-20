@@ -1,6 +1,6 @@
 //File: SupplyStore.java
 //Author: MrFuzzyPants
-//Created: 05-04-2023
+//Created: 04-04-2023
 //Modified: 04-19-2023
 package Encounters.subEncounters;
 
@@ -10,8 +10,9 @@ import static Globals.PlayerAttributes.Inventory.*;
 import java.util.*;
 import Humans.*;
 import Items.Packs.*;
+import Encounters.Encounter;
 
-public class SupplyStore extends SubEncounter{
+public class SupplyStore extends Encounter{
   ArrayList<Pack> packs;
 
   /*

@@ -1,17 +1,18 @@
 //File: Dockyard.java
 //Author: MrFuzzyPants
-//Created: 05-04-2023
+//Created: 04-04-2023
 //Modified: 04-19-2023
 package Encounters.subEncounters;
 
 import Humans.Player;
+import Encounters.Encounter;
 import static Globals.Tools.*;
 import static Globals.Constants.*;
 import static Globals.PlayerAttributes.Inventory.*;
 import java.util.ArrayList;
 import Items.Packs.ShipPack;
 
-public class Dockyard extends SubEncounter{
+public class Dockyard extends Encounter{
   private String name;
   private ArrayList<ShipPack> shipPacks;
   

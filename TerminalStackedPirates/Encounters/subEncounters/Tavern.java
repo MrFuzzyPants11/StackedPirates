@@ -1,6 +1,6 @@
 //File: Tavern.java
 //Author: MrFuzzyPants
-//Created: 05-04-2023
+//Created: 04-04-2023
 //Modified: 04-19-2023
 package Encounters.subEncounters;
 
@@ -11,8 +11,9 @@ import static Globals.PlayerAttributes.CrewList.*;
 import static Globals.Tools.*;
 import java.util.ArrayList;
 import Humans.*;
+import Encounters.Encounter;
 
-public class Tavern extends SubEncounter{
+public class Tavern extends Encounter{
   ArrayList<Crew> tavernPatrons;
   String name;
   Bartender bartender;

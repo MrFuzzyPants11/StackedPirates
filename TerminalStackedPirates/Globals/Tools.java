@@ -1,6 +1,6 @@
 //File: Tools.java
 //Author: MrFuzzyPants
-//Created: 05-04-2023
+//Created: 04-04-2023
 //Modified: 04-19-2023
 package Globals;
 
@@ -11,6 +11,7 @@ import java.nio.file.*;
 import java.util.*;
 import Items.Packs.*;
 import Items.Cards.*;
+import static Globals.Encyclopedia.*;
 
 public abstract class Tools {
 
@@ -487,7 +488,24 @@ public abstract class Tools {
    */
   public static void viewPauseMenu(){
     lineBreaker("PAUSE MENU");
-    //int input = askIn();
+    while(true){
+      prln("1. Settings");
+      prln("2. SP Encyclopedia");
+      prln("Q. Close Menu");
+      int input = askIn();
+      if(input == 1){
+        //Open Settings
+      } else if(input == 2){
+        viewEncyclopedia();
+      } else if(input == QUIT){
+        break;
+      } else if(input == MENUEXIT){ 
+        continue;
+      } else {
+        invalOp();
+        continue;
+      }
+    }
   }
 
   // CSV METHODS | CSV METHODS | CSV METHODS
