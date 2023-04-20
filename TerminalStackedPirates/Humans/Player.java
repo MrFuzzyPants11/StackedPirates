@@ -19,11 +19,11 @@ public class Player extends Human{
    */
   public Player(){
     String[] playerData = getFromCSVRow(PLAYERCSV, "Player.java",INDEX, "0");
-    this.name = playerData[1];
-    this.level = toInt(playerData[2]);
-    this.health = toInt(playerData[3]);
-    this.gold = toInt(playerData[4]);
-    this.ship = new PlayerShip();
+    name = playerData[1];
+    level = toInt(playerData[2]);
+    health = toInt(playerData[3]);
+    gold = toInt(playerData[4]);
+    ship = new PlayerShip();
   }
 
   /*
@@ -32,12 +32,12 @@ public class Player extends Human{
    */
   public Player(String name){
     this.name = name;
-    this.level = STARTINGLEVEL;
-    this.health = STARTINGHEALTH;
-    this.gold = STARTINGGOLD;
-    this.ship = new PlayerShip();
+    level = STARTINGLEVEL;
+    health = STARTINGHEALTH;
+    gold = STARTINGGOLD;
+    ship = new PlayerShip();
     writeToCSV(PLAYERCSV,"Player.java", false, PLAYERHEADER,PLAYERFORMAT, 
-        this.name, this.level, this.health, this.gold, -1,-1,-1,-1,-1);
+        name, level, health, gold, -1,-1,-1,-1,-1);
   }
 
   /*
@@ -45,7 +45,7 @@ public class Player extends Human{
    * @return the player's name
    */
   public String getName() {
-    return this.name;
+    return name;
   }
 
   /*
@@ -53,7 +53,7 @@ public class Player extends Human{
    * @return the player's gold
    */
   public int getGold() {
-    return this.gold;
+    return gold;
   }
 
   /*
@@ -61,8 +61,8 @@ public class Player extends Human{
    * @param amount the amount of gold to be removed
    */
   public void spendGold(int amount){
-    this.gold -= amount;
-    writeToCSVValue(PLAYERCSV, "Player.java", INDEX, "0", GOLD, toStr(this.gold));
+    gold -= amount;
+    writeToCSVValue(PLAYERCSV, "Player.java", INDEX, "0", GOLD, toStr(gold));
   }
 
   /*
@@ -70,8 +70,8 @@ public class Player extends Human{
    * @param amount the amount of gold to be added
    */
   public void earnGold(int amount){
-    this.gold += amount;
-    writeToCSVValue(PLAYERCSV, "Player.java", INDEX, "0", GOLD, toStr(this.gold));
+    gold += amount;
+    writeToCSVValue(PLAYERCSV, "Player.java", INDEX, "0", GOLD, toStr(gold));
   }
 
   /*
@@ -79,6 +79,6 @@ public class Player extends Human{
    * @return the player's PlayerShip
    */
   public PlayerShip getShip(){
-    return this.ship;
+    return ship;
   }
 }

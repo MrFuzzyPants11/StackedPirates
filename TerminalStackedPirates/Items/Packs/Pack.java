@@ -37,7 +37,7 @@ public abstract class Pack extends Item{
    */
   public void sellPack(){
     sold = true;
-    writeToCSVValue(PACKSCSV, "Pack.java", INDEX, toStr(this.index), SOLD, TRUE);
+    writeToCSVValue(PACKSCSV, "Pack.java", INDEX, toStr(index), SOLD, TRUE);
   }
 
   /*
@@ -61,17 +61,17 @@ public abstract class Pack extends Item{
    */
   public ArrayList<Card> open(){
     opened = true;
-    writeToCSVValue(PACKSCSV, "Pack.java", INDEX, toStr(this.index), OPENED, TRUE);
+    writeToCSVValue(PACKSCSV, "Pack.java", INDEX, toStr(index), OPENED, TRUE);
     ArrayList<Card> cards = new ArrayList<Card>();
-    if(this.getType().equals(CREW)){
+    if(getType().equals(CREW)){
       for(int i = 0; i < 5; i++){
         cards.add(new CrewCard(false, cRarities.get(i)));
       }
-    } else if(this.getType().equals(FOOD)){
+    } else if(getType().equals(FOOD)){
       for(int i = 0; i < 5; i++){
         cards.add(new FoodCard(false, cRarities.get(i)));
       }
-    } else if(this.getType().equals(SHIP)){
+    } else if(getType().equals(SHIP)){
       for(int i = 0; i < 5; i++){
         cards.add(new ShipCard(false, cRarities.get(i)));
       }

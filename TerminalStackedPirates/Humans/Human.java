@@ -17,7 +17,7 @@ public abstract class Human {
    * @return the human's level + 1
    */
   public int getLevelText() {
-    return this.level + 1;
+    return level + 1;
   }
 
   /*
@@ -25,7 +25,7 @@ public abstract class Human {
    * @return the human's level
    */
   public int getLevel() {
-    return this.level;
+    return level;
   }
 
   /*
@@ -33,7 +33,7 @@ public abstract class Human {
    * @return the human's health
    */
   public int getHealth() {
-    return this.health;
+    return health;
   }
 
   /*
@@ -41,7 +41,7 @@ public abstract class Human {
    * @param damage the amount of damage to be taken
    */
   public void reduceHealth(int damage){
-    this.health -= damage;
+    health -= damage;
   }
 
   /*
@@ -50,12 +50,12 @@ public abstract class Human {
    * @return true if the card was saved, false if the card was not saved
    */
   public boolean equipCard(CrewCard card){
-    for(int i = 0; i < this.equippedCards.size(); i++){
+    for(int i = 0; i < equippedCards.size(); i++){
       if(card.getCrewType().equals(equippedCards.get(i).getCrewType())){
         return false;
       }
     }
-    this.equippedCards.add(card);
+    equippedCards.add(card);
     return true;
   }
 
@@ -64,7 +64,7 @@ public abstract class Human {
    * @param card the crew card to be removed
    */
   public void unequipCard(CrewCard card){
-    this.equippedCards.remove(card);
+    equippedCards.remove(card);
   }
 
   /*
@@ -72,6 +72,6 @@ public abstract class Human {
    * @return the human's equipped cards
    */
   public ArrayList<CrewCard> getEquippedCards(){
-    return this.equippedCards;
+    return equippedCards;
   }
 }

@@ -13,7 +13,7 @@ public abstract class NPC extends Human{
    * @return the NPC's first name
    */
   public String getFname() {
-    return this.fname;
+    return fname;
   }
 
   /*
@@ -21,7 +21,7 @@ public abstract class NPC extends Human{
    * @return the NPC's last name
    */
   public String getLname() {
-    return this.lname;
+    return lname;
   }
 
   /*
@@ -29,6 +29,6 @@ public abstract class NPC extends Human{
    * @return the NPC's index
    */
   public int getIndex() {
-    return this.index;
+    return index;
   }
 }

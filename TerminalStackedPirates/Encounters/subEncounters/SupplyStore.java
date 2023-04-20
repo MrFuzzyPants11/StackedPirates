@@ -44,7 +44,7 @@ public class SupplyStore extends SubEncounter{
       writeToCSV(SUPPLYSTORESCSV,"SupplyStore.java",true,SUPPLYSTORESHEADER,SUPPLYSTORESFORMAT,level, packs.get(0).getIndex(), 
         packs.get(1).getIndex(), packs.get(2).getIndex(), packs.get(3).getIndex(), packs.get(4).getIndex(), 
         packs.get(5).getIndex(), packs.get(6).getIndex(), packs.get(7).getIndex(), packs.get(8).getIndex(), packs.get(9).getIndex());
-      this.index = getFromCSVLastIndex(SUPPLYSTORESCSV,"SupplyStore.java");
+      index = getFromCSVLastIndex(SUPPLYSTORESCSV,"SupplyStore.java");
     }
   }
 

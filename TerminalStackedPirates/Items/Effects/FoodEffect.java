@@ -12,10 +12,10 @@ public class FoodEffect extends Effect{
 
   public FoodEffect(int index){
     String[] data = getFromCSVRow(FOODEFFECTS, "FoodEffect.java", INDEX, toStr(index));
-    this.index = toInt(data[0]);
-    this.rarity = toInt(data[1]);
-    this.description = data[2];
-    this.healthRestored = toInt(data[3]);
+    index = toInt(data[0]);
+    rarity = toInt(data[1]);
+    description = data[2];
+    healthRestored = toInt(data[3]);
   }
 
   public String getType(){
@@ -27,6 +27,6 @@ public class FoodEffect extends Effect{
   }
 
   public int getHealthRestored(){
-    return this.healthRestored;
+    return healthRestored;
   }
 }

@@ -13,18 +13,18 @@ public class Bartender extends NPC {
   public Bartender(boolean reload,int levelOrIndex){
     if(reload){
       String[] data = getFromCSVRow(BARTENDERSCSV, "Bartender.java",INDEX, toStr(levelOrIndex));
-      this.index = levelOrIndex;
-      this.fname = data[1];
-      this.lname = data[2];
-      this.level = toInt(data[3]);
-      this.health = toInt(data[4]);
-      this.blackMarket = toBool(data[5]);
+      index = levelOrIndex;
+      fname = data[1];
+      lname = data[2];
+      level = toInt(data[3]);
+      health = toInt(data[4]);
+      blackMarket = toBool(data[5]);
     } else {
       boolean isEnglish = generateRand();
-      this.fname = generateFirstName(isEnglish);
-      this.lname = generateLastName(isEnglish);
-      this.level = levelOrIndex;
-      this.health = STARTINGHEALTH;
+      fname = generateFirstName(isEnglish);
+      lname = generateLastName(isEnglish);
+      level = levelOrIndex;
+      health = STARTINGHEALTH;
       if(levelOrIndex == MAXLEVEL){
         blackMarket = true;
       } else {
@@ -32,8 +32,8 @@ public class Bartender extends NPC {
       }
 
       writeToCSV(BARTENDERSCSV,"Bartender.java", true, BARTENDERSHEADER,BARTENDERSFORMAT, 
-          this.fname, this.lname, this.level, this.health, toStr(this.blackMarket));
-      this.index = getFromCSVLastIndex(BARTENDERSCSV, "Bartender.java");
+          fname, lname, level, health, toStr(blackMarket));
+      index = getFromCSVLastIndex(BARTENDERSCSV, "Bartender.java");
     }
   }
 

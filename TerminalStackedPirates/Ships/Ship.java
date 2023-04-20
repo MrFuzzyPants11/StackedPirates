@@ -14,16 +14,16 @@ public abstract class Ship {
   int toughness; 
   
   public int getLevel() {
-    return this.level;
+    return level;
   }
 
   public ArrayList<ShipCard> getCards() {
-    return this.cards;
+    return cards;
   }
 
   public boolean addCard(ShipCard newCard) {
     if(cards.size() < level){
-      this.cards.add(newCard);
+      cards.add(newCard);
       return true;
     } else {
       return false;
@@ -39,14 +39,14 @@ public abstract class Ship {
   }
 
   public int getToughness(){
-    return this.toughness;
+    return toughness;
   }
 
   public void reduceToughness(int damage){
-    this.toughness -= damage;
+    toughness -= damage;
   }
 
   public void increaseToughness(int toughtnessGained){
-    this.toughness += toughtnessGained;
+    toughness += toughtnessGained;
   }
 }

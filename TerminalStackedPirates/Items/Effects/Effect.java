@@ -11,7 +11,7 @@ public abstract class Effect extends Item{
   String description;
 
   public String getDescription(){
-    return this.description;
+    return description;
   }
 
   public String getItemType(){

@@ -15,20 +15,20 @@ public class FoodPack extends Pack{
   public FoodPack(boolean reload, int rarityOrIndex){
     if(reload){
       String[] data = getFromCSVRow(PACKSCSV, "FoodPack.java", INDEX, toStr(rarityOrIndex));
-      this.index = toInt(data[0]);
-      this.sold = toBool(data[2]);
-      this.opened = toBool(data[3]);
-      this.rarity = toInt(data[4]);
-      this.cost = toInt(data[5]);
+      index = toInt(data[0]);
+      sold = toBool(data[2]);
+      opened = toBool(data[3]);
+      rarity = toInt(data[4]);
+      cost = toInt(data[5]);
       cRarities = new ArrayList<Integer>();
       for(int i = 6; i < data.length; i++){
         cRarities.add(toInt(data[i]));
       }
     } else {
-      this.rarity = rarityOrIndex;
+      rarity = rarityOrIndex;
       generatePack(rarity,"FoodPack.java", FOOD);
       cost -= 100;
-      this.index = getFromCSVLastIndex(PACKSCSV, "FoodPack.java");
+      index = getFromCSVLastIndex(PACKSCSV, "FoodPack.java");
     }
   }
 

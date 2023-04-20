@@ -63,10 +63,10 @@ public class Tavern extends SubEncounter{
 
       writeToCSV(TAVERNSCSV,"Tavern.java",true,TAVERNSHEADER,TAVERNSFORMAT,name, level,bartender.getIndex(),foodPacks.get(0).getIndex(),foodPacks.get(1).getIndex(),foodPacks.get(2).getIndex(),
       foodPacks.get(3).getIndex(),foodPacks.get(4).getIndex(),-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1);
-      this.index = getFromCSVLastIndex(TAVERNSCSV,"Tavern.java");
+      index = getFromCSVLastIndex(TAVERNSCSV,"Tavern.java");
 
       for(int i = 0; i < tavernPatrons.size() - 1; i++){
-        writeToCSVValue(TAVERNSCSV,"Tavern.java",INDEX,toStr(this.index), "crewindex" + i, toStr(tavernPatrons.get(i).getIndex()));
+        writeToCSVValue(TAVERNSCSV,"Tavern.java",INDEX,toStr(index), "crewindex" + i, toStr(tavernPatrons.get(i).getIndex()));
       }
     }
   }

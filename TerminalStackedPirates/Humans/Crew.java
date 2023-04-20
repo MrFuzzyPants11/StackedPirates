@@ -15,13 +15,13 @@ public class Crew extends NPC {
   public Crew(boolean reload, int levelOrIndex){
     if(reload){
       String[] data = getFromCSVRow(CREWSCSV, "Crew.java",INDEX, toStr(levelOrIndex));
-      this.index = levelOrIndex;
-      this.fname = data[1];
-      this.lname = data[2];
-      this.level = toInt(data[4]);
-      this.health = toInt(data[5]);
-      this.cost = toInt(data[6]);
-      this.inTavern = toBool(data[7]);
+      index = levelOrIndex;
+      fname = data[1];
+      lname = data[2];
+      level = toInt(data[4]);
+      health = toInt(data[5]);
+      cost = toInt(data[6]);
+      inTavern = toBool(data[7]);
 
       for(int i = 8; toInt(data[i]) != -1 && i < data.length; i++){
         equipCard(new CrewCard(true, toInt(data[i])));
@@ -29,16 +29,16 @@ public class Crew extends NPC {
 
     } else {
       boolean isEnglish = generateRand();
-      this.fname = generateFirstName(isEnglish);
-      this.lname = generateLastName(isEnglish);
-      this.level = levelOrIndex;
-      this.health = STARTINGHEALTH;
-      this.cost = 10 + generateRand(11);
-      this.inTavern = true;
+      fname = generateFirstName(isEnglish);
+      lname = generateLastName(isEnglish);
+      level = levelOrIndex;
+      health = STARTINGHEALTH;
+      cost = 10 + generateRand(11);
+      inTavern = true;
 
       writeToCSV(CREWSCSV,"Crew.java", true, ALLCREWSHEADER,ALLCREWSFORMAT, 
-          this.fname, this.lname, FALSE, this.level, this.health,this.cost,this.inTavern,-1,-1,-1,-1,-1);
-      this.index = getFromCSVLastIndex(CREWSCSV, "Crew.java");
+          fname, lname, FALSE, level, health,cost,inTavern,-1,-1,-1,-1,-1);
+      index = getFromCSVLastIndex(CREWSCSV, "Crew.java");
     }
   }
 

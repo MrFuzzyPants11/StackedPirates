@@ -23,11 +23,11 @@ public class Port extends Encounter{
    */
   public Port(int index){
     String[] data = getFromCSVRow(PORTSCSV,"Ports.java",INDEX, toStr(index));
-    this.index = toInt(data[0]);
-    this.name = data[1];
-    this.storeIndex = toInt(data[2]);
-    this.tavernIndex = toInt(data[3]);
-    this.dockIndex = toInt(data[4]);
+    index = toInt(data[0]);
+    name = data[1];
+    storeIndex = toInt(data[2]);
+    tavernIndex = toInt(data[3]);
+    dockIndex = toInt(data[4]);
     if(storeIndex != -1){
       store = new SupplyStore(true,storeIndex);
     }
@@ -45,7 +45,7 @@ public class Port extends Encounter{
    * @param full whether the port has all sub encounters
    */
   public Port(Boolean full, int level) {
-    this.name = "Nassau";
+    name = "Nassau";
     this.level = level;
     if(full){
       store = new SupplyStore(false,MINLEVEL);
@@ -72,7 +72,7 @@ public class Port extends Encounter{
     while(true){
       lineBreaker("Port");
       pr("You have entered The ");
-      pr("Level " + this.getLevelText(), LEVELCOLOUR);
+      pr("Level " + getLevelText(), LEVELCOLOUR);
       pr(" Port",ENCOUNTERCOLOUR);
       prln(" of " + name);
 
@@ -102,9 +102,9 @@ public class Port extends Encounter{
   
       prln(".");
       prln("Where would you like to go?");
-      this.printSubEncounters();
+      printSubEncounters();
       int input = askIn();
-      int choice = this.enterSubEncounter(player, input);
+      int choice = enterSubEncounter(player, input);
       if(choice == 0 || choice == MENUEXIT){ //If entered menu or sub encounter reload Port interaction
         continue;
       } else if(choice == 1){ //If left port leave it
@@ -126,23 +126,23 @@ public class Port extends Encounter{
     //Calling the nextBoolean() method twice to get a greater change of generating
     //a port with more than one sub-encounter
     if(rand.nextBoolean()) {
-      this.store = new SupplyStore(false,Slevel);
+      store = new SupplyStore(false,Slevel);
       storeIndex = store.getIndex();
     } else if(rand.nextBoolean()) {
-      this.store = new SupplyStore(false,Slevel);
+      store = new SupplyStore(false,Slevel);
       storeIndex = store.getIndex();
     }
 
     if(rand.nextBoolean()) {
-      this.tavern = new Tavern(false,Tlevel);
+      tavern = new Tavern(false,Tlevel);
       tavernIndex = tavern.getIndex();
     } else if(rand.nextBoolean()) {
-      this.tavern = new Tavern(false,Tlevel);
+      tavern = new Tavern(false,Tlevel);
       tavernIndex = tavern.getIndex();
     }
 
     if(rand.nextBoolean()) {
-      this.dock = new Dockyard(false,Dlevel);
+      dock = new Dockyard(false,Dlevel);
       dockIndex = dock.getIndex();
     }
 
@@ -195,7 +195,7 @@ public class Port extends Encounter{
         pr("There is no ");
         pr("Supply Store",ENCOUNTERCOLOUR); 
         prln("here.");
-        return this.enterSubEncounter(player,askIn());
+        return enterSubEncounter(player,askIn());
       }
     } else if(input == 2){
       if(tavern != null){
@@ -205,7 +205,7 @@ public class Port extends Encounter{
         pr("There is no ");
         pr("Tavern",ENCOUNTERCOLOUR); 
         prln(" here.");
-        return this.enterSubEncounter(player,askIn());
+        return enterSubEncounter(player,askIn());
       }
     } else if(input == 3){
       if(dock != null){
@@ -215,7 +215,7 @@ public class Port extends Encounter{
         pr("There is no ");
         pr("Dockyard",ENCOUNTERCOLOUR); 
         prln(" here.");
-        return this.enterSubEncounter(player,askIn());
+        return enterSubEncounter(player,askIn());
       }
     } else if(input == QUIT){
       prln("You leave the Port on your Ship.");
@@ -224,7 +224,7 @@ public class Port extends Encounter{
       return input;
     } else {
       invalOp();
-      return this.enterSubEncounter(player,askIn());
+      return enterSubEncounter(player,askIn());
     }
   }
 }

@@ -17,16 +17,16 @@ public class FoodCard extends Card{
   public FoodCard(boolean reload, int rarityOrIndex){
     if(reload){
       String[] data = getFromCSVRow(FOODCARDSCSV, "FoodCard.java", INDEX, toStr(rarityOrIndex));
-      this.index = toInt(data[0]);
-      this.rarity = toInt(data[1]);
-      this.name = data[2];
-      this.effect = new FoodEffect(toInt(data[3]));
+      index = toInt(data[0]);
+      rarity = toInt(data[1]);
+      name = data[2];
+      effect = new FoodEffect(toInt(data[3]));
     } else {
-      this.rarity = rarityOrIndex;
-      this.name = "TEST FOOD";
-      this.effect = new FoodEffect(rarityOrIndex);
-      writeToCSV(FOODCARDSCSV, "FoodCard.java", true, FOODCARDSHEADER, FOODCARDSFORMAT, rarity, this.name,rarity);
-      this.index = getFromCSVLastIndex(FOODCARDSCSV, "FoodCard.java");
+      rarity = rarityOrIndex;
+      name = "TEST FOOD";
+      effect = new FoodEffect(rarityOrIndex);
+      writeToCSV(FOODCARDSCSV, "FoodCard.java", true, FOODCARDSHEADER, FOODCARDSFORMAT, rarity, name,rarity);
+      index = getFromCSVLastIndex(FOODCARDSCSV, "FoodCard.java");
     }
   }
 

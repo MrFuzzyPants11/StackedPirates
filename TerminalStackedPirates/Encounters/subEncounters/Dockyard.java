@@ -31,14 +31,14 @@ public class Dockyard extends SubEncounter{
         shipPacks.add(new ShipPack(true, toInt(data[i])));
       }
     } else {
-      this.name = generateFirstName(generateRand());
-      this.level = levelOrIndex;
+      name = generateFirstName(generateRand());
+      level = levelOrIndex;
       shipPacks = new ArrayList<ShipPack>();
       for(int i = 0; i < 5; i++){
         shipPacks.add(new ShipPack(false, generateLevel(levelOrIndex)));
       }
       writeToCSV(DOCKYARDSCSV, "Dockyard.java",true,DOCKYARDHEADER,DOCKYARDFORMAT,name,level,shipPacks.get(0),shipPacks.get(1),shipPacks.get(2),shipPacks.get(3),shipPacks.get(4));
-      this.index = getFromCSVLastIndex(DOCKYARDSCSV,"Dockyard.java");
+      index = getFromCSVLastIndex(DOCKYARDSCSV,"Dockyard.java");
     }
   }
 

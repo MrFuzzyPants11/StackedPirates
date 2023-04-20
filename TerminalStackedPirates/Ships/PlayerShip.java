@@ -36,7 +36,7 @@ public class PlayerShip extends Ship{
    * @return the repairs
    */
   public int getRepairs(){
-    return this.repairs;
+    return repairs;
   }
 
   /*
@@ -78,19 +78,19 @@ public class PlayerShip extends Ship{
    */
   public boolean hasHoles(){
     boolean hasHoles = false;
-    if(this.toughness <= ((level * 100) * 0.25)){
+    if(toughness <= ((level * 100) * 0.25)){
       travelUntilSink = 1;
       holeLevel = 3;
       hasHoles = true;
     }
 
-    if(this.toughness <= ((level * 100) * 0.5)){
+    if(toughness <= ((level * 100) * 0.5)){
       travelUntilSink = 2;
       holeLevel = 2;
       hasHoles = true;
     }
 
-    if(this.toughness <= ((level * 100) * 0.75)){
+    if(toughness <= ((level * 100) * 0.75)){
       travelUntilSink = 3;
       holeLevel = 1;
       hasHoles = true;
@@ -109,7 +109,7 @@ public class PlayerShip extends Ship{
    * @return the amount of travel until the ship sinks
    */
   public int getTravelUntilSink(){
-    return this.travelUntilSink;
+    return travelUntilSink;
   }
 
   /*
@@ -133,8 +133,8 @@ public class PlayerShip extends Ship{
    * Upgrades the ship's level and adds in new toughness
    */
   public void upgrade(){
-    this.level += 1;
-    this.toughness += 100;
+    level += 1;
+    toughness += 100;
     writeToCSVValue(PLAYERSHIPCSV,"PlayerShip.java",INDEX,"0",LEVEL,toStr(level));
     writeToCSVValue(PLAYERSHIPCSV,"PlayerShip.java",INDEX,"0",TOUGHNESS,toStr(toughness));
   }

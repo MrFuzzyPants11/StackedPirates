@@ -11,9 +11,9 @@ public class ShipEffect extends Effect{
 
   public ShipEffect(int index){
     String[] data = getFromCSVRow(SHIPEFFECTS, "ShipEffect.java", INDEX, toStr(index));
-    this.index = toInt(data[0]);
-    this.rarity = toInt(data[1]);
-    this.description = data[2];
+    index = toInt(data[0]);
+    rarity = toInt(data[1]);
+    description = data[2];
   }
 
   public String getType(){
