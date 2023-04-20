@@ -6,13 +6,15 @@ package Humans;
 
 import static Globals.Tools.*;
 import static Globals.Constants.*;
+import Ships.PlayerShip;
 
 public class Player extends Human{
   int gold;
   String name;
+  PlayerShip ship;
 
   /*
-   * Constructor to reload player data from CSV
+   * Constructor to reload player data from CSV 
    * Used for loading a saved game
    */
   public Player(){
@@ -21,6 +23,7 @@ public class Player extends Human{
     this.level = toInt(playerData[2]);
     this.health = toInt(playerData[3]);
     this.gold = toInt(playerData[4]);
+    this.ship = new PlayerShip();
   }
 
   /*
@@ -32,6 +35,7 @@ public class Player extends Human{
     this.level = STARTINGLEVEL;
     this.health = STARTINGHEALTH;
     this.gold = STARTINGGOLD;
+    this.ship = new PlayerShip();
     writeToCSV(PLAYERCSV,"Player.java", false, PLAYERHEADER,PLAYERFORMAT, 
         this.name, this.level, this.health, this.gold, -1,-1,-1,-1,-1);
   }
@@ -59,5 +63,22 @@ public class Player extends Human{
   public void spendGold(int amount){
     this.gold -= amount;
     writeToCSVValue(PLAYERCSV, "Player.java", INDEX, "0", GOLD, toStr(this.gold));
+  }
+
+  /*
+   * Adds gold to the amount of gold the player has
+   * @param amount the amount of gold to be added
+   */
+  public void earnGold(int amount){
+    this.gold += amount;
+    writeToCSVValue(PLAYERCSV, "Player.java", INDEX, "0", GOLD, toStr(this.gold));
+  }
+
+  /*
+   * Gets this player's ship
+   * @return the player's PlayerShip
+   */
+  public PlayerShip getShip(){
+    return this.ship;
   }
 }

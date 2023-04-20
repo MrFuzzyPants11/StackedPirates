@@ -77,8 +77,7 @@ public abstract class Constants {
   public static final String PACK9 = "pack9";
   public static final String PANTS = "pants";
   public static final String RARITY = "rarity";
-  public static final String REPAIRS = "repairs";
-  public static final String SIZE = "size";  
+  public static final String REPAIRS = "repairs"; 
   public static final String SOLD = "sold";
   public static final String SUBTYPE = "subtype";
   public static final String SUPPLYSTORE = "supplystore";
@@ -127,8 +126,8 @@ public abstract class Constants {
   public static final String EFFECTSFOLDER = IMMUTABLEFILELOCATION + "Effects/";
 
   // File paths
-  public static final String ALLCREWSCSV = SAVEGAMELOCATION + "allcrews.csv";
-  public static final String ALLPACKSCSV = SAVEGAMELOCATION + "allpacks.csv";
+  public static final String CREWSCSV = SAVEGAMELOCATION + "crews.csv";
+  public static final String PACKSCSV = SAVEGAMELOCATION + "packs.csv";
   public static final String BARTENDERSCSV = SAVEGAMELOCATION + "bartenders.csv";
   public static final String CREWCARDSCSV = SAVEGAMELOCATION + "crewcards.csv";
   public static final String CREWEFFECTS = EFFECTSFOLDER + "creweffects.csv";
@@ -147,7 +146,7 @@ public abstract class Constants {
   public static final String SHIPEFFECTS = EFFECTSFOLDER + "shipeffects.csv";
   public static final String SUPPLYSTORESCSV = SAVEGAMELOCATION + "supplystores.csv";
   public static final String TAVERNSCSV = SAVEGAMELOCATION + "taverns.csv"; 
-
+  public static final String DOCKYARDSCSV = SAVEGAMELOCATION + "dockyards.csv";
 
   // Headers and formats
   public static final String ALLCREWSFORMAT = "%s,%s,%s,%d,%d,%d,%s,%d,%d,%d,%d,%d";
@@ -171,7 +170,7 @@ public abstract class Constants {
   public static final String PLAYERFORMAT = "%s,%d,%d,%d,%d,%d,%d,%d,%d";
   public static final String PLAYERHEADER = NAME + COMMA + LEVEL + COMMA + HEALTH + COMMA + GOLD + COMMA + CARD0 + COMMA + CARD1 + COMMA + CARD2 + COMMA + CARD3 + COMMA + CARD4;
   public static final String PLAYERSHIPFORMAT = "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d";
-  public static final String PLAYERSHIPHEADER = SIZE + COMMA + TOUGHNESS + COMMA + REPAIRS + COMMA + TRAVELUNTILSINK + COMMA + HOLELEVEL + COMMA + CARD0 + COMMA + CARD1 + COMMA + CARD2 + COMMA + CARD3 + COMMA + CARD4;
+  public static final String PLAYERSHIPHEADER = LEVEL + COMMA + TOUGHNESS + COMMA + REPAIRS + COMMA + TRAVELUNTILSINK + COMMA + HOLELEVEL + COMMA + CARD0 + COMMA + CARD1 + COMMA + CARD2 + COMMA + CARD3 + COMMA + CARD4;
   public static final String PORTSFORMAT = "%s,%d,%d,%d,%d";
   public static final String PORTSHEADER = NAME + COMMA + LEVEL + COMMA + SUPPLYSTORE + COMMA + TAVERN + COMMA + DOCKYARD;
   public static final String SHIPCARDSFORMAT = "%d,%s,%d";
@@ -182,7 +181,8 @@ public abstract class Constants {
   public static final String SUPPLYSTORESHEADER = LEVEL + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4 + COMMA + PACK5 + COMMA + PACK6 + COMMA + PACK7 + COMMA + PACK8 + COMMA + PACK9;
   public static final String TAVERNSFORMAT = "%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d";
   public static final String TAVERNSHEADER = NAME + COMMA + LEVEL + COMMA + BARTENDERINDEX + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4 + COMMA + CREWINDEX0 + COMMA + CREWINDEX1 + COMMA + CREWINDEX2 + COMMA + CREWINDEX3 + COMMA + CREWINDEX4 + COMMA + CREWINDEX5 + COMMA + CREWINDEX6 + COMMA + CREWINDEX7 + COMMA + CREWINDEX8 + COMMA + CREWINDEX9+ COMMA + CREWINDEX10 + COMMA + CREWINDEX11 + COMMA + CREWINDEX12 + COMMA + CREWINDEX13 + COMMA + CREWINDEX14;
-
+  public static final String DOCKYARDFORMAT = "%s,%d,%d,%d,%d,%d,%d";
+  public static final String DOCKYARDHEADER = NAME + COMMA + LEVEL + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4;
 
   // Numbers
   public static final int ANIMATIONSPEED = 1000;
@@ -200,6 +200,7 @@ public abstract class Constants {
   public static final int RARENUM = 2;
   public static final int UNCOMMONNUM = 1;
   public static final int REPAIRAMOUNT = 75;
+  public static final int UPGRADECOST = 1000;
 
   // Initial Values
   public static final int STARTINGGOLD = 696969;

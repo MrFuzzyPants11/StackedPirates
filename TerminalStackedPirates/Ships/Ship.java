@@ -9,16 +9,12 @@ import Items.Cards.Card;
 import Items.Cards.ShipCard;
 
 public abstract class Ship {
-  int size;
+  int level;
   ArrayList<ShipCard> cards; 
   int toughness; 
   
-  public int getSize() {
-    return this.size;
-  }
-
-  public void setSize(int size) {
-    this.size = size;
+  public int getLevel() {
+    return this.level;
   }
 
   public ArrayList<ShipCard> getCards() {
@@ -26,7 +22,7 @@ public abstract class Ship {
   }
 
   public boolean addCard(ShipCard newCard) {
-    if(cards.size() < size){
+    if(cards.size() < level){
       this.cards.add(newCard);
       return true;
     } else {

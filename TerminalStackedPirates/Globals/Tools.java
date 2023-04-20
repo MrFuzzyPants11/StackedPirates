@@ -177,7 +177,7 @@ public abstract class Tools {
 
   /*
    * Sorts a Pack ArrayList by rarity
-   * @Param ArrayList of Packs
+   * @param ArrayList of Packs
    */
   public static ArrayList<Pack> sortPacksByRarity(ArrayList<Pack> packs){
     ArrayList<Pack> sortedList = new ArrayList<Pack>();
@@ -216,7 +216,7 @@ public abstract class Tools {
 
   /*
    * Sorts a Card ArrayList by rarity
-   * @Param ArrayList of Cards
+   * @param ArrayList of Cards
    */
   public static ArrayList<Card> sortCardsByRarity(ArrayList<Card> cards){
     ArrayList<Card> sortedList = new ArrayList<Card>();
@@ -498,8 +498,8 @@ public abstract class Tools {
    * Refreshes all CSVs to delete their contents
    */
   public static void cleanCSVFiles(){
-    refreshCSV(ALLCREWSCSV,ALLCREWSHEADER);
-    refreshCSV(ALLPACKSCSV,ALLPACKSHEADER);
+    refreshCSV(CREWSCSV,ALLCREWSHEADER);
+    refreshCSV(PACKSCSV,ALLPACKSHEADER);
     refreshCSV(BARTENDERSCSV,BARTENDERSHEADER);
     refreshCSV(CREWCARDSCSV,CREWCARDSHEADER);
     refreshCSV(FOODCARDSCSV,FOODCARDSHEADER);
@@ -511,6 +511,7 @@ public abstract class Tools {
     refreshCSV(SUPPLYSTORESCSV,SUPPLYSTORESHEADER);
     refreshCSV(TAVERNSCSV,TAVERNSHEADER);
     refreshCSV(CREWLISTCSV,CREWLISTHEADER);
+    refreshCSV(DOCKYARDSCSV,DOCKYARDHEADER);
   }
 
   /*

@@ -14,7 +14,7 @@ public class FoodPack extends Pack{
    */
   public FoodPack(boolean reload, int rarityOrIndex){
     if(reload){
-      String[] data = getFromCSVRow(ALLPACKSCSV, "FoodPack.java", INDEX, toStr(rarityOrIndex));
+      String[] data = getFromCSVRow(PACKSCSV, "FoodPack.java", INDEX, toStr(rarityOrIndex));
       this.index = toInt(data[0]);
       this.sold = toBool(data[2]);
       this.opened = toBool(data[3]);
@@ -28,7 +28,7 @@ public class FoodPack extends Pack{
       this.rarity = rarityOrIndex;
       generatePack(rarity,"FoodPack.java", FOOD);
       cost -= 100;
-      this.index = getFromCSVLastIndex(ALLPACKSCSV, "FoodPack.java");
+      this.index = getFromCSVLastIndex(PACKSCSV, "FoodPack.java");
     }
   }
 

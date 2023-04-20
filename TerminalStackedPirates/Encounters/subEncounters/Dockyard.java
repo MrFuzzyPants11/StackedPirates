@@ -10,11 +10,11 @@ import static Globals.Constants.*;
 import static Globals.PlayerAttributes.Inventory.*;
 import java.util.ArrayList;
 import Items.Packs.ShipPack;
-import Ships.PlayerShip;
 
 public class Dockyard extends SubEncounter{
   private String name;
   private ArrayList<ShipPack> shipPacks;
+  
   /*
    * Constructor for a new Dockyard
    * @param reload whether the encounter is being reloaded
@@ -22,15 +22,23 @@ public class Dockyard extends SubEncounter{
    */
   public Dockyard(boolean reload, int levelOrIndex){
     if(reload){
-
+      String[] data = getFromCSVRow(DOCKYARDSCSV,"Tavern.java",INDEX, toStr(levelOrIndex));
+      index = toInt(data[0]);
+      name = data[1];
+      level = toInt(data[2]);
+      shipPacks = new ArrayList<ShipPack>();
+      for(int i = 3;  i < data.length; i++){
+        shipPacks.add(new ShipPack(true, toInt(data[i])));
+      }
     } else {
       this.name = generateFirstName(generateRand());
       this.level = levelOrIndex;
-      this.index = 0; 
       shipPacks = new ArrayList<ShipPack>();
       for(int i = 0; i < 5; i++){
         shipPacks.add(new ShipPack(false, generateLevel(levelOrIndex)));
       }
+      writeToCSV(DOCKYARDSCSV, "Dockyard.java",true,DOCKYARDHEADER,DOCKYARDFORMAT,name,level,shipPacks.get(0),shipPacks.get(1),shipPacks.get(2),shipPacks.get(3),shipPacks.get(4));
+      this.index = getFromCSVLastIndex(DOCKYARDSCSV,"Dockyard.java");
     }
   }
 
@@ -116,7 +124,6 @@ public class Dockyard extends SubEncounter{
   }
 
   private void goRepairShip(Player player){
-    PlayerShip ship = new PlayerShip();
     while(true){
       prln("You pull your ship into the repair slip.");
       prln("What would you like to do?");
@@ -130,36 +137,39 @@ public class Dockyard extends SubEncounter{
       int input = askIn();
       if(input == QUIT){
         break;
-      } else if(input == 1){
+      } else if(input == MENUEXIT){
+        continue;
+      } if(input == 1){
         prln("How many times would you like to repair your ship?");
-        prln("Your ship has " + ship.getToughness() + "/" + ((ship.getSize() + 1) * 100) + " Toughness");
+        prln("Your ship has " + player.getShip().getToughness() + "/" + ((player.getShip().getLevel() + 1) * 100) + " Toughness");
         pr("And you have ");
         pr(player.getGold() + " Gold", GOLDCOLOUR);
         prln(".");
         prln("Q. Leave");
         input = askIn();
         if(input == QUIT){
-          continue;
+          prln("You pull out of the slip and go back to the Dockyard entrance.");
+          break;
         } else if(input > 0){
           if(player.getGold() < input * 50){
-            prln("You do not have enough gold to buy that many repairs");
-          } else if((input * REPAIRAMOUNT) + ship.getToughness() < ((ship.getSize() + 1) * 100)){ //If the repairs are less than the max ship size no prompt
-            ship.increaseToughness(input * REPAIRAMOUNT);
+            prln("You do not have enough gold to buy that many repairs.");
+          } else if((input * REPAIRAMOUNT) + player.getShip().getToughness() < ((player.getShip().getLevel() + 1) * 100) || ((input - 1) * REPAIRAMOUNT) + player.getShip().getToughness() < ((player.getShip().getLevel() + 1) * 100)){ //If the repairs are less than the max ship toughness or max - 1  no prompt
+            player.getShip().increaseToughness(input * REPAIRAMOUNT);
             player.spendGold(input * 50);
-          } else if(((input - 1) * REPAIRAMOUNT) + ship.getToughness() < ((ship.getSize() + 1) * 100)){ //Same is they are greater but not more than 1 repair kit more
-            ship.increaseToughness(input * REPAIRAMOUNT);
-            player.spendGold(input * 50);
-          } else {
-            prln("You are attempting to repair more than is possible");
-            prln("Are you sure you want repair that much?");
-            prln("1. Yes");
-            prln("Q. No");
-            int input2 = askIn();
-            if(input2 != 1){
-              continue;
-            } else {
-              ship.increaseToughness(input * REPAIRAMOUNT);
-              player.spendGold(input * 50);
+          } else { // However if greater than 1 repair above it asks the user
+            while(true){ 
+              prln("You are attempting to repair more than will help.");
+              prln("Are you sure you want repair that much?");
+              prln("1. Yes");
+              prln("Q. No");
+              int input2 = askIn();
+              if(input2 != 1){
+                break;
+              } else {
+                player.getShip().increaseToughness(input * REPAIRAMOUNT);
+                player.spendGold(input * 50);
+                break;
+              }
             }
           }
         } else {
@@ -168,7 +178,7 @@ public class Dockyard extends SubEncounter{
         }
       } else if (input == 2){
         prln("How many times would you like to repair your ship?");
-        prln("Your ship has " + ((ship.getSize() + 1) * 100) + " Maximum Toughness");
+        prln("Your ship has " + ((player.getShip().getLevel() + 1) * 100) + " Maximum Toughness");
         pr("And you have ");
         pr(player.getGold() + " Gold", GOLDCOLOUR);
         prln(".");
@@ -180,7 +190,7 @@ public class Dockyard extends SubEncounter{
           if(player.getGold() < input * 75){
             prln("You do not have enough gold to buy that many repairs");
           } else {
-            ship.addRepairs(input);
+            player.getShip().addRepairs(input);
             player.spendGold(input * 75);
           } 
         } else {
@@ -195,6 +205,33 @@ public class Dockyard extends SubEncounter{
   }
 
   private void goUpgradeShip(Player player){
-
+    if(player.getShip().getLevel() == MAXLEVEL){
+      prln("Your ship is already max level.");
+    } else {
+      while(true){
+        prln("Are you sure you'd like to upgrade your ship?");
+        pr("It will cost ");
+        pr(UPGRADECOST + " Gold",GOLDCOLOUR);
+        prln(".");
+        pr("And you have ");
+        pr(player.getGold() + " Gold", GOLDCOLOUR);
+        prln(".");
+        prln("1. Purchase Upgrade");
+        prln("Q. Leave");
+        int input = askIn();
+        if(input == QUIT){
+          break;
+        } else if(input != 1){
+          continue;
+        } else {
+          if(player.getGold() < input * 75){
+            prln("You do not have enough gold to buy that many repairs");
+          } else {
+            player.getShip().upgrade();
+            player.spendGold(UPGRADECOST);
+          } 
+        }
+      }
+    }
   }
 }

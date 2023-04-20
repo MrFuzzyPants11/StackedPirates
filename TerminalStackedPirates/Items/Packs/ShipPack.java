@@ -14,7 +14,7 @@ public class ShipPack extends Pack{
    */
   public ShipPack(boolean reload, int rarityOrIndex){
     if(reload){
-      String[] data = getFromCSVRow(ALLPACKSCSV, "ShipPack.java", INDEX, toStr(rarityOrIndex));
+      String[] data = getFromCSVRow(PACKSCSV, "ShipPack.java", INDEX, toStr(rarityOrIndex));
       this.index = toInt(data[0]);
       this.sold = toBool(data[2]);
       this.opened = toBool(data[3]);
@@ -27,7 +27,7 @@ public class ShipPack extends Pack{
     } else {
       this.rarity = rarityOrIndex;
       generatePack(rarity,"ShipPack.java", SHIP);
-      this.index = getFromCSVLastIndex(ALLPACKSCSV, "ShipPack.java");
+      this.index = getFromCSVLastIndex(PACKSCSV, "ShipPack.java");
     }
   }
 

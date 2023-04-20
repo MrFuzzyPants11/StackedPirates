@@ -14,7 +14,7 @@ public class Crew extends NPC {
 
   public Crew(boolean reload, int levelOrIndex){
     if(reload){
-      String[] data = getFromCSVRow(ALLCREWSCSV, "Crew.java",INDEX, toStr(levelOrIndex));
+      String[] data = getFromCSVRow(CREWSCSV, "Crew.java",INDEX, toStr(levelOrIndex));
       this.index = levelOrIndex;
       this.fname = data[1];
       this.lname = data[2];
@@ -36,9 +36,9 @@ public class Crew extends NPC {
       this.cost = 10 + generateRand(11);
       this.inTavern = true;
 
-      writeToCSV(ALLCREWSCSV,"Crew.java", true, ALLCREWSHEADER,ALLCREWSFORMAT, 
+      writeToCSV(CREWSCSV,"Crew.java", true, ALLCREWSHEADER,ALLCREWSFORMAT, 
           this.fname, this.lname, FALSE, this.level, this.health,this.cost,this.inTavern,-1,-1,-1,-1,-1);
-      this.index = getFromCSVLastIndex(ALLCREWSCSV, "Crew.java");
+      this.index = getFromCSVLastIndex(CREWSCSV, "Crew.java");
     }
   }
 

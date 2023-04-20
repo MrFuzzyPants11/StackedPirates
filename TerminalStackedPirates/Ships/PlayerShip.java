@@ -19,12 +19,12 @@ public class PlayerShip extends Ship{
    */
   public PlayerShip(){
     String[] data = getFromCSVRow(PLAYERSHIPCSV,"PlayerShip.java",INDEX, "0");
-    this.size = toInt(data[1]);
-    this.toughness = toInt(data[2]);
-    this.repairs = toInt(data[3]);
-    this.travelUntilSink = toInt(data[4]);
-    this.holeLevel = toInt(data[5]);
-    this.cards = new ArrayList<ShipCard>();
+    level = toInt(data[1]);
+    toughness = toInt(data[2]);
+    repairs = toInt(data[3]);
+    travelUntilSink = toInt(data[4]);
+    holeLevel = toInt(data[5]);
+    cards = new ArrayList<ShipCard>();
     for(int i = 6; i < data.length; i++){
       if(toInt(data[i]) != -1){
         cards.add(new ShipCard(true, toInt(data[i])));
@@ -33,7 +33,7 @@ public class PlayerShip extends Ship{
   }
   /*
    * Gets the number of repairs the PlayerShip has
-   * @Return the repairs
+   * @return the repairs
    */
   public int getRepairs(){
     return this.repairs;
@@ -41,23 +41,25 @@ public class PlayerShip extends Ship{
 
   /*
    * Adds one repair kit to the ship
-   * @Param int the amount of repairs to add
+   * @param int the amount of repairs to add
    */
   public void addRepairs(int added){
-    this.repairs += added;
+    repairs += added;
+    writeToCSVValue(PLAYERSHIPCSV,"PlayerShip.java",INDEX,"0",REPAIRS,toStr(repairs));
   }
 
   /*
    * Reduces the number of Repairs by the amount used
-   * @Param int the amount being used
-   * @Return true if able to remove that many repairs
-   * @Return false if unable to remove that many repairs
+   * @param int the amount being used
+   * @return true if able to remove that many repairs
+   * @return false if unable to remove that many repairs
    */
   public boolean reduceRepairs(int used){
-    if(this.repairs < used){
+    if(repairs < used){
+      writeToCSVValue(PLAYERSHIPCSV,"PlayerShip.java",INDEX,"0",REPAIRS,toStr(repairs));
       return false;
     }
-    this.repairs -= used;
+    repairs -= used;
     return true;
   }
 
@@ -66,7 +68,7 @@ public class PlayerShip extends Ship{
    * @return the hole level of the ship
    */
   public int getHoleLevel(){
-    return this.holeLevel;
+    return holeLevel;
   }
 
   /*
@@ -75,27 +77,31 @@ public class PlayerShip extends Ship{
    * @return false if the ship has enough damage to have holes
    */
   public boolean hasHoles(){
-    if(this.toughness <= ((size * 100) * 0.25)){
+    boolean hasHoles = false;
+    if(this.toughness <= ((level * 100) * 0.25)){
       travelUntilSink = 1;
       holeLevel = 3;
-      return false;
+      hasHoles = true;
     }
 
-    if(this.toughness <= ((size * 100) * 0.5)){
+    if(this.toughness <= ((level * 100) * 0.5)){
       travelUntilSink = 2;
       holeLevel = 2;
-      return false;
+      hasHoles = true;
     }
 
-    if(this.toughness <= ((size * 100) * 0.75)){
+    if(this.toughness <= ((level * 100) * 0.75)){
       travelUntilSink = 3;
       holeLevel = 1;
-      return false;
+      hasHoles = true;
     } else {
       travelUntilSink = 4;
       holeLevel = 0;
-      return true;
+      hasHoles = false;
     }
+    writeToCSVValue(PLAYERSHIPCSV,"PlayerShip.java",INDEX,"0",TRAVELUNTILSINK,toStr(travelUntilSink));
+    writeToCSVValue(PLAYERSHIPCSV,"PlayerShip.java",INDEX,"0",HOLELEVEL,toStr(holeLevel));
+    return hasHoles;
   }
 
   /*
@@ -121,5 +127,15 @@ public class PlayerShip extends Ship{
     } else {
       return true;
     }
+  }
+
+  /*
+   * Upgrades the ship's level and adds in new toughness
+   */
+  public void upgrade(){
+    this.level += 1;
+    this.toughness += 100;
+    writeToCSVValue(PLAYERSHIPCSV,"PlayerShip.java",INDEX,"0",LEVEL,toStr(level));
+    writeToCSVValue(PLAYERSHIPCSV,"PlayerShip.java",INDEX,"0",TOUGHNESS,toStr(toughness));
   }
 }
