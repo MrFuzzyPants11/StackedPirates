@@ -1,7 +1,7 @@
 //File: Constants.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 04-19-2023
+//Modified: 05-16-2023
 package Globals;
 
 public abstract class Constants {
@@ -201,6 +201,10 @@ public abstract class Constants {
   public static final int UNCOMMONNUM = 1;
   public static final int REPAIRAMOUNT = 75;
   public static final int UPGRADECOST = 1000;
+  public static final int NUMPORTS = 10;
+  public static final int NUMBATTLES = 10;
+  public static final int NUMISLANDS = 10;
+
 
   // Initial Values
   public static final int STARTINGGOLD = 696969;
@@ -234,7 +238,34 @@ public abstract class Constants {
   public static final int X = -24;
   public static final int Y = -25;
   public static final int Z = -26;
-  
+
+  // WORLD ENCOUNTER IDENTIFIERS
+  public static final int GENOCEAN = 0;
+  public static final int GENPORT = 1;
+  public static final int GENSTARTINGPORT = 9;
+  public static final int GENBATTLE = 2;
+  public static final int GENISLAND = 3;
+  public static final int GENBOSS = 4;
+    // Sub encounter specifiers
+    // Battles
+  public static final int GENBRITISH = 11;
+  public static final int GENSPANISH = 12;
+  public static final int GENPIRATE = 13;
+  public static final int GENMERCHANT = 14;
+
+    // Bosses
+  public static final int GENLEVIATHON = 20;
+  public static final int GENKRAKEN = 21;
+  public static final int GENKAPPA = 22;
+  public static final int GENSCYLLA = 23;
+  public static final int GENUMIBOZU = 24;
+  public static final int GENCHARYDBIS = 25;
+  public static final int GENJENGU = 26;
+  public static final int GENSIREN = 27;
+  public static final int GENMAMI = 28;
+  public static final int GENCUSTOM = 29;
+  public static final int[] GENBOSSES = {GENLEVIATHON,GENKRAKEN,GENKAPPA,GENSCYLLA,GENUMIBOZU,GENCHARYDBIS,GENJENGU,GENSIREN,GENMAMI,GENCUSTOM};
+
   // OTHER
   public static final String FALSE = "false";
   public static final String TRUE = "true";
