@@ -1,7 +1,7 @@
 //File: SupplyStore.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 06-07-2023
+//Modified: 06-08-2023
 package Encounters.subEncounters;
 
 import static Globals.Tools.*;
@@ -124,7 +124,19 @@ public class SupplyStore extends Encounter{
     }
   }
 
+  /*
+   * gets the SUPPLYSTORE type
+   * @return String SUPPLYSTORE
+   */
   public String getType(){
     return SUPPLYSTORE;
+  }
+
+  /*
+   * gets the Supplystore Symbol
+   * @return char SUPPLYSTORE
+   */
+  public char getSymbol(){
+    return 'S';
   }
 }

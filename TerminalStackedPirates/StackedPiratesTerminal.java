@@ -6,6 +6,7 @@
 import Humans.*;
 import static Globals.Tools.*;
 import static Globals.Constants.*;
+import Globals.WorldMap;
 import Encounters.*;
 
 public class StackedPiratesTerminal{
@@ -33,7 +34,10 @@ public class StackedPiratesTerminal{
       //   prln("Cancelling");
       //   return;
       // }
-      Player player = initializeNewGame();
+      Pair<WorldMap, Player> pair = initializeNewGame();
+      //WorldMap map = pair.getFirst();
+      Player player = pair.getSecond();
+      //prMap();
       if(player != null){
         pr("Welcome to Stacked Pirates");
         pr(" Captain " + player.getName() + "!\nYou are ");
@@ -50,7 +54,7 @@ public class StackedPiratesTerminal{
   /*
    * Method for generating game world and files
    */
-  private static Player initializeNewGame(){
+  private static Pair<WorldMap,Player> initializeNewGame(){
     //Clean any CSV files that need to be
     cleanCSVFiles();
 
@@ -68,54 +72,23 @@ public class StackedPiratesTerminal{
     // ...
     //Generate world
     pr("Generating World.... ");
-    Encounter[][] world = new Encounter[11][11];
-    int[] remainingBosses = GENBOSSES;
-    // These are all number remaining not number in the world
-    int numPorts = NUMPORTS;
-    int numBattles = NUMBATTLES;
-    int numIslands = NUMISLANDS;
-
-    world[6][6] = new Port(true,MINLEVEL);
-    int x;
-    int y;
-    int encounter;
-    int bossNum = 0;
-    while(numPorts != 0 || numBattles != 0 || numIslands != 0 || bossNum < remainingBosses.length){
-      x = generateRand(11);
-      y = generateRand(11);
-      if(world[y][x] == 0){
-        encounter = generateRand(4) + 1;
-        if(encounter == 1 && numPorts > 0){
-          world[y][x] = 1;
-          numPorts--;
-        } else if(encounter == 2 && numBattles > 0){
-          world[y][x] = 2;
-          numBattles--;
-        } else if(encounter == 3 && numIslands > 0){
-          world[y][x] = 3;
-          numIslands--;
-        } else if(encounter == 4 && bossNum < remainingBosses.length){
-          world[y][x] = remainingBosses[bossNum];
-          bossNum++;
-        }
-      }
-    }
-
+    WorldMap map = new WorldMap(false);
     prln(" Done!",GREEN);
+
     //Load blank ship into CSV
     writeToCSV(PLAYERSHIPCSV, "StackedPiratesTerminal.java",false,PLAYERSHIPHEADER, PLAYERSHIPFORMAT,MINLEVEL,(MINLEVEL + 1) * 100,0,4,0,-1,-1,-1,-1,-1);
     
-    return new Player("FuzzyPants");
+    return new Pair<WorldMap,Player>(map,new Player("FuzzyPants"));
   }
 
-  // private static Player initializeLoadGame(){
+  // private static Pair<WorldMap,Player> initializeLoadGame(){
   //   // Load name files into memory
   //   LoadNameFiles();
 
   //   // Load the scanner
   //   initializeScanner();
 
-  //   return new Player();
+  //   return new Pair<WorldMap,Player>(map,new Player();
   // }
 
   /*

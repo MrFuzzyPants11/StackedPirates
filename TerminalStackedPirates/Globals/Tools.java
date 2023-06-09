@@ -29,6 +29,21 @@ public abstract class Tools {
   }
 
   /*
+   * Converts char to string
+   * @param num The number to convert
+   */
+  public static String toStr(char c){
+    return "" + c;
+  }
+
+  /*
+   * Converts boolean to string
+   * @param bool The boolean to convert
+   */
+  public static String toStr(boolean bool){
+    return Boolean.toString(bool);
+  }
+  /*
    * Converts string to int
    * @param str The string to convert
    */
@@ -42,14 +57,6 @@ public abstract class Tools {
    */
   public static boolean toBool(String str){
     return Boolean.parseBoolean(str);
-  }
-
-  /*
-   * Converts boolean to string
-   * @param bool The boolean to convert
-   */
-  public static String toStr(boolean bool){
-    return Boolean.toString(bool);
   }
 
   /*
@@ -157,12 +164,12 @@ public abstract class Tools {
 
   /*
    * Generates a random number between 0 and max - 1
-   * @param max The max number to generate (-1)
+   * @param maxPlusOne The max number to generate (-1)
    * @return The generated number
    */
-  public static int generateRand(int max) {
+  public static int generateRand(int maxPlusOne) {
     Random rand = new Random();
-    return rand.nextInt(max);
+    return rand.nextInt(maxPlusOne);
   }
 
   /*
@@ -425,7 +432,14 @@ public abstract class Tools {
    * Prints the world map
    */
   public static void prMap(){
-    (new WorldMap()).printMap();
+    (new WorldMap(true)).printMap();
+  }
+
+  /*
+   * Prints the world map zoomed to the 5x5 around the player
+   */
+  public static void prMapZoomed(){
+    (new WorldMap(true)).printMapZoomed();
   }
 
 
@@ -775,6 +789,26 @@ public abstract class Tools {
       }
       reader.close();
       return null;
+    } catch (Exception e){
+      prln("getFromCSVRow: " + comingFrom + ": Failed to read from CSV file.", RED);
+      return null;
+    }
+  }
+  /*
+   * Gets a specific row from a CSV file
+   * @param filepath The name of the file to read from
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @return The row with the value in the column as a String array
+   * @return null if the value or column are not found
+   */
+  public static String[] getFromFirstCSVRow(String filepath, String comingFrom) {
+    try{
+      BufferedReader reader = new BufferedReader(new FileReader(filepath));
+      
+      String[] row = reader.readLine().split(COMMA);
+      reader.close();
+      return row;
+
     } catch (Exception e){
       prln("getFromCSVRow: " + comingFrom + ": Failed to read from CSV file.", RED);
       return null;

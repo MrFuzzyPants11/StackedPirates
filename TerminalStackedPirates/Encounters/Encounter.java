@@ -21,6 +21,11 @@ public abstract class Encounter {
    */
   public abstract String getType();
   /*
+   * Method for getting the encounter Map Symbol
+   * @return the encounters Map Symbol as a character
+   */
+  public abstract char getSymbol();
+  /*
    * Gets if the encounter has been viewed before
    * @return the Encounter's viewed boolean
    */

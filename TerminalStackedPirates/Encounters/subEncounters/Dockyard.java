@@ -1,7 +1,7 @@
 //File: Dockyard.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 06-07-2023
+//Modified: 06-08-2023
 package Encounters.subEncounters;
 
 import Humans.Player;
@@ -38,7 +38,7 @@ public class Dockyard extends Encounter{
       for(int i = 0; i < 5; i++){
         shipPacks.add(new ShipPack(false, generateLevel(levelOrIndex)));
       }
-      writeToCSV(DOCKYARDSCSV, "Dockyard.java",true,DOCKYARDHEADER,DOCKYARDFORMAT,name,level,shipPacks.get(0),shipPacks.get(1),shipPacks.get(2),shipPacks.get(3),shipPacks.get(4));
+      writeToCSV(DOCKYARDSCSV, "Dockyard.java",true,DOCKYARDHEADER,DOCKYARDFORMAT,name,level,shipPacks.get(0).getIndex(),shipPacks.get(1).getIndex(),shipPacks.get(2).getIndex(),shipPacks.get(3).getIndex(),shipPacks.get(4).getIndex());
       index = getFromCSVLastIndex(DOCKYARDSCSV,"Dockyard.java");
     }
   }
@@ -235,8 +235,19 @@ public class Dockyard extends Encounter{
       }
     }
   }
-
+  /*
+   * gets the DOCKYARD type
+   * @return DOCKYARD PORT
+   */
   public String getType(){
     return DOCKYARD;
+  }
+
+  /*
+   * gets the Dockyard Symbol
+   * @return char DOCKYARD
+   */
+  public char getSymbol(){
+    return 'D';
   }
 }
