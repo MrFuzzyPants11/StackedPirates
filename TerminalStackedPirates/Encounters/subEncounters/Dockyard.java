@@ -1,7 +1,7 @@
 //File: Dockyard.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 04-19-2023
+//Modified: 06-07-2023
 package Encounters.subEncounters;
 
 import Humans.Player;
@@ -234,5 +234,9 @@ public class Dockyard extends Encounter{
         }
       }
     }
+  }
+
+  public String getType(){
+    return DOCKYARD;
   }
 }

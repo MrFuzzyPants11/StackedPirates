@@ -1,12 +1,13 @@
 //File: Encounter.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 04-08-2023
+//Modified: 06-07-2023
 package Encounters;
 
 import Humans.Player;
 
 public abstract class Encounter {
+  protected boolean viewed;
   protected int index;
   protected int level;
   /*
@@ -14,7 +15,19 @@ public abstract class Encounter {
    * @param player the player entering the encounter
    */
   public abstract void enter(Player player);
-  
+  /*
+   * Method for getting the encounter type
+   * @return the encounters type as a String
+   */
+  public abstract String getType();
+  /*
+   * Gets if the encounter has been viewed before
+   * @return the Encounter's viewed boolean
+   */
+  public boolean getviewed(){
+    return viewed;
+  }
+
   /*
    * Gets the Encounter's index
    * @return the Encounter's index

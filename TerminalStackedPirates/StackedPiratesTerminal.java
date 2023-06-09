@@ -1,7 +1,7 @@
 //File: StackedPiratesTerminal.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 05-16-2023
+//Modified: 06-07-2023
 
 import Humans.*;
 import static Globals.Tools.*;
@@ -68,14 +68,14 @@ public class StackedPiratesTerminal{
     // ...
     //Generate world
     pr("Generating World.... ");
-    int[][] world = new int[11][11];
+    Encounter[][] world = new Encounter[11][11];
     int[] remainingBosses = GENBOSSES;
     // These are all number remaining not number in the world
     int numPorts = NUMPORTS;
     int numBattles = NUMBATTLES;
     int numIslands = NUMISLANDS;
 
-    world[6][6] = GENSTARTINGPORT;
+    world[6][6] = new Port(true,MINLEVEL);
     int x;
     int y;
     int encounter;

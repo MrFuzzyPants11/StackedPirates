@@ -1,7 +1,7 @@
 //File: Port.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 04-19-2023
+//Modified: 06-07-2023
 package Encounters;
 
 import static Globals.Tools.*;
@@ -28,6 +28,7 @@ public class Port extends Encounter{
     storeIndex = toInt(data[2]);
     tavernIndex = toInt(data[3]);
     dockIndex = toInt(data[4]);
+    viewed = toBool(data[5]);
     if(storeIndex != -1){
       store = new SupplyStore(true,storeIndex);
     }
@@ -61,7 +62,8 @@ public class Port extends Encounter{
         }
       }
     }
-    writeToCSV(PORTSCSV,"Port.java",true,PORTSHEADER,PORTSFORMAT,name,level,storeIndex, tavernIndex, dockIndex);
+    viewed = false;
+    writeToCSV(PORTSCSV,"Port.java",true,PORTSHEADER,PORTSFORMAT,name,level,storeIndex, tavernIndex, dockIndex,toStr(viewed));
   }
 
   /*
@@ -226,5 +228,9 @@ public class Port extends Encounter{
       invalOp();
       return enterSubEncounter(player,askIn());
     }
+  }
+
+  public String getType(){
+    return PORT;
   }
 }

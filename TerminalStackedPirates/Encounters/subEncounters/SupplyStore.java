@@ -1,7 +1,7 @@
 //File: SupplyStore.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 04-19-2023
+//Modified: 06-07-2023
 package Encounters.subEncounters;
 
 import static Globals.Tools.*;
@@ -122,5 +122,9 @@ public class SupplyStore extends Encounter{
         invalOp();
       }
     }
+  }
+
+  public String getType(){
+    return SUPPLYSTORE;
   }
 }

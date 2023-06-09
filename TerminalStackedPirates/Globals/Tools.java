@@ -1,7 +1,7 @@
 //File: Tools.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 04-19-2023
+//Modified: 06-07-2023
 package Globals;
 
 import static Globals.Constants.*;
@@ -12,6 +12,7 @@ import java.util.*;
 import Items.Packs.*;
 import Items.Cards.*;
 import static Globals.Encyclopedia.*;
+import Globals.WorldMap;
 
 public abstract class Tools {
 
@@ -263,7 +264,7 @@ public abstract class Tools {
    * @param str The string to print
    */
   public static void prln(String str){
-    System.out.print(str + "\n");
+    System.out.print(str + NEWLINE);
   }
 
   /*
@@ -279,7 +280,7 @@ public abstract class Tools {
    * @param str The string to print
    */
   public static void prnl(String str){
-    System.out.print("\n" + str);
+    System.out.print(NEWLINE + str);
   }
 
   /*
@@ -420,6 +421,13 @@ public abstract class Tools {
     return (temp + "\u001B[0m");
   }
 
+  /*
+   * Prints the world map
+   */
+  public static void prMap(){
+    (new WorldMap()).printMap();
+  }
+
 
   // INTERACTIVE USER METHODS | INTERACTIVE USER METHODS | INTERACTIVE USER METHODS
   // INTERACTIVE USER METHODS | INTERACTIVE USER METHODS | INTERACTIVE USER METHODS
@@ -445,7 +453,7 @@ public abstract class Tools {
    * This can also go to other menus if special characters are entered
    * @return The string the user entered as an int
    */
-  public static final Map<Character,Integer> charMap = Map.ofEntries(Map.entry('A', -1),Map.entry('a', -1),Map.entry('B', -2),Map.entry('b', -2),Map.entry('C', -3),Map.entry('c', -3),Map.entry('D', -4),Map.entry('d', -4),Map.entry('E', -5),Map.entry('e', -5),Map.entry('F', -6),Map.entry('f', -6),Map.entry('G', -7),Map.entry('g', -7),Map.entry('H', -8),Map.entry('h', -8),Map.entry('I', -9),Map.entry('i', -9),Map.entry('J', -10),Map.entry('j', -10),Map.entry('K', -11),Map.entry('k', -11),Map.entry('L', -12),Map.entry('l', -12),Map.entry('M', -13),Map.entry('m', -13),Map.entry('N', -14),Map.entry('n', -14),Map.entry('O', -15),Map.entry('o', -15),Map.entry('P', -16),Map.entry('p', -16),Map.entry('Q', -17),Map.entry('q', -17),Map.entry('R', -18),Map.entry('r', -18),Map.entry('S', -19),Map.entry('s', -19),Map.entry('T', -20),Map.entry('t', -20),Map.entry('U', -21),Map.entry('u', -21),Map.entry('V', -22),Map.entry('v', -22),Map.entry('W', -23),Map.entry('w', -23),Map.entry('X', -24),Map.entry('x', -24),Map.entry('Y', -25),Map.entry('y', -25),Map.entry('Z', -26),Map.entry('z', -26));
+  public static final Map<Character,Integer> charMap = Map.ofEntries(Map.entry('A', A),Map.entry('a', A),Map.entry('B', B),Map.entry('b', B),Map.entry('C', C),Map.entry('c', C),Map.entry('D', D),Map.entry('d', D),Map.entry('E', E),Map.entry('e', E),Map.entry('F', F),Map.entry('f', F),Map.entry('G', G),Map.entry('g', G),Map.entry('H', H),Map.entry('h', H),Map.entry('I', I),Map.entry('i', I),Map.entry('J', J),Map.entry('j', J),Map.entry('K', K),Map.entry('k', K),Map.entry('L', L),Map.entry('l', L),Map.entry('M', M),Map.entry('m', M),Map.entry('N', N),Map.entry('n', N),Map.entry('O', O),Map.entry('o', O),Map.entry('P', P),Map.entry('p', P),Map.entry('Q', Q),Map.entry('q', Q),Map.entry('R', R),Map.entry('r', R),Map.entry('S', S),Map.entry('s', S),Map.entry('T', T),Map.entry('t', T),Map.entry('U', U),Map.entry('u', U),Map.entry('V', V),Map.entry('v', V),Map.entry('W', W),Map.entry('w', -23),Map.entry('X', X),Map.entry('x', X),Map.entry('Y', Y),Map.entry('y', Y),Map.entry('Z', Z),Map.entry('z', Z ));
   public static int askIn(){
     pr("Enter Response: ");
     String userInput = scanner.nextLine();
@@ -544,7 +552,7 @@ public abstract class Tools {
         Files.createFile(Paths.get(filepath));
       }
       BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
-      writer.write(INDEX + COMMA + headerRow + "\n");
+      writer.write(INDEX + COMMA + headerRow + NEWLINE);
 
       writer.close();
     } catch (Exception e){
@@ -567,7 +575,7 @@ public abstract class Tools {
 
       // If the file is being overwritten, write the header row with index value
       if (!append) {
-        writer.write(INDEX + COMMA + headerRow + "\n");
+        writer.write(INDEX + COMMA + headerRow + NEWLINE);
       }
 
       // Get the number of rows in the file (if overwritten will be 1)
@@ -586,7 +594,7 @@ public abstract class Tools {
             writer.write(COMMA);
           }
         }
-        writer.write("\n");
+        writer.write(NEWLINE);
       }
         writer.close();
     } catch (Exception e){
@@ -664,7 +672,7 @@ public abstract class Tools {
             writer.write(COMMA);
           }
         }
-        writer.write("\n");
+        writer.write(NEWLINE);
       }
       writer.close();
     } catch (Exception e){
