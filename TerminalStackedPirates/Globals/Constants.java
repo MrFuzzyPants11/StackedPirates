@@ -1,7 +1,7 @@
 //File: Constants.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 06-07-2023
+//Modified: 06-10-2023
 package Globals;
 
 public abstract class Constants {
@@ -91,6 +91,9 @@ public abstract class Constants {
   public static final String TWOHANDEDWEAPON = "twohandedweapon";
   public static final String TYPE = "type";
   public static final String VIEWED = "viewed";
+  public static final String ENCOUNTER = "encounter";
+  public static final String ENCOUNTERINDEX = "encounterindex";
+
 
   // RARITIES
   public static final String COMMON = "common";
@@ -187,6 +190,8 @@ public abstract class Constants {
   public static final String TAVERNSHEADER = NAME + COMMA + LEVEL + COMMA + BARTENDERINDEX + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4 + COMMA + CREWINDEX0 + COMMA + CREWINDEX1 + COMMA + CREWINDEX2 + COMMA + CREWINDEX3 + COMMA + CREWINDEX4 + COMMA + CREWINDEX5 + COMMA + CREWINDEX6 + COMMA + CREWINDEX7 + COMMA + CREWINDEX8 + COMMA + CREWINDEX9+ COMMA + CREWINDEX10 + COMMA + CREWINDEX11 + COMMA + CREWINDEX12 + COMMA + CREWINDEX13 + COMMA + CREWINDEX14;
   public static final String DOCKYARDFORMAT = "%s,%d,%d,%d,%d,%d,%d";
   public static final String DOCKYARDHEADER = NAME + COMMA + LEVEL + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4;
+  public static final String WORLDMAPFORMAT = "%s,%d";
+  public static final String WORLDMAPHEADER = ENCOUNTER + COMMA + ENCOUNTERINDEX;
   
   // Numbers
   public static final int ANIMATIONSPEED = 1000;
