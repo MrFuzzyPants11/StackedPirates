@@ -16,3 +16,6 @@ TerminalStackedPirates/Globals/SaveGameFiles/map.csv
 TerminalStackedPirates/Globals/SaveGameFiles/dockyards.csv
 TerminalStackedPirates/Globals/SaveGameFiles/packs.csv
 Ideas/I need cards.txt
+TerminalStackedPirates/Globals/SaveGameFiles/world.csv
+TerminalStackedPirates/Globals/SaveGameFiles/location.csv
+TerminalStackedPirates/Globals/SaveGameFiles/ocean.csv

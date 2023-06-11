@@ -5,7 +5,7 @@
 package Globals;
 
 public abstract class Constants {
-  // Common Strings
+  // General Words
   public static final String CARD = "card";
   public static final String COMMA = ",";
   public static final String CREW = "crew";
@@ -17,9 +17,6 @@ public abstract class Constants {
   public static final String SPACE = " ";
   public static final String NEWLINE = "\n";
   public static final String PORT = "port";
-  public static final String BASIC = "basic";
-
-  // Header Columns
   public static final String BARTENDERINDEX = "bartenderindex";
   public static final String BLACKMARKETDEALER = "blackmarketdealer";
   public static final String CARD0 = "card0";
@@ -93,6 +90,10 @@ public abstract class Constants {
   public static final String VIEWED = "viewed";
   public static final String ENCOUNTER = "encounter";
   public static final String ENCOUNTERINDEX = "encounterindex";
+  public static final String OCEAN = "ocean";
+  public static final String YCORD = "ycord";
+  public static final String XCORD = "xcord"; 
+  public static final String ZERO = "0";
 
 
   // RARITIES
@@ -132,12 +133,12 @@ public abstract class Constants {
   public static final String EFFECTSFOLDER = IMMUTABLEFILELOCATION + "Effects/";
 
   // File paths
-  public static final String CREWSCSV = SAVEGAMELOCATION + "crews.csv";
-  public static final String PACKSCSV = SAVEGAMELOCATION + "packs.csv";
   public static final String BARTENDERSCSV = SAVEGAMELOCATION + "bartenders.csv";
   public static final String CREWCARDSCSV = SAVEGAMELOCATION + "crewcards.csv";
   public static final String CREWEFFECTS = EFFECTSFOLDER + "creweffects.csv";
   public static final String CREWLISTCSV = SAVEGAMELOCATION + "crewlist.csv";
+  public static final String CREWSCSV = SAVEGAMELOCATION + "crews.csv";
+  public static final String DOCKYARDSCSV = SAVEGAMELOCATION + "dockyards.csv";
   public static final String ENFIRSTNAMES = NAMESFOLDER + "enfirstnames.txt";
   public static final String ENLASTNAMES = NAMESFOLDER + "enlastnames.txt";
   public static final String ESFIRSTNAMES = NAMESFOLDER + "esfirstnames.txt";
@@ -145,6 +146,9 @@ public abstract class Constants {
   public static final String FOODCARDSCSV = SAVEGAMELOCATION + "foodcards.csv";
   public static final String FOODEFFECTS = EFFECTSFOLDER + "foodeffects.csv";
   public static final String INVENTORYCSV = SAVEGAMELOCATION + "inventory.csv";
+  public static final String LOCATIONCSV = SAVEGAMELOCATION + "location.csv";
+  public static final String OCEANCSV = SAVEGAMELOCATION + "ocean.csv";
+  public static final String PACKSCSV = SAVEGAMELOCATION + "packs.csv";
   public static final String PLAYERCSV = SAVEGAMELOCATION + "player.csv";
   public static final String PLAYERSHIPCSV = SAVEGAMELOCATION + "playership.csv";
   public static final String PORTSCSV = SAVEGAMELOCATION + "ports.csv";
@@ -152,8 +156,7 @@ public abstract class Constants {
   public static final String SHIPEFFECTS = EFFECTSFOLDER + "shipeffects.csv";
   public static final String SUPPLYSTORESCSV = SAVEGAMELOCATION + "supplystores.csv";
   public static final String TAVERNSCSV = SAVEGAMELOCATION + "taverns.csv"; 
-  public static final String DOCKYARDSCSV = SAVEGAMELOCATION + "dockyards.csv";
-  public static final String WORLDMAPCSV = SAVEGAMELOCATION + "map.csv";
+  public static final String WORLDCSV = SAVEGAMELOCATION + "world.csv";
 
   // Headers and formats
   public static final String ALLCREWSFORMAT = "%s,%s,%s,%d,%d,%d,%s,%d,%d,%d,%d,%d";
@@ -168,12 +171,18 @@ public abstract class Constants {
   public static final String CREWEFFECTHEADER = RARITY + COMMA + DESCRIPTION;
   public static final String CREWLISTFORMAT = "%d,%d,%d,%d,%d";
   public static final String CREWLISTHEADER = CREW0 + COMMA + CREW1 + COMMA + CREW2 + COMMA + CREW3 + COMMA + CREW4;
+  public static final String DOCKYARDFORMAT = "%s,%d,%d,%d,%d,%d,%d";
+  public static final String DOCKYARDHEADER = NAME + COMMA + LEVEL + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4;
   public static final String FOODCARDSFORMAT = "%d,%s,%d";
   public static final String FOODCARDSHEADER = RARITY + COMMA + NAME + COMMA + EFFECTINDEX;
   public static final String FOODEFFECTFORMAT = "%d,%s,%d";
   public static final String FOODEFFECTHEADER = RARITY + COMMA + DESCRIPTION + COMMA + HEALTHRESTORED;
   public static final String INVENTORYFORMAT = "%s,%s,%s,%d";
   public static final String INVENTORYHEADER = ININVENTORY + COMMA + TYPE + COMMA + SUBTYPE + COMMA + ITEMINDEX;
+  public static final String LOCATIONFORMAT = "%d,%d";
+  public static final String LOCATIONHEADER = YCORD + COMMA + XCORD;
+  public static final String OCEANFORMAT = "%s";
+  public static final String OCEANHEADER = VIEWED;
   public static final String PLAYERFORMAT = "%s,%d,%d,%d,%d,%d,%d,%d,%d";
   public static final String PLAYERHEADER = NAME + COMMA + LEVEL + COMMA + HEALTH + COMMA + GOLD + COMMA + CARD0 + COMMA + CARD1 + COMMA + CARD2 + COMMA + CARD3 + COMMA + CARD4;
   public static final String PLAYERSHIPFORMAT = "%d,%d,%d,%d,%d,%d,%d,%d,%d,%d";
@@ -188,10 +197,8 @@ public abstract class Constants {
   public static final String SUPPLYSTORESHEADER = LEVEL + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4 + COMMA + PACK5 + COMMA + PACK6 + COMMA + PACK7 + COMMA + PACK8 + COMMA + PACK9;
   public static final String TAVERNSFORMAT = "%s,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d,%d";
   public static final String TAVERNSHEADER = NAME + COMMA + LEVEL + COMMA + BARTENDERINDEX + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4 + COMMA + CREWINDEX0 + COMMA + CREWINDEX1 + COMMA + CREWINDEX2 + COMMA + CREWINDEX3 + COMMA + CREWINDEX4 + COMMA + CREWINDEX5 + COMMA + CREWINDEX6 + COMMA + CREWINDEX7 + COMMA + CREWINDEX8 + COMMA + CREWINDEX9+ COMMA + CREWINDEX10 + COMMA + CREWINDEX11 + COMMA + CREWINDEX12 + COMMA + CREWINDEX13 + COMMA + CREWINDEX14;
-  public static final String DOCKYARDFORMAT = "%s,%d,%d,%d,%d,%d,%d";
-  public static final String DOCKYARDHEADER = NAME + COMMA + LEVEL + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4;
-  public static final String WORLDMAPFORMAT = "%s,%d";
-  public static final String WORLDMAPHEADER = ENCOUNTER + COMMA + ENCOUNTERINDEX;
+  public static final String WORLDFORMAT = "%s,%d";
+  public static final String WORLDHEADER = ENCOUNTER + COMMA + ENCOUNTERINDEX;
   
   // Numbers
   public static final int ANIMATIONSPEED = 1000;
@@ -210,9 +217,6 @@ public abstract class Constants {
   public static final int UNCOMMONNUM = 1;
   public static final int REPAIRAMOUNT = 75;
   public static final int UPGRADECOST = 1000;
-  public static final int NUMPORTS = 10;
-  public static final int NUMBATTLES = 10;
-  public static final int NUMISLANDS = 10;
   public static final int WORLDSIZE = 20;
 
 
@@ -249,8 +253,12 @@ public abstract class Constants {
   public static final int Y = -25;
   public static final int Z = -26;
 
+  // WORLD GENERATION AMOUNTS
+  public static final int NUMPORTS = 40;
+  public static final int NUMBATTLES = 40;
+  public static final int NUMISLANDS = 30;
+
   // WORLD ENCOUNTER IDENTIFIERS
-  public static final int GENOCEAN = 0;
   public static final int GENPORT = 1;
   public static final int GENSTARTINGPORT = 9;
   public static final int GENBATTLE = 2;
@@ -275,6 +283,14 @@ public abstract class Constants {
   public static final int GENMAMI = 28;
   public static final int GENCUSTOM = 29;
   public static final int[] GENBOSSES = {GENLEVIATHON,GENKRAKEN,GENKAPPA,GENSCYLLA,GENUMIBOZU,GENCHARYDBIS,GENJENGU,GENSIREN,GENMAMI,GENCUSTOM};
+
+  // MAP SYMBOLS
+  public static final char OCEANSYMBOL = 'O';
+  public static final char PORTSYMBOL = 'P';
+  public static final char TAVERNSYMBOL = 'T';
+  public static final char SUPPLYSTORESYMBOL = 'S';
+  public static final char DOCKYARDSYMBOL = 'D';
+  public static final char NOTVIEWED = 'N';
 
   // OTHER
   public static final String FALSE = "false";

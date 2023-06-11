@@ -12,7 +12,6 @@ import java.util.*;
 import Items.Packs.*;
 import Items.Cards.*;
 import static Globals.Encyclopedia.*;
-import Globals.WorldMap;
 
 public abstract class Tools {
 
@@ -432,14 +431,14 @@ public abstract class Tools {
    * Prints the world map
    */
   public static void prMap(){
-    (new WorldMap(true)).printMap();
+    (new World(true)).printMap();
   }
 
   /*
    * Prints the world map zoomed to the 5x5 around the player
    */
   public static void prMapZoomed(){
-    (new WorldMap(true)).printMapZoomed();
+    (new World(true)).printMapZoomed();
   }
 
 
@@ -538,20 +537,23 @@ public abstract class Tools {
    * Refreshes all CSVs to delete their contents
    */
   public static void cleanCSVFiles(){
-    refreshCSV(CREWSCSV,ALLCREWSHEADER);
-    refreshCSV(PACKSCSV,ALLPACKSHEADER);
     refreshCSV(BARTENDERSCSV,BARTENDERSHEADER);
     refreshCSV(CREWCARDSCSV,CREWCARDSHEADER);
+    refreshCSV(CREWLISTCSV,CREWLISTHEADER);
+    refreshCSV(CREWSCSV,ALLCREWSHEADER);
+    refreshCSV(DOCKYARDSCSV,DOCKYARDHEADER);
     refreshCSV(FOODCARDSCSV,FOODCARDSHEADER);
     refreshCSV(INVENTORYCSV,INVENTORYHEADER);
+    refreshCSV(LOCATIONCSV,LOCATIONHEADER);
+    refreshCSV(OCEANCSV,OCEANHEADER);
+    refreshCSV(PACKSCSV,ALLPACKSHEADER);
     refreshCSV(PLAYERCSV,PLAYERHEADER);
     refreshCSV(PLAYERSHIPCSV,PLAYERSHIPHEADER);
     refreshCSV(PORTSCSV,PORTSHEADER);
     refreshCSV(SHIPCARDSCSV,SHIPCARDSHEADER);
     refreshCSV(SUPPLYSTORESCSV,SUPPLYSTORESHEADER);
     refreshCSV(TAVERNSCSV,TAVERNSHEADER);
-    refreshCSV(CREWLISTCSV,CREWLISTHEADER);
-    refreshCSV(DOCKYARDSCSV,DOCKYARDHEADER);
+    refreshCSV(WORLDCSV,WORLDHEADER);
   }
 
   /*
@@ -559,7 +561,7 @@ public abstract class Tools {
    * @param filepath The name of the file to refresh
    * @param headerRow The header row to write to the file
    */
-  private static void refreshCSV(String filepath, String headerRow) {
+  public static void refreshCSV(String filepath, String headerRow) {
     try{
       //Check if file exists and create it if not
       if (!Files.exists(Paths.get(filepath))) {

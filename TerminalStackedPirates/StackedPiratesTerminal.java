@@ -6,7 +6,7 @@
 import Humans.*;
 import static Globals.Tools.*;
 import static Globals.Constants.*;
-import Globals.WorldMap;
+import Globals.World;
 import Encounters.*;
 
 public class StackedPiratesTerminal{
@@ -34,10 +34,13 @@ public class StackedPiratesTerminal{
       //   prln("Cancelling");
       //   return;
       // }
-      Pair<WorldMap, Player> pair = initializeNewGame();
+      
+      Pair<World, Player> pair = initializeNewGame();
       //WorldMap map = pair.getFirst();
       Player player = pair.getSecond();
-      //prMap();
+      prMap();
+      prln("/////////////////////////////");
+      prMapZoomed();
       if(player != null){
         pr("Welcome to Stacked Pirates");
         pr(" Captain " + player.getName() + "!\nYou are ");
@@ -54,7 +57,7 @@ public class StackedPiratesTerminal{
   /*
    * Method for generating game world and files
    */
-  private static Pair<WorldMap,Player> initializeNewGame(){
+  private static Pair<World,Player> initializeNewGame(){
     //Clean any CSV files that need to be
     cleanCSVFiles();
 
@@ -72,13 +75,13 @@ public class StackedPiratesTerminal{
     // ...
     //Generate world
     pr("Generating World.... ");
-    WorldMap map = new WorldMap(false);
+    World map = new World(false);
     prln(" Done!",GREEN);
 
     //Load blank ship into CSV
     writeToCSV(PLAYERSHIPCSV, "StackedPiratesTerminal.java",false,PLAYERSHIPHEADER, PLAYERSHIPFORMAT,MINLEVEL,(MINLEVEL + 1) * 100,0,4,0,-1,-1,-1,-1,-1);
     
-    return new Pair<WorldMap,Player>(map,new Player("FuzzyPants"));
+    return new Pair<World,Player>(map,new Player("FuzzyPants"));
   }
 
   // private static Pair<WorldMap,Player> initializeLoadGame(){

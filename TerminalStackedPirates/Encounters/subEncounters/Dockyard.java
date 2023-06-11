@@ -1,7 +1,7 @@
 //File: Dockyard.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 06-08-2023
+//Modified: 06-10-2023
 package Encounters.subEncounters;
 
 import Humans.Player;
@@ -248,6 +248,13 @@ public class Dockyard extends Encounter{
    * @return char DOCKYARD
    */
   public char getSymbol(){
-    return 'D';
+    return DOCKYARDSYMBOL;
+  }
+
+  /*
+   * Sets the viewedness of an Encounter
+   */
+  public void viewEncounter(){
+    viewed = true;
   }
 }

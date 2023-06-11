@@ -1,4 +1,4 @@
-//File: Map.java
+//File: World.java
 //Author: MrFuzzyPants
 //Created: 06-07-2023
 //Modified: 06-10-2023
@@ -6,25 +6,26 @@ package Globals;
 
 import static Globals.Tools.*;
 import static Globals.Constants.*;
+import static Globals.PlayerAttributes.Location.*;
 import Encounters.*;
 
-public class WorldMap {
+public class World {
   Encounter[][] world = new Encounter[WORLDSIZE][WORLDSIZE];
   
   /*
-   * Constructor for reloading the map
+   * Constructor for the WorldMap object
    * @param boolean true if reloading a map false if generating a map.
    */
-  public WorldMap(Boolean reload){
+  public World(Boolean reload){
     String[] mapData = new String[2];
     if(reload){
       for(int y = 0; y < WORLDSIZE; y++){
         for(int x = 0; x < WORLDSIZE; x++){
-          mapData = getFromCSVRow(WORLDMAPCSV,"WorldMap.java",INDEX,toStr(y * 11 + x));
+          mapData = getFromCSVRow(WORLDCSV,"WorldMap.java",INDEX,toStr(y * WORLDSIZE + x));
           if(mapData[1].equals(PORT)){
             world[y][x] = new Port(toInt(mapData[2]));
           } else {
-            world[y][x] = new Basic();
+            world[y][x] = new Ocean(true,toInt(mapData[2]));
           }
         }
       }
@@ -39,25 +40,26 @@ public class WorldMap {
   private void createMap(){
     for(int y = 0; y < WORLDSIZE; y++){
       for(int x = 0; x < WORLDSIZE; x++){
-        world[y][x] = new Basic();
+        world[y][x] = new Ocean(false,MINLEVEL);
       }
     }
     // These are all number remaining not number in the world
     int numPorts = NUMPORTS;
 
-    //Randomly picks one of the middle squares to be the starting square;
+    //Randomly picks one of the middle squares to be the starting square
     int randomSquare = generateRand(4);
     world[((WORLDSIZE / 2) - 1) + randomSquare / 2][((WORLDSIZE / 2) - 1) + randomSquare % 2] = new Port(true,MINLEVEL);
+    setYX(((WORLDSIZE / 2) - 1) + randomSquare / 2,((WORLDSIZE / 2) - 1) + randomSquare % 2); //And sets the players location to that square
     
     int encounter;
     int x;
     int y;
     int level = MINLEVEL;
-    while(numPorts != 0){
+    while(numPorts > 1){
       x = generateRand(WORLDSIZE);
       y = generateRand(WORLDSIZE);
-      if(world[y][x].getType().equals(BASIC)){
-        encounter = generateRand(1);
+      if(world[y][x].getType().equals(OCEAN)){
+        encounter = generateRand(1) + 1;
         // Determines the ring selected and sets the level
         if (y == 0 || y == 1 || y == 18 || y == 19 || x == 0 || x == 1 || x == 18 || x == 19) {
           level = MAXLEVEL;
@@ -71,23 +73,37 @@ public class WorldMap {
           level = MINLEVEL;
         }
 
-        if(encounter == 0 && numPorts > 0){
+        if(encounter == GENPORT && numPorts > 0){
           world[y][x] = new Port(false,level);
           numPorts--;
         }
       }
     }
     writeMapToCSV();
+
+    // Set the views around the player
+    Pair<Integer,Integer> YX = getYX();
+    int yCord = YX.getFirst();
+    int xCord = YX.getSecond();
+    world[yCord][xCord].viewEncounter();
+    world[yCord + 1][xCord].viewEncounter();
+    world[yCord + 1][xCord + 1].viewEncounter();
+    world[yCord + 1][xCord - 1].viewEncounter();
+    world[yCord][xCord + 1].viewEncounter();
+    world[yCord][xCord - 1].viewEncounter();
+    world[yCord - 1][xCord].viewEncounter();
+    world[yCord - 1][xCord + 1].viewEncounter();
+    world[yCord - 1][xCord - 1].viewEncounter();
   }
 
   /*
    * Internal WorldMap function used to more efficiently write the map to a CSV
    */
   private void writeMapToCSV(){
-    writeToCSV(WORLDMAPCSV, "WorldMap.java", false, WORLDMAPHEADER, WORLDMAPFORMAT); //Resets map CSV if it already exists
+    refreshCSV(WORLDCSV,WORLDHEADER);
     for(int y = 0; y < WORLDSIZE; y++){
       for(int x = 0; x < WORLDSIZE; x++){
-        writeToCSV(WORLDMAPCSV, "WorldMap.java", true, WORLDMAPHEADER, WORLDMAPFORMAT,world[y][x].getType(),world[y][x].getIndex());
+        writeToCSV(WORLDCSV, "WorldMap.java", true, WORLDHEADER, WORLDFORMAT,world[y][x].getType(),world[y][x].getIndex());
       }
     }
   }
@@ -98,13 +114,33 @@ public class WorldMap {
   public void printMap(){
     for(int y = 0; y < WORLDSIZE; y++){
       for(int x = 0; x < WORLDSIZE; x++){
-        pr(toStr(world[y][x].getSymbol()) + SPACE);
+        if(world[y][x].getViewed()){
+          pr(world[y][x].getSymbol() + SPACE);
+        } else {
+          pr(NOTVIEWED + SPACE);
+        }
       }
       pr(NEWLINE);
     }
   }
+
   /*
    * prints the map at a 5x5 scale around the player
    */
-  public void printMapZoomed(){}
+  public void printMapZoomed(){
+    Pair<Integer,Integer> YX = getYX();
+    int yCord = YX.getFirst();
+    int xCord = YX.getSecond();
+
+    for(int y = yCord - 2; y <= yCord + 2; y++){
+      for(int x = xCord - 2; x <= xCord + 2; x++){
+        if(world[y][x].getViewed()){
+          pr(world[y][x].getSymbol() + SPACE);
+        } else {
+          pr(NOTVIEWED + SPACE);
+        }
+      }
+      pr(NEWLINE);
+    }
+  }
 }

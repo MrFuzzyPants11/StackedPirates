@@ -15,21 +15,29 @@ public abstract class Encounter {
    * @param player the player entering the encounter
    */
   public abstract void enter(Player player);
+  
   /*
    * Method for getting the encounter type
    * @return the encounters type as a String
    */
   public abstract String getType();
+  
   /*
    * Method for getting the encounter Map Symbol
    * @return the encounters Map Symbol as a character
    */
   public abstract char getSymbol();
+
+  /*
+   * Sets the Encounter to viewed.
+   */
+  public abstract void viewEncounter();
+  
   /*
    * Gets if the encounter has been viewed before
    * @return the Encounter's viewed boolean
    */
-  public boolean getviewed(){
+  public boolean getViewed(){
     return viewed;
   }
 

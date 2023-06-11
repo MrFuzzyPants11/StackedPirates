@@ -23,12 +23,13 @@ public class Port extends Encounter{
    */
   public Port(int index){
     String[] data = getFromCSVRow(PORTSCSV,"Ports.java",INDEX, toStr(index));
-    index = toInt(data[0]);
+    this.index = index;
     name = data[1];
-    storeIndex = toInt(data[2]);
-    tavernIndex = toInt(data[3]);
-    dockIndex = toInt(data[4]);
-    viewed = toBool(data[5]);
+    level = toInt(data[2]);
+    storeIndex = toInt(data[3]);
+    tavernIndex = toInt(data[4]);
+    dockIndex = toInt(data[5]);
+    viewed = toBool(data[6]);
     if(storeIndex != -1){
       store = new SupplyStore(true,storeIndex);
     }
@@ -64,6 +65,7 @@ public class Port extends Encounter{
     }
     viewed = false;
     writeToCSV(PORTSCSV,"Port.java",true,PORTSHEADER,PORTSFORMAT,name,level,storeIndex, tavernIndex, dockIndex,toStr(viewed));
+    this.index = getFromCSVLastIndex(PORTSCSV, "Port.java");
   }
 
   /*
@@ -244,5 +246,13 @@ public class Port extends Encounter{
    */
   public char getSymbol(){
     return 'P';
+  }
+
+  /*
+   * Sets the viewedness of an Encounter
+   */
+  public void viewEncounter(){
+    writeToCSVValue(PORTSCSV,"Port.java",INDEX,toStr(index),VIEWED,TRUE);
+    viewed = true;
   }
 }

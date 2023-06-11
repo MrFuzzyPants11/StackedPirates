@@ -1,7 +1,7 @@
 //File: Tavern.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 06-08-2023
+//Modified: 06-10-2023
 package Encounters.subEncounters;
 
 import Items.Packs.FoodPack;
@@ -244,6 +244,13 @@ public class Tavern extends Encounter{
    * @return char TAVERN
    */
   public char getSymbol(){
-    return 'T';
+    return TAVERNSYMBOL;
+  }
+
+  /*
+   * Sets the viewedness of an Encounter
+   */
+  public void viewEncounter(){
+    viewed = true;
   }
 }

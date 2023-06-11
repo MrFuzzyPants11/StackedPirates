@@ -1,7 +1,7 @@
 //File: SupplyStore.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 06-08-2023
+//Modified: 06-10-2023
 package Encounters.subEncounters;
 
 import static Globals.Tools.*;
@@ -137,6 +137,13 @@ public class SupplyStore extends Encounter{
    * @return char SUPPLYSTORE
    */
   public char getSymbol(){
-    return 'S';
+    return SUPPLYSTORESYMBOL;
+  }
+
+  /*
+   * Sets the viewedness of an Encounter
+   */
+  public void viewEncounter(){
+    viewed = true;
   }
 }
