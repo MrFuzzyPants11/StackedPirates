@@ -46,6 +46,7 @@ public class World {
     }
     // These are all number remaining not number in the world
     int numPorts = NUMPORTS;
+    int numBattles = NUMBATTLES;
 
     //Randomly picks one of the middle squares to be the starting square
     int randomSquare = generateRand(4);
@@ -56,11 +57,11 @@ public class World {
     int x;
     int y;
     int level = MINLEVEL;
-    while(numPorts > 1){
+    while(numPorts > 1 || numBattles > 0){
       x = generateRand(WORLDSIZE);
       y = generateRand(WORLDSIZE);
       if(world[y][x].getType().equals(OCEAN)){
-        encounter = generateRand(1) + 1;
+        encounter = generateRand(2) + 1;
         // Determines the ring selected and sets the level
         if (y == 0 || y == 1 || y == 18 || y == 19 || x == 0 || x == 1 || x == 18 || x == 19) {
           level = MAXLEVEL;
@@ -77,6 +78,8 @@ public class World {
         if(encounter == GENPORT && numPorts > 0){
           world[y][x] = new Port(false,level);
           numPorts--;
+        } else if(encounter == GENBATTLE && numBattles > 0){
+          world[y][x] = new Battle(false,level);
         }
       }
     }
@@ -153,11 +156,11 @@ public class World {
     for(int y = 0; y < WORLDSIZE; y++){
       for(int x = 0; x < WORLDSIZE; x++){
         if(y == yCord && x == xCord){
-          pr(PLAYERICON + SPACE);
+          pr(PLAYERSYMBOL + SPACE);
         } else if(world[y][x].getViewed()){
           pr(world[y][x].getSymbol() + SPACE);
         } else {
-          pr(NOTVIEWED + SPACE);
+          pr(NOTVIEWEDSYMBOL + SPACE);
         }
       }
       pr(NEWLINE);
@@ -207,11 +210,11 @@ public class World {
     for(int y = yCord - minY; y <= yCord + maxY; y++){
       for(int x = xCord - minX; x <= xCord + maxX; x++){
         if(y == yCord && x == xCord){
-          pr(PLAYERICON + SPACE);
+          pr(PLAYERSYMBOL + SPACE);
         } else if(world[y][x].getViewed()){
           pr(world[y][x].getSymbol() + SPACE);
         } else {
-          pr(NOTVIEWED + SPACE);
+          pr(NOTVIEWEDSYMBOL + SPACE);
         }
       }
       pr(NEWLINE);

@@ -67,7 +67,7 @@ public class Tavern extends Encounter{
       index = getFromCSVLastIndex(TAVERNSCSV,"Tavern.java");
 
       for(int i = 0; i < tavernPatrons.size() - 1; i++){
-        writeToCSVValue(TAVERNSCSV,"Tavern.java",INDEX,toStr(index), "crewindex" + i, toStr(tavernPatrons.get(i).getIndex()));
+        writeToCSVValue(TAVERNSCSV,"Tavern.java",INDEX,toStr(index), CREWINDEX + toStr(i), toStr(tavernPatrons.get(i).getIndex()));
       }
     }
   }

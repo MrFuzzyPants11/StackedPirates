@@ -5,5 +5,5 @@
 package Humans;
 
 public class Enemy extends NPC{
-  
+  public Enemy(boolean reload, int levelOrIndex){}
 }

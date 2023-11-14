@@ -1,0 +1,38 @@
+Hi, While reading this remember your task at the end will be to create 50 uncommon food cards:  you are going to be generating cards that have effects in my game about pirates. 
+There will be 3 card types for your crew, for food, and for your ship. 
+There are also bosses, crewmates, the player, and enemies. Crews, the player, and enemies are all people who can eat food and where crew cards. Bosses are mega encounters that attack with increased damage and have increased health. If you need any more base information please ask but for now focus on this task:
+The first card you will be making will be food cards that will be eaten by the player, crew, and sometimes enemies. Please follow these guidelines:
+Cards come in rarities of common, uncommon, rare, epic, and legendary.
+They should be formated as "Name, +X HP, Effect" Where the name is a name of food that should be pirate or pirate age (1700s) themed. Where x is the gained HP for consuming it, and Where Effect is any addition effects it can give (it can have none). In general the higher the rarity the better the health gain and effects should be. Within a rarity food should give more health if it has a weaker effect and give less health if it has a stronger effect. Foods can even have negative health gain and negative effects, if the other is strong enough to compensate. 
+The effect can also affect crew cards (or have magnified effects if you have something equipped) which have a general crew type as well as 5 possible subtypes of "two-handed weapon" "one handed weapon" "hat" "tunic" "pants".
+The effect can also do special things like attacking twice each turn during this battle or twice this turn or etc. Be creative.
+There are also considerations you should know before deciding how powerful food is:
+- Food can be eaten any time you are not in battle and during the break phase in battle
+- Battle is comprised of 3 turns (you and your crew attack, enemy attacks, you and your crew attack) Then a break phase which is the only time you can eat food before another 3 turns (enemy attacks, you and your crew attack, enemy attacks), before another break phase where you can once again eat. This then repeats until you or the enemy dies.
+These next consideration apply to the player, crewmates, and enemy
+- have a max HP of 50 and die if it reaches 0.
+- Have a stat called surprise which is a stat between 1 and 100 which is a percentage chance that they will attack during the other side (enemy or crew)'s turn. If two or more people attack with surprise in the same turn the person with the lower surprise attacks before the others. This can only trigger once a turn phase per person.
+- Agility is a number between 0 and 50 that is your percentage chance to hit an opponent - 50. The base % is 50% chance to hit, so someone with 1 agility has a 51% chance to hit an opponent, 25 agility would have a 75% chance to hit. This applies to surprise attacks.
+- Attack is a number between 1 and 25 that is the base amount of damage a person does to opponents. A person has a base attack of 1 but it can be increased by crew cards and food effects.
+- Strength is a number between 0 and 50 which is a damage boost to your attacks. Damage is calculated as "Attack * (Strength + 50/50)" So a strength of 50 is double attack. whereas a strength of 0 will be Attack * 1;
+- Defense is a number between 0 and 50 that is the percentage of damage a person can block, and not take damage. For example someone with 50 defense hit with 20 damage would only lose 10 health points instead of the regular 20 they would lose if they had 0 defense.
+
+As I mentioned earlier food has rarities and HP gained/effect should scale with that, here is an example of a power creep I would like from cards:
+
+common:
+HP gained between 2 and 5, no effect
+ex. Hardtack Biscuit, +3 HP
+uncommon:
+HP gained generally between 5 and 8 but it can go higher or lower if an effect is good or bad enough to affect that, These can have an effect but it should be fairly weak or negative, These also often will not have effects.
+ex. Grilled Steak, +7 HP and increases strength by 10 until end of battle
+rare:
+HP gained generally between 8 and 13 but again can go higher or lower based on effect, These should almost all have effects and they should be better than uncommon effects but not as good as epic effects
+ex. Ratatouille, +8 HP 15% chance to double your strength and agility until end of battle
+epic:
+Hp gained generally between 13 and 20 but again can go lower or higher based on effect, These should all have quite powerful effects that can change the entire outcome of a battle if used tactically.
+ex. Dragon Meat, +15 HP and allows the user to attack twice each turn and surprise attack this battle
+legendary:
+HP gained generally between 20 and 30 but again can go lower or higher based on effect, These all have effect and should win a battle simply by being eaten. These effects can including giving teammates boosts, reviving dead teammates, healing all teammates, damaging all enemies, buffing all stats at once, feeding another teammate a random rare or epic food, etc. Again get very creative and don't be afraid to get overly powerful, these are very rare to get.
+ex. Golden Apple, +25 HP and increases defense by 35 for the rest of the battle
+
+Now please make 50 uncommon cards

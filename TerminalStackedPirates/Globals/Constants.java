@@ -19,6 +19,7 @@ public abstract class Constants {
   public static final String FOOD = "food";
   public static final String PACK = "pack";
   public static final String SHIP = "ship";
+  public static final String SHIPINDEX = "shipindex";
   public static final String SPACE = " ";
   public static final String NEWLINE = "\n";
   public static final String PORT = "port";
@@ -36,21 +37,22 @@ public abstract class Constants {
   public static final String CREW3 = "crew3";
   public static final String CREW4 = "crew4";
   public static final String CREWCARDTYPE = "crewcardtype";
-  public static final String CREWINDEX0 = "crewindex0";
-  public static final String CREWINDEX1 = "crewindex1";
-  public static final String CREWINDEX10 = "crewindex10";
-  public static final String CREWINDEX11 = "crewindex11";
-  public static final String CREWINDEX12 = "crewindex12";
-  public static final String CREWINDEX13 = "crewindex13";
-  public static final String CREWINDEX14 = "crewindex14";
-  public static final String CREWINDEX2 = "crewindex2";
-  public static final String CREWINDEX3 = "crewindex3";
-  public static final String CREWINDEX4 = "crewindex4";
-  public static final String CREWINDEX5 = "crewindex5";
-  public static final String CREWINDEX6 = "crewindex6";
-  public static final String CREWINDEX7 = "crewindex7";
-  public static final String CREWINDEX8 = "crewindex8";
-  public static final String CREWINDEX9 = "crewindex9";
+  public static final String CREWINDEX = "crewindex";
+  public static final String CREWINDEX0 = CREWINDEX + "0";
+  public static final String CREWINDEX1 = CREWINDEX + "1";
+  public static final String CREWINDEX10 = CREWINDEX + "10";
+  public static final String CREWINDEX11 = CREWINDEX + "11";
+  public static final String CREWINDEX12 = CREWINDEX + "12";
+  public static final String CREWINDEX13 = CREWINDEX + "13";
+  public static final String CREWINDEX14 = CREWINDEX + "14";
+  public static final String CREWINDEX2 = CREWINDEX + "2";
+  public static final String CREWINDEX3 = CREWINDEX + "3";
+  public static final String CREWINDEX4 = CREWINDEX + "4";
+  public static final String CREWINDEX5 = CREWINDEX + "5";
+  public static final String CREWINDEX6 = CREWINDEX + "6";
+  public static final String CREWINDEX7 = CREWINDEX + "7";
+  public static final String CREWINDEX8 = CREWINDEX + "8";
+  public static final String CREWINDEX9 = CREWINDEX + "9";
   public static final String DESCRIPTION = "description";
   public static final String DOCKYARD = "dockyard";
   public static final String EFFECTINDEX = "effectindex";
@@ -99,6 +101,11 @@ public abstract class Constants {
   public static final String YCORD = "ycord";
   public static final String XCORD = "xcord"; 
   public static final String ZERO = "0";
+  public static final String BATTLE = "battle";
+  public static final String BRITISH = "british";
+  public static final String SPANISH = "spanish";
+  public static final String MERCHANT = "merchant";
+  public static final String PIRATE = "pirate";
 
 
   // Rarities
@@ -174,6 +181,8 @@ public abstract class Constants {
   public static final String TAVERNSCSV = TEMPFILELOCATION + "taverns.csv"; 
   public static final String TAVERNSCSVPERM = SAVEGAMELOCATION + "taverns.csv"; 
   public static final String WORLDCSV = SAVEGAMELOCATION + "world.csv";
+  public static final String BATTLECSV = TEMPFILELOCATION + "battle.csv";
+  public static final String BATTLECSVPERM = SAVEGAMELOCATION + "battle.csv";
   public static final List<Pair<String, String>> allfileHeaderPairs = Collections.unmodifiableList(
     new ArrayList<Pair<String, String>>() {{
       add(new Pair<>(BARTENDERSCSV,BARTENDERSHEADER));
@@ -210,6 +219,7 @@ public abstract class Constants {
       add(new Pair<>(WORLDCSV,WORLDHEADER));
       add(new Pair<>(LOCATIONCSV,LOCATIONHEADER));
       add(new Pair<>(LOCATIONCSVPERM,LOCATIONHEADER));
+      add(new Pair<>(BATTLECSVPERM,BATTLEHEADER));
     }}
   );
 
@@ -231,6 +241,7 @@ public abstract class Constants {
       add(new Pair<>(SUPPLYSTORESCSV,SUPPLYSTORESCSVPERM));
       add(new Pair<>(TAVERNSCSV,TAVERNSCSVPERM));
       add(new Pair<>(LOCATIONCSV,LOCATIONCSVPERM));
+      add(new Pair<>(BATTLECSV,BATTLECSVPERM));
     }}
   );
 
@@ -245,7 +256,7 @@ public abstract class Constants {
 
   // Headers and formats
   public static final String ALLCREWSFORMAT = "%s,%s,%s,%d,%d,%d,%s,%d,%d,%d,%d,%d";
-  public static final String ALLCREWSHEADER = FNAME + COMMA + LNAME + COMMA + INCREW + COMMA + LEVEL + COMMA + HEALTH + COMMA + COST + COMMA + INTAVERN +COMMA+ CARD0 + COMMA + CARD1 + COMMA + CARD2 + COMMA + CARD3 + COMMA + CARD4;
+  public static final String ALLCREWSHEADER = FNAME + COMMA + LNAME + COMMA + INCREW + COMMA + LEVEL + COMMA + HEALTH + COMMA + COST + COMMA + INTAVERN + COMMA + CARD0 + COMMA + CARD1 + COMMA + CARD2 + COMMA + CARD3 + COMMA + CARD4;
   public static final String ALLPACKSFORMAT = "%s,%s,%s,%d,%d,%d,%d,%d,%d,%d";
   public static final String ALLPACKSHEADER = TYPE + COMMA + SOLD + COMMA + OPENED + COMMA + RARITY + COMMA + COST + COMMA + CARD0 + COMMA + CARD1 + COMMA + CARD2 + COMMA + CARD3 + COMMA + CARD4;
   public static final String BARTENDERSFORMAT = "%s,%s,%d,%d,%s";
@@ -286,6 +297,8 @@ public abstract class Constants {
   public static final String WORLDHEADER = ENCOUNTER + COMMA + ENCOUNTERINDEX;
   public static final String GAMEPROGRESSHEADER = ENCOUNTER + COMMA + ENCOUNTERINDEX;
   public static final String GAMEPROGRESSFORMAT = "%s,%d";
+  public static final String BATTLEHEADER = LEVEL + COMMA + TYPE + COMMA + SHIPINDEX + COMMA + CREWINDEX1 + COMMA + CREWINDEX2 + COMMA + CREWINDEX3 + COMMA + CREWINDEX4 + COMMA + CREWINDEX5;
+  public static final String BATTLEFORMAT = "%d,%s,%d,%d,%d,%d,%d,%d";
   
   // Numbers
   public static final int ANIMATIONSPEED = 1000;
@@ -341,7 +354,7 @@ public abstract class Constants {
   public static final int Z = -26;
 
   // World Generation Amounts
-  public static final int NUMPORTS = 40;
+  public static final int NUMPORTS = 30;
   public static final int NUMBATTLES = 40;
   public static final int NUMISLANDS = 30;
 
@@ -377,8 +390,9 @@ public abstract class Constants {
   public static final char TAVERNSYMBOL = 'T';
   public static final char SUPPLYSTORESYMBOL = 'S';
   public static final char DOCKYARDSYMBOL = 'D';
-  public static final char NOTVIEWED = 'N';
-  public static final char PLAYERICON = 'Y';
+  public static final char NOTVIEWEDSYMBOL = 'N';
+  public static final char PLAYERSYMBOL = 'Y';
+  public static final char BATTLESYMBOL = 'B';
 
   // Other
   public static final String FALSE = "false";
