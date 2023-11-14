@@ -1,7 +1,7 @@
 //File: Port.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 06-08-2023
+//Modified: 11-13-2023
 package Encounters;
 
 import static Globals.Tools.*;
@@ -73,6 +73,7 @@ public class Port extends Encounter{
    * @param player the player
    */
   public void enter(Player player){
+    enterProgressUpdates("Port.java", PORT, this.index);
     while(true){
       lineBreaker("Port");
       pr("You have entered The ");

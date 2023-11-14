@@ -1,7 +1,7 @@
 //File: Tools.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 06-07-2023
+//Modified: 11-13-2023
 package Globals;
 
 import static Globals.Constants.*;
@@ -12,6 +12,7 @@ import java.util.*;
 import Items.Packs.*;
 import Items.Cards.*;
 import static Globals.Encyclopedia.*;
+import Encounters.*;
 
 public abstract class Tools {
 
@@ -261,6 +262,37 @@ public abstract class Tools {
     return sortedList;
   }
 
+  /*
+   * Adds to progress.csv
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @param encounter encounter type
+   * @param index encounter index
+   */
+  public static void incrementProgress(String comingFrom, String encounter, int index){
+    writeToCSV(GAMEPROGRESSCSV, comingFrom,true,GAMEPROGRESSHEADER,GAMEPROGRESSFORMAT,encounter,index);
+  }
+
+  /*
+   * Shortcut to place at the top of all enter commands
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @param encounter encounter type
+   * @param index encounter index
+   */
+  public static void enterProgressUpdates(String comingFrom, String encounter, int encounterIndex){
+    refreshCSV(GAMEPROGRESSCSV, GAMEPROGRESSHEADER);
+    incrementProgress(comingFrom,encounter,encounterIndex);
+    saveTempFiles();
+  }
+
+  /*
+   * Returns an Encounter from the map
+   * @param y y-coordinate of Encounter
+   * @param x x-coordinate of Encounter
+   */
+  public static Encounter getMapEncounter(int y, int x){
+    return (new World(true)).getMapEncounter(y,x);
+  }
+
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
   // PRINT METHODS | PRINT METHODS | PRINT METHODS
@@ -488,6 +520,8 @@ public abstract class Tools {
       input = MENUEXIT;
     } else if(input == Q){ // If the user enters 'q' or 'Q'
       input = QUIT;
+    } else if(input == L){
+      prMap();
     } else if(input == -6969){ // If they didn't enter an int or a char
       invalOp();
       input = askIn();
@@ -512,12 +546,16 @@ public abstract class Tools {
     while(true){
       prln("1. Settings");
       prln("2. SP Encyclopedia");
+      prln("0. Quit Game (Does not save on quit)", RED);
       prln("Q. Close Menu");
       int input = askIn();
       if(input == 1){
         //Open Settings
       } else if(input == 2){
         viewEncyclopedia();
+      } else if(input == 0){
+        prln("Closing game without saving...");
+        System.exit(0);
       } else if(input == QUIT){
         break;
       } else if(input == MENUEXIT){ 
@@ -537,23 +575,9 @@ public abstract class Tools {
    * Refreshes all CSVs to delete their contents
    */
   public static void cleanCSVFiles(){
-    refreshCSV(BARTENDERSCSV,BARTENDERSHEADER);
-    refreshCSV(CREWCARDSCSV,CREWCARDSHEADER);
-    refreshCSV(CREWLISTCSV,CREWLISTHEADER);
-    refreshCSV(CREWSCSV,ALLCREWSHEADER);
-    refreshCSV(DOCKYARDSCSV,DOCKYARDHEADER);
-    refreshCSV(FOODCARDSCSV,FOODCARDSHEADER);
-    refreshCSV(INVENTORYCSV,INVENTORYHEADER);
-    refreshCSV(LOCATIONCSV,LOCATIONHEADER);
-    refreshCSV(OCEANCSV,OCEANHEADER);
-    refreshCSV(PACKSCSV,ALLPACKSHEADER);
-    refreshCSV(PLAYERCSV,PLAYERHEADER);
-    refreshCSV(PLAYERSHIPCSV,PLAYERSHIPHEADER);
-    refreshCSV(PORTSCSV,PORTSHEADER);
-    refreshCSV(SHIPCARDSCSV,SHIPCARDSHEADER);
-    refreshCSV(SUPPLYSTORESCSV,SUPPLYSTORESHEADER);
-    refreshCSV(TAVERNSCSV,TAVERNSHEADER);
-    refreshCSV(WORLDCSV,WORLDHEADER);
+    for (Pair<String,String> file : allfileHeaderPairs) {
+      refreshCSV(file.getFirst(),file.getSecond());
+    }  
   }
 
   /*
@@ -573,6 +597,34 @@ public abstract class Tools {
       writer.close();
     } catch (Exception e){
       prln("refreshCSV: Failed to write to CSV file.", RED);
+    }
+  }
+
+  /*
+   * Saves game files from temp to permanent locations
+   */
+  public static void saveTempFiles(){
+    for (Pair<String,String> file : allTempPermPairs) {
+      saveTempToPerm(file.getFirst(),file.getSecond());
+    }  
+  }
+
+  /*
+   * Saves a specific file from temp to permanent location
+   * @param tempFilepath The name of the file to save from
+   * @param permFilePath The name of the file to save to
+   */
+  private static void saveTempToPerm(String tempFilepath, String permFilePath){
+    try (BufferedReader reader = new BufferedReader(new FileReader(tempFilepath));
+        BufferedWriter writer = new BufferedWriter(new FileWriter(permFilePath))) {
+            
+      String line;
+      while ((line = reader.readLine()) != null) {         
+        writer.write(line);
+        writer.newLine(); // To write a new line
+      } 
+    } catch (IOException e) {
+      prln("saveSpecificFile: " + permFilePath + ": Failed to write to CSV file.", RED);
     }
   }
 
@@ -864,6 +916,33 @@ public abstract class Tools {
     } catch (Exception e){
       prln("getFromCSVIndex: " + comingFrom + ": Failed to read from CSV file.", RED);
       return MAXVALUE;
+    }
+  }
+
+  /*
+   * Removes the last row from a CSV File
+   * @param filepath The name of the file to write to
+   * @param comingFrom The name of the class that called this method (For error reporting)
+   * @param headerRow The header row of the file
+   */
+  public static void removeLastRowFromCSVFile(String filepath, String comingFrom, String headerRow){
+    ArrayList<ArrayList<String>> data = getFromCSVFile(filepath,comingFrom);
+    // Check if the CSV data has at least one row to remove
+    if (!data.isEmpty()) {
+      // Remove the last row
+      data.remove(data.size() - 1);
+
+      // Convert the 2D ArrayList back into a list of strings, each representing a CSV row
+      try (BufferedWriter writer = new BufferedWriter(new FileWriter(filepath))) {
+        writer.write(INDEX + COMMA + headerRow + NEWLINE);
+        for (ArrayList<String> row : data) {
+          String joinedRow = String.join(COMMA, row); // Join the columns with commas
+          writer.write(joinedRow);
+          writer.newLine(); // Write a new line at the end of the row
+        }
+      } catch (IOException e) {
+        prln("removeLastRowFromCSVFile: " + comingFrom + ": Failed to read from CSV file.", RED);
+      }
     }
   }
 

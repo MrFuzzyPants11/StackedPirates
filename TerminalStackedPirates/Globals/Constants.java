@@ -1,8 +1,13 @@
 //File: Constants.java
 //Author: MrFuzzyPants
 //Created: 04-08-2023
-//Modified: 06-10-2023
+//Modified: 11-13-2023
 package Globals;
+
+import Globals.Tools.Pair;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 public abstract class Constants {
   // General Words
@@ -96,14 +101,14 @@ public abstract class Constants {
   public static final String ZERO = "0";
 
 
-  // RARITIES
+  // Rarities
   public static final String COMMON = "common";
   public static final String UNCOMMON = "uncommon";
   public static final String RARE = "rare";
   public static final String EPIC = "epic";
   public static final String LEGENDARY = "legendary";
 
-  // COLOURS
+  // Colours
   public static final String RESET = "0";
   public static final String BLACK = "30";
   public static final String RED = "31";
@@ -125,38 +130,118 @@ public abstract class Constants {
   public static final String UNCOMMONCOLOUR = CYAN;
 
   // Folder names
-  public static final String ROUTINGLOCATION = "TerminalStackedPirates/"; // This should be set to EMPTY when running outside of VSC
+  public static final String ROUTINGLOCATION = "";//"TerminalStackedPirates/"; // Sometimes needs to be terminalStackPirates sometimes not. Weird.
   public static final String FILELOCATION = ROUTINGLOCATION + "Globals/";
   public static final String SAVEGAMELOCATION = FILELOCATION + "SaveGameFiles/";
+  public static final String TEMPFILELOCATION = SAVEGAMELOCATION + "Temp/";
   public static final String IMMUTABLEFILELOCATION = FILELOCATION + "ImmutableFiles/";
   public static final String NAMESFOLDER = IMMUTABLEFILELOCATION + "SmashewNames/";
   public static final String EFFECTSFOLDER = IMMUTABLEFILELOCATION + "Effects/";
 
   // File paths
-  public static final String BARTENDERSCSV = SAVEGAMELOCATION + "bartenders.csv";
-  public static final String CREWCARDSCSV = SAVEGAMELOCATION + "crewcards.csv";
-  public static final String CREWEFFECTS = EFFECTSFOLDER + "creweffects.csv";
-  public static final String CREWLISTCSV = SAVEGAMELOCATION + "crewlist.csv";
-  public static final String CREWSCSV = SAVEGAMELOCATION + "crews.csv";
-  public static final String DOCKYARDSCSV = SAVEGAMELOCATION + "dockyards.csv";
+    // SAVE GAME
+  public static final String BARTENDERSCSV = TEMPFILELOCATION + "bartenders.csv";
+  public static final String BARTENDERSCSVPERM = SAVEGAMELOCATION + "bartenders.csv";
+  public static final String CREWCARDSCSV = TEMPFILELOCATION + "crewcards.csv";
+  public static final String CREWCARDSCSVPERM = SAVEGAMELOCATION + "crewcards.csv";
+  public static final String CREWLISTCSV = TEMPFILELOCATION + "crewlist.csv";
+  public static final String CREWLISTCSVPERM = SAVEGAMELOCATION + "crewlist.csv";
+  public static final String CREWSCSV = TEMPFILELOCATION + "crews.csv";
+  public static final String CREWSCSVPERM = SAVEGAMELOCATION + "crews.csv";
+  public static final String DOCKYARDSCSV = TEMPFILELOCATION + "dockyards.csv";
+  public static final String DOCKYARDSCSVPERM = SAVEGAMELOCATION + "dockyards.csv";
+  public static final String FOODCARDSCSV = TEMPFILELOCATION + "foodcards.csv";
+  public static final String FOODCARDSCSVPERM = SAVEGAMELOCATION + "foodcards.csv";
+  public static final String GAMEPROGRESSCSV = SAVEGAMELOCATION + "progress.csv";
+  public static final String INVENTORYCSV = TEMPFILELOCATION + "inventory.csv";
+  public static final String INVENTORYCSVPERM = SAVEGAMELOCATION + "inventory.csv";
+  public static final String LOCATIONCSV = TEMPFILELOCATION + "location.csv";
+  public static final String LOCATIONCSVPERM = SAVEGAMELOCATION + "location.csv";
+  public static final String OCEANCSV = TEMPFILELOCATION + "ocean.csv";
+  public static final String OCEANCSVPERM = SAVEGAMELOCATION + "ocean.csv";
+  public static final String PACKSCSV = TEMPFILELOCATION + "packs.csv";
+  public static final String PACKSCSVPERM = SAVEGAMELOCATION + "packs.csv";
+  public static final String PLAYERCSV = TEMPFILELOCATION + "player.csv";
+  public static final String PLAYERCSVPERM = SAVEGAMELOCATION + "player.csv";
+  public static final String PLAYERSHIPCSV = TEMPFILELOCATION + "playership.csv";
+  public static final String PLAYERSHIPCSVPERM = SAVEGAMELOCATION + "playership.csv";
+  public static final String PORTSCSV = TEMPFILELOCATION + "ports.csv";
+  public static final String PORTSCSVPERM = SAVEGAMELOCATION + "ports.csv";
+  public static final String SHIPCARDSCSV = TEMPFILELOCATION + "shipcards.csv";
+  public static final String SHIPCARDSCSVPERM = SAVEGAMELOCATION + "shipcards.csv";
+  public static final String SUPPLYSTORESCSV = TEMPFILELOCATION + "supplystores.csv";
+  public static final String SUPPLYSTORESCSVPERM = SAVEGAMELOCATION + "supplystores.csv";
+  public static final String TAVERNSCSV = TEMPFILELOCATION + "taverns.csv"; 
+  public static final String TAVERNSCSVPERM = SAVEGAMELOCATION + "taverns.csv"; 
+  public static final String WORLDCSV = SAVEGAMELOCATION + "world.csv";
+  public static final List<Pair<String, String>> allfileHeaderPairs = Collections.unmodifiableList(
+    new ArrayList<Pair<String, String>>() {{
+      add(new Pair<>(BARTENDERSCSV,BARTENDERSHEADER));
+      add(new Pair<>(BARTENDERSCSVPERM,BARTENDERSHEADER));
+      add(new Pair<>(CREWCARDSCSV,CREWCARDSHEADER));
+      add(new Pair<>(CREWCARDSCSVPERM,CREWCARDSHEADER));
+      add(new Pair<>(CREWLISTCSV,CREWLISTHEADER));
+      add(new Pair<>(CREWLISTCSVPERM,CREWLISTHEADER));
+      add(new Pair<>(CREWSCSV,ALLCREWSHEADER));
+      add(new Pair<>(CREWSCSVPERM,ALLCREWSHEADER));
+      add(new Pair<>(DOCKYARDSCSV,DOCKYARDHEADER));
+      add(new Pair<>(DOCKYARDSCSVPERM,DOCKYARDHEADER));
+      add(new Pair<>(FOODCARDSCSV,FOODCARDSHEADER));
+      add(new Pair<>(FOODCARDSCSVPERM,FOODCARDSHEADER));
+      add(new Pair<>(GAMEPROGRESSCSV, GAMEPROGRESSHEADER));
+      add(new Pair<>(INVENTORYCSV,INVENTORYHEADER));
+      add(new Pair<>(INVENTORYCSVPERM,INVENTORYHEADER));
+      add(new Pair<>(OCEANCSV,OCEANHEADER));
+      add(new Pair<>(OCEANCSVPERM,OCEANHEADER));
+      add(new Pair<>(PACKSCSV,ALLPACKSHEADER));
+      add(new Pair<>(PACKSCSVPERM,ALLPACKSHEADER));
+      add(new Pair<>(PLAYERCSV,PLAYERHEADER));
+      add(new Pair<>(PLAYERCSVPERM,PLAYERHEADER));
+      add(new Pair<>(PLAYERSHIPCSV,PLAYERSHIPHEADER));
+      add(new Pair<>(PLAYERSHIPCSVPERM,PLAYERSHIPHEADER));
+      add(new Pair<>(PORTSCSV,PORTSHEADER));
+      add(new Pair<>(PORTSCSVPERM,PORTSHEADER));
+      add(new Pair<>(SHIPCARDSCSV,SHIPCARDSHEADER));
+      add(new Pair<>(SHIPCARDSCSVPERM,SHIPCARDSHEADER));
+      add(new Pair<>(SUPPLYSTORESCSV,SUPPLYSTORESHEADER));
+      add(new Pair<>(SUPPLYSTORESCSVPERM,SUPPLYSTORESHEADER));
+      add(new Pair<>(TAVERNSCSV,TAVERNSHEADER));
+      add(new Pair<>(TAVERNSCSVPERM,TAVERNSHEADER));
+      add(new Pair<>(WORLDCSV,WORLDHEADER));
+      add(new Pair<>(LOCATIONCSV,LOCATIONHEADER));
+      add(new Pair<>(LOCATIONCSVPERM,LOCATIONHEADER));
+    }}
+  );
+
+  public static final List<Pair<String, String>> allTempPermPairs = Collections.unmodifiableList(
+    new ArrayList<Pair<String, String>>() {{
+      add(new Pair<>(BARTENDERSCSV,BARTENDERSCSVPERM));
+      add(new Pair<>(CREWCARDSCSV,CREWCARDSCSVPERM));
+      add(new Pair<>(CREWLISTCSV,CREWLISTCSVPERM));
+      add(new Pair<>(CREWSCSV,CREWSCSVPERM));
+      add(new Pair<>(DOCKYARDSCSV,DOCKYARDSCSVPERM));
+      add(new Pair<>(FOODCARDSCSV,FOODCARDSCSVPERM));
+      add(new Pair<>(INVENTORYCSV,INVENTORYCSVPERM));
+      add(new Pair<>(OCEANCSV,OCEANCSVPERM));
+      add(new Pair<>(PACKSCSV,PACKSCSVPERM));
+      add(new Pair<>(PLAYERCSV,PLAYERCSVPERM));
+      add(new Pair<>(PLAYERSHIPCSV,PLAYERSHIPCSVPERM));
+      add(new Pair<>(PORTSCSV,PORTSCSVPERM));
+      add(new Pair<>(SHIPCARDSCSV,SHIPCARDSCSVPERM));
+      add(new Pair<>(SUPPLYSTORESCSV,SUPPLYSTORESCSVPERM));
+      add(new Pair<>(TAVERNSCSV,TAVERNSCSVPERM));
+      add(new Pair<>(LOCATIONCSV,LOCATIONCSVPERM));
+    }}
+  );
+
+    // IMMUTABLE
   public static final String ENFIRSTNAMES = NAMESFOLDER + "enfirstnames.txt";
   public static final String ENLASTNAMES = NAMESFOLDER + "enlastnames.txt";
   public static final String ESFIRSTNAMES = NAMESFOLDER + "esfirstnames.txt";
   public static final String ESLASTNAMES = NAMESFOLDER + "eslastnames.txt";
-  public static final String FOODCARDSCSV = SAVEGAMELOCATION + "foodcards.csv";
+  public static final String CREWEFFECTS = EFFECTSFOLDER + "creweffects.csv";
   public static final String FOODEFFECTS = EFFECTSFOLDER + "foodeffects.csv";
-  public static final String INVENTORYCSV = SAVEGAMELOCATION + "inventory.csv";
-  public static final String LOCATIONCSV = SAVEGAMELOCATION + "location.csv";
-  public static final String OCEANCSV = SAVEGAMELOCATION + "ocean.csv";
-  public static final String PACKSCSV = SAVEGAMELOCATION + "packs.csv";
-  public static final String PLAYERCSV = SAVEGAMELOCATION + "player.csv";
-  public static final String PLAYERSHIPCSV = SAVEGAMELOCATION + "playership.csv";
-  public static final String PORTSCSV = SAVEGAMELOCATION + "ports.csv";
-  public static final String SHIPCARDSCSV = SAVEGAMELOCATION + "shipcards.csv";
   public static final String SHIPEFFECTS = EFFECTSFOLDER + "shipeffects.csv";
-  public static final String SUPPLYSTORESCSV = SAVEGAMELOCATION + "supplystores.csv";
-  public static final String TAVERNSCSV = SAVEGAMELOCATION + "taverns.csv"; 
-  public static final String WORLDCSV = SAVEGAMELOCATION + "world.csv";
 
   // Headers and formats
   public static final String ALLCREWSFORMAT = "%s,%s,%s,%d,%d,%d,%s,%d,%d,%d,%d,%d";
@@ -199,6 +284,8 @@ public abstract class Constants {
   public static final String TAVERNSHEADER = NAME + COMMA + LEVEL + COMMA + BARTENDERINDEX + COMMA + PACK0 + COMMA + PACK1 + COMMA + PACK2 + COMMA + PACK3 + COMMA + PACK4 + COMMA + CREWINDEX0 + COMMA + CREWINDEX1 + COMMA + CREWINDEX2 + COMMA + CREWINDEX3 + COMMA + CREWINDEX4 + COMMA + CREWINDEX5 + COMMA + CREWINDEX6 + COMMA + CREWINDEX7 + COMMA + CREWINDEX8 + COMMA + CREWINDEX9+ COMMA + CREWINDEX10 + COMMA + CREWINDEX11 + COMMA + CREWINDEX12 + COMMA + CREWINDEX13 + COMMA + CREWINDEX14;
   public static final String WORLDFORMAT = "%s,%d";
   public static final String WORLDHEADER = ENCOUNTER + COMMA + ENCOUNTERINDEX;
+  public static final String GAMEPROGRESSHEADER = ENCOUNTER + COMMA + ENCOUNTERINDEX;
+  public static final String GAMEPROGRESSFORMAT = "%s,%d";
   
   // Numbers
   public static final int ANIMATIONSPEED = 1000;
@@ -253,12 +340,12 @@ public abstract class Constants {
   public static final int Y = -25;
   public static final int Z = -26;
 
-  // WORLD GENERATION AMOUNTS
+  // World Generation Amounts
   public static final int NUMPORTS = 40;
   public static final int NUMBATTLES = 40;
   public static final int NUMISLANDS = 30;
 
-  // WORLD ENCOUNTER IDENTIFIERS
+  // World Encounter Identifiers
   public static final int GENPORT = 1;
   public static final int GENSTARTINGPORT = 9;
   public static final int GENBATTLE = 2;
@@ -284,18 +371,19 @@ public abstract class Constants {
   public static final int GENCUSTOM = 29;
   public static final int[] GENBOSSES = {GENLEVIATHON,GENKRAKEN,GENKAPPA,GENSCYLLA,GENUMIBOZU,GENCHARYDBIS,GENJENGU,GENSIREN,GENMAMI,GENCUSTOM};
 
-  // MAP SYMBOLS
+  // Map Symbols
   public static final char OCEANSYMBOL = 'O';
   public static final char PORTSYMBOL = 'P';
   public static final char TAVERNSYMBOL = 'T';
   public static final char SUPPLYSTORESYMBOL = 'S';
   public static final char DOCKYARDSYMBOL = 'D';
   public static final char NOTVIEWED = 'N';
+  public static final char PLAYERICON = 'Y';
 
-  // OTHER
+  // Other
   public static final String FALSE = "false";
   public static final String TRUE = "true";
-  public static final String[] TAVERNTYPES = {"Pub","Bar","Tavern","Cantina","Saloon","Beach Club", "Ale House", "Lounge", "Canteen", "Tavern", "Speakeasy", "Beer Hole", "Brewery"};
+  public static final String[] TAVERNTYPES = {"Pub","Bar","Tavern", "Tavern","Cantina","Saloon","Beach Club", "Ale House", "Lounge", "Canteen", "Speakeasy", "Beer Hole", "Brewery"};
   public static final String[] JOINCREW = {"Yeah I'll join your crew!", "Sure.","Better than sitting around here.", "I hope you offer dental.", "Good time to confront my Thalassophobia.", 
                                             "Thank god my mother-in-law was driving me insane."};
 }

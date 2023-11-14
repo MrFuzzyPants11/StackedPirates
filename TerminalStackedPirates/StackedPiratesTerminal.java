@@ -1,15 +1,17 @@
 //File: StackedPiratesTerminal.java
 //Author: MrFuzzyPants
 //Created: 04-04-2023
-//Modified: 06-07-2023
+//Modified: 11-13-2023
 
 import Humans.*;
 import static Globals.Tools.*;
 import static Globals.Constants.*;
 import Globals.World;
 import Encounters.*;
+import static Globals.PlayerAttributes.Location.*;
 
 public class StackedPiratesTerminal{
+
   /*
    * Main method
    * @param args command line arguments
@@ -36,7 +38,7 @@ public class StackedPiratesTerminal{
       // }
       
       Pair<World, Player> pair = initializeNewGame();
-      //WorldMap map = pair.getFirst();
+      //World map = pair.getFirst();
       Player player = pair.getSecond();
       prMap();
       prln("/////////////////////////////");
@@ -47,8 +49,9 @@ public class StackedPiratesTerminal{
         pr("Level " + player.getLevelText(),LEVELCOLOUR);
         pr(", have no cards, But do have ");
         prln(player.getGold() + " gold.", GOLDCOLOUR);
-        Port port = new Port(true, 0);
-        port.enter(player);
+        //Port port = new Port(0);
+        //port.enter(player);
+        gameplayLoop(player);
         closeScanner();
       }
     }
@@ -99,6 +102,44 @@ public class StackedPiratesTerminal{
    * @param player the player
    */
   public static void gameplayLoop(Player player){
-
+    while(true){
+      lineBreaker("MAP");
+      prln("Where would you like to go?");
+      prMapZoomed();
+      prln("E. Enter this location");
+      prln("W. Move Up");
+      prln("A. Move Left");
+      prln("S. Move Down");
+      prln("D. Move Right");
+      int input = askIn();
+      if(input == E){
+        Encounter enc = getMapEncounter(getY(),getX());
+        if(enc instanceof Port){
+          Port newEncounter = (Port) enc;
+          newEncounter.enter(player);
+        } else if(enc instanceof Ocean){
+          Ocean newEncounter = (Ocean) enc;
+          newEncounter.enter(player);
+        }
+      } else {
+        if (input == W){
+          if(!moveUp()){
+            prln("You cannot go any further up!", RED);
+          }
+        } else if (input == A){
+          if(!moveLeft()){
+            prln("You cannot go any further left!", RED);
+          }
+        } else if (input == S){
+          if(!moveDown()){
+            prln("You cannot go any further down!", RED);
+          }
+        } else if (input == D){
+          if(!moveRight()){
+            prln("You cannot go any further right!", RED);
+          }
+        }
+      }
+    }
   }
 }

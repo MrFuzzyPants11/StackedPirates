@@ -1,7 +1,7 @@
 //File: Location.java
 //Author: MrFuzzyPants
 //Created: 06-10-2023
-//Modified: 06-10-2023
+//Modified: 11-13-2023
 package Globals.PlayerAttributes;
 
 import static Globals.Tools.*;
@@ -29,7 +29,7 @@ public abstract class Location {
   /*
    * Gets the players y coordinate 
    */
-  public int getY() {
+  public static int getY() {
     String data = getFromCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,YCORD);
     return toInt(data);
   }
@@ -37,50 +37,60 @@ public abstract class Location {
   /*
    * Gets the players x coordinate 
    */
-  public int getX() {
+  public static int getX() {
     String data = getFromCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,XCORD);
     return toInt(data);
   }
 
   /*
-   * Sets the players y coordindate
-   * @param the players y coordinate
-   */
-  public void moveUp(int y) {
-    String data = getFromCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,XCORD);
-    int x = toInt(data);
-    writeToCSV(LOCATIONCSV,"Location.java",false,LOCATIONHEADER,LOCATIONFORMAT,y,x);
-  }
-
-  /*
    * Moves the player up
    */
-  public void moveUp() {
-    int y = getY();
-    writeToCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,YCORD,toStr(y + 1));
+  public static boolean moveUp() {
+    int y = getY() - 1; //flipped sign because graph starts top left
+    if(y < 0){
+      return false;
+    }
+
+    writeToCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,YCORD,toStr(y));
+    return true;
   }
 
   /*
    * Moves the player down
    */
-  public void moveDown() {
-    int y = getY();
-    writeToCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,YCORD,toStr(y - 1));
+  public static boolean moveDown() {
+    int y = getY() + 1; //flipped sign because graph starts top left
+    if(y > WORLDSIZE - 1){
+      return false;
+    }
+
+    writeToCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,YCORD,toStr(y));
+    return true;
   }
 
   /*
    * Moves the player right
    */
-  public void moveRight() {
-    int x = getX();
-    writeToCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,XCORD,toStr(x + 1));
+  public static boolean moveRight() {
+    int x = getX() + 1;
+    if(x > WORLDSIZE - 1){
+      return false;
+    }
+
+    writeToCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,XCORD,toStr(x));
+    return true;
   }
 
   /*
    * Moves the player left
    */
-  public void moveLeft() {
-    int x = getX();
-    writeToCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,XCORD,toStr(x - 1));
+  public static boolean moveLeft() {
+    int x = getX() - 1;
+    if(x < 0){
+      return false;
+    }
+
+    writeToCSVValue(LOCATIONCSV,"Location.java",INDEX,ZERO,XCORD,toStr(x));
+    return true;
   }
 }

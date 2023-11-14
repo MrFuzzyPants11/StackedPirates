@@ -1,7 +1,7 @@
 //File: OpenOcean.java
 //Author: MrFuzzyPants
 //Created: 04-19-2023
-//Modified: 06-10-2023
+//Modified: 11-13-2023
 package Encounters;
 
 import static Globals.Constants.*;
@@ -25,7 +25,9 @@ public class Ocean extends Encounter{
   public char getSymbol(){
     return OCEANSYMBOL;
   }
-  public void enter(Player player){}
+  public void enter(Player player){
+    enterProgressUpdates("Ocean.java",OCEAN,this.index);
+  }
 
   /*
    * Sets the viewedness of an Encounter

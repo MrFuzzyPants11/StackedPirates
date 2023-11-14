@@ -1,19 +1,20 @@
 //File: World.java
 //Author: MrFuzzyPants
 //Created: 06-07-2023
-//Modified: 06-10-2023
+//Modified: 11-13-2023
 package Globals;
 
 import static Globals.Tools.*;
 import static Globals.Constants.*;
 import static Globals.PlayerAttributes.Location.*;
 import Encounters.*;
+import Globals.Tools.Pair;
 
 public class World {
   Encounter[][] world = new Encounter[WORLDSIZE][WORLDSIZE];
   
   /*
-   * Constructor for the WorldMap object
+   * Constructor for the World object
    * @param boolean true if reloading a map false if generating a map.
    */
   public World(Boolean reload){
@@ -82,22 +83,11 @@ public class World {
     writeMapToCSV();
 
     // Set the views around the player
-    Pair<Integer,Integer> YX = getYX();
-    int yCord = YX.getFirst();
-    int xCord = YX.getSecond();
-    world[yCord][xCord].viewEncounter();
-    world[yCord + 1][xCord].viewEncounter();
-    world[yCord + 1][xCord + 1].viewEncounter();
-    world[yCord + 1][xCord - 1].viewEncounter();
-    world[yCord][xCord + 1].viewEncounter();
-    world[yCord][xCord - 1].viewEncounter();
-    world[yCord - 1][xCord].viewEncounter();
-    world[yCord - 1][xCord + 1].viewEncounter();
-    world[yCord - 1][xCord - 1].viewEncounter();
+    updateViews();
   }
 
   /*
-   * Internal WorldMap function used to more efficiently write the map to a CSV
+   * Internal World function used to more efficiently write the map to a CSV
    */
   private void writeMapToCSV(){
     refreshCSV(WORLDCSV,WORLDHEADER);
@@ -109,12 +99,62 @@ public class World {
   }
 
   /*
+   * Internal function to set Views around player as they move
+   */
+  private void updateViews(){
+    Pair<Integer,Integer> YX = getYX();
+    int yCord = YX.getFirst();
+    int xCord = YX.getSecond();
+    world[yCord][xCord].viewEncounter();
+    boolean smallY = yCord == 0;
+    boolean largeY = yCord == WORLDSIZE - 1;
+    boolean smallX = xCord == 0;
+    boolean largeX = xCord == WORLDSIZE - 1;
+    
+    if(!largeY){
+      world[yCord + 1][xCord].viewEncounter();
+      if(!largeX){
+        world[yCord + 1][xCord + 1].viewEncounter();
+      }
+      if(!smallX){
+        world[yCord + 1][xCord - 1].viewEncounter();
+      }
+    }
+
+    if(!largeX){
+      world[yCord][xCord + 1].viewEncounter();
+    }
+
+    if(!smallX){
+      world[yCord][xCord - 1].viewEncounter();
+    }
+
+    if(!smallY){
+      world[yCord - 1][xCord].viewEncounter();
+      if(!largeX){
+        world[yCord - 1][xCord + 1].viewEncounter();
+      }
+
+      if(!smallX){
+        world[yCord - 1][xCord - 1].viewEncounter();
+      }
+    }
+  }
+
+  /*
    * prints the map
    */
   public void printMap(){
+    updateViews();
+    Pair<Integer,Integer> YX = getYX();
+    int yCord = YX.getFirst();
+    int xCord = YX.getSecond();
+
     for(int y = 0; y < WORLDSIZE; y++){
       for(int x = 0; x < WORLDSIZE; x++){
-        if(world[y][x].getViewed()){
+        if(y == yCord && x == xCord){
+          pr(PLAYERICON + SPACE);
+        } else if(world[y][x].getViewed()){
           pr(world[y][x].getSymbol() + SPACE);
         } else {
           pr(NOTVIEWED + SPACE);
@@ -128,13 +168,47 @@ public class World {
    * prints the map at a 5x5 scale around the player
    */
   public void printMapZoomed(){
+    updateViews();
     Pair<Integer,Integer> YX = getYX();
     int yCord = YX.getFirst();
     int xCord = YX.getSecond();
+    int minY = 2;
+    int maxY = 2;
+    int minX = 2;
+    int maxX = 2;
+    // Edge of map checks
+    if(yCord == 1){
+      minY = 1;
+      maxY = 3;
+    } else if(yCord == 0){
+      minY = 0;
+      maxY = 4;
+    } else if(yCord == WORLDSIZE - 2){
+      minY = 3;
+      maxY = 1;
+    } else if(yCord == WORLDSIZE - 1){
+      minY = 4;
+      maxY = 0;
+    }
 
-    for(int y = yCord - 2; y <= yCord + 2; y++){
-      for(int x = xCord - 2; x <= xCord + 2; x++){
-        if(world[y][x].getViewed()){
+    if(xCord == 1){
+      minX = 1;
+      maxX = 3;
+    } else if(xCord == 0){
+      minX = 0;
+      maxX = 4;
+    } else if(xCord == WORLDSIZE - 2){
+      minX = 3;
+      maxX = 1;
+    } else if(xCord == WORLDSIZE - 1){
+      minX = 4;
+      maxX = 0;
+    }
+    for(int y = yCord - minY; y <= yCord + maxY; y++){
+      for(int x = xCord - minX; x <= xCord + maxX; x++){
+        if(y == yCord && x == xCord){
+          pr(PLAYERICON + SPACE);
+        } else if(world[y][x].getViewed()){
           pr(world[y][x].getSymbol() + SPACE);
         } else {
           pr(NOTVIEWED + SPACE);
@@ -142,5 +216,14 @@ public class World {
       }
       pr(NEWLINE);
     }
+  }
+
+  /*
+   * Gets the encounter from coordinates on the map
+   * @param y y-coordinate of Encounter
+   * @param x x-coordinate of Encounter
+   */
+  public Encounter getMapEncounter(int y, int x){
+    return world[y][x];
   }
 }
